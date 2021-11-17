@@ -8,9 +8,9 @@ const Home = (props) => {
     return (
         <>
             <Heading type="h1" title="E-learning App" />
-            <Link to="/" >Home</Link>
-            <Link to="/register">Register</Link>
-            <Link to="/login" >Login</Link>
+            <Link to="/" >Home</Link> |
+            <Link to="/register">Register</Link> |
+            <Link to="/login" >Login</Link> 
         </>
     )
 }
