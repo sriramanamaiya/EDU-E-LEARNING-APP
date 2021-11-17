@@ -31,4 +31,28 @@ const serverMessage = (errors) => {
     }
 }
 
-export { startRegisteradmin, serverMessage }
+const startLogin = (userData, redirect) => {
+    return (dispatch) => {
+        axios.post(`${baseUrl}/admin/login`, userData)
+            .then((response) => {
+                const result = response.data
+                console.log(result)
+                if( result.hasOwnProperty('errors') ){
+                    dispatch(serverMessage(result))
+                }else{
+                    localStorage.setItem('token', result.token)
+                    dispatch(serverMessage({'notice' : 'Signed in successfully.'}))
+                    dispatch(loggedIn())
+                    redirect()
+                }
+            })
+    }
+}
+
+const loggedIn = (props) => {
+    return {
+        type : 'LOGGEDIN'
+    }
+}
+
+export { startRegisteradmin, serverMessage, startLogin, loggedIn }

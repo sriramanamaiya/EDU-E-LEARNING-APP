@@ -3,26 +3,29 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { serverMessage } from '../../actions/adminAction'
+import { startLogin, serverMessage } from '../../actions/adminAction'
 
 import InputField from '../common-comp/InputField'
 import ButtonComp from '../common-comp/ButtonComp'
+import AlertComp from '../common-comp/AlertComp'
 
 const Login = (props) => {
     const { history } = props
     const dispatch = useDispatch()
 
-    const adminErrors = useSelector((state) => {
+    const loginErrors = useSelector((state) => {
         return state.admin.message
     })
 
     useEffect(() => {
-        dispatch(serverMessage({}))
+        return () => {
+            dispatch(serverMessage({}))
+        }
     },[])
 
     useEffect(() => {
-        setErrors(adminErrors)
-    },[adminErrors])
+        setErrors(loginErrors)
+    },[loginErrors])
 
     const redirect = () => {
         history.push('/')
@@ -41,12 +44,14 @@ const Login = (props) => {
         validationSchema,
         validateOnChange : false,
         onSubmit : (values) => {
-            dispatch()
+            dispatch(startLogin(values,redirect))
         }
     })
 
     return (
         <form onSubmit={handleSubmit}>
+            { errors.hasOwnProperty('notice') && <AlertComp type="success" title={errors.notice} />}
+            { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} /> }
             <InputField 
                 label="Email" 
                 name="email" 

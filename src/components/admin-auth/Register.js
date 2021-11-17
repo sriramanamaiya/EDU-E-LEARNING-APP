@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { Alert } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { startRegisteradmin, serverMessage } from '../../actions/adminAction'
 
 import InputField from '../common-comp/InputField'
 import ButtonComp from '../common-comp/ButtonComp'
+import AlertComp from '../common-comp/AlertComp'
 
 const Register = (props) => {
     const { history } = props
     const dispatch = useDispatch()
 
-    const adminErrors = useSelector((state) => {
+    const registerErrors = useSelector((state) => {
         return state.admin.message
     })
 
@@ -22,8 +22,8 @@ const Register = (props) => {
     },[])
 
     useEffect(() => {
-        setErrors(adminErrors)
-    },[adminErrors])
+        setErrors(registerErrors)
+    },[registerErrors])
 
     const handleCancel = () => {
         history.push('/')
@@ -60,7 +60,7 @@ const Register = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            { errors.hasOwnProperty('errors') && <Alert severity="error">{errors.errors}</Alert> }
+            { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
             <InputField 
                 label="Username" 
                 name="username" 
@@ -119,7 +119,7 @@ const Register = (props) => {
                 size="small" 
             />
 
-            <ButtonComp variant="contained" handleClick={handleSubmit} title="Submit" />
+            <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
             <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" />
         </form>
     )

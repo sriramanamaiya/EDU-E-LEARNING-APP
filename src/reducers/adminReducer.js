@@ -1,4 +1,5 @@
 const adminInitialState = {
+    isLoggedIn : false,
     message : {},
     data : {},
 }
@@ -6,7 +7,7 @@ const adminInitialState = {
 const adminReducer = ( state = adminInitialState, action ) => {
     switch ( action.type ) {
         case 'SERVER-MESSAGE' : {
-            if( action.payload.hasOwnProperty('errors') ){
+            if( action.payload.hasOwnProperty('errors') || action.payload.hasOwnProperty('notice') ){
                 return { ...state, message : { ...action.payload } }
             }else{
                 let result
@@ -15,6 +16,9 @@ const adminReducer = ( state = adminInitialState, action ) => {
                 }
                 return { ...state, message : { ...result} }
             }
+        }
+        case 'LOGGEDIN' : {
+            return { ...state, isLoggedIn : !state.isLoggedIn }
         }
         default : {
             return { ...state }
