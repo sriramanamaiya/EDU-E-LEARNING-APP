@@ -88,6 +88,7 @@ const Register = (props) => {
             <InputField 
                 label="Password" 
                 name="password" 
+                type="password"
                 value={values.password} 
                 handleChange={handleChange} 
                 handleBlur={handleBlur}

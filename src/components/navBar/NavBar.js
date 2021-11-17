@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router'
 
 import Home from './Home'
 import Register from '../admin-auth/Register'
+import Login from '../admin-auth/Login'
 
 const NavBar = (props) => {
     
@@ -11,6 +12,7 @@ const NavBar = (props) => {
             <Route path="/" component={Home} />
             <Switch>
                 <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
             </Switch>
         </>
     )
