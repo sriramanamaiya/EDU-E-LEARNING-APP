@@ -45,7 +45,7 @@ const Home = (props) => {
                         <>  
                             <Link to="/account">Account</Link>
                             <Link to="/course">Course</Link>
-                            <Link to="/student">Student</Link>
+                            <Link to="/students">Students</Link>
                             <Link to="#" onClick={handleClick} >LogOut</Link>
                             { message.hasOwnProperty('notice') && <AlertComp type="success" title={message.notice} />}
                         </>
