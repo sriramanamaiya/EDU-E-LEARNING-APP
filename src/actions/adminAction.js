@@ -85,4 +85,28 @@ const adminAccount = (adminData) => {
     }
 }
 
-export { startRegisteradmin, serverMessage, startLogin, loggedIn, startGetAdminAccount }
+const startEditAdminAccount = (editedData, handleToggle) => {
+    return (dispatch) => {
+        axios.put(`${baseUrl}/admin`, editedData , {
+            headers : {
+                "Authorization" : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                dispatch(editedAccountDetails(response.data))
+                handleToggle()
+            })
+            .catch((err) => {
+                alert(err.message)
+            })
+    }
+}
+
+const editedAccountDetails = (data) => {
+    return {
+        type : 'EDITED-ACCOUNT',
+        payload : data
+    }
+}
+
+export { startRegisteradmin, serverMessage, startLogin, loggedIn, startGetAdminAccount, startEditAdminAccount }

@@ -23,6 +23,9 @@ const adminReducer = ( state = adminInitialState, action ) => {
         case 'ADMIN-ACCOUNT' : {
             return { ...state, data : { ...action.payload } }
         }
+        case 'EDITED-ACCOUNT' : {
+            return { ...state, data : { ...state.data, ...action.payload } }
+        }
         default : {
             return { ...state }
         }

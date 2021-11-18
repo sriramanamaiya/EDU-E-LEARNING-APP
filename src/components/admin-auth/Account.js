@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
+import EditAccount from './EditAccount'
+
 const Account = (props) => {
     const [ toggle, setToggle ] = useState(false)
 
@@ -8,9 +10,7 @@ const Account = (props) => {
         return state.admin.data
     })
 
-    console.log(accountDetails)
-
-    const handleClick = () => {
+    const handleToggle = () => {
         setToggle(!toggle)
     }
 
@@ -20,7 +20,7 @@ const Account = (props) => {
                 <>  
                     { toggle ? (
                         <>
-                            <button onClick={handleClick}>Cancel</button>
+                            <EditAccount role={accountDetails.role} name={accountDetails.username} userEmail={accountDetails.email} academyName = {accountDetails.academy.name} academyWebsite={accountDetails.academy.website} handleToggle={handleToggle} />
                         </>
                     ) : (
                         <>
@@ -28,7 +28,7 @@ const Account = (props) => {
                             <li>Email : {accountDetails.email}</li>
                             <li>Academy Name : {accountDetails.academy.name}</li>
                             { accountDetails.academy.website.trim().length !== 0 && <li>{accountDetails.academy.website}</li> }
-                            <button onClick={handleClick}>Edit</button>
+                            <button onClick={handleToggle}>Edit</button>
                         </>
                     )}
                 </>
