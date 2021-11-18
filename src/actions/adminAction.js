@@ -21,6 +21,9 @@ const startRegisteradmin = (userData, redirect) => {
                     }
                 }
             })
+            .catch((error) => {
+                alert(error.message)
+            })
     }
 }
 
@@ -43,8 +46,12 @@ const startLogin = (userData, redirect) => {
                     localStorage.setItem('token', result.token)
                     dispatch(serverMessage({'notice' : 'Signed in successfully.'}))
                     dispatch(loggedIn())
+                    dispatch(startGetAdminAccount(result.token))
                     redirect()
                 }
+            })
+            .catch((error) => {
+                alert(error.message)
             })
     }
 }
@@ -55,4 +62,27 @@ const loggedIn = (props) => {
     }
 }
 
-export { startRegisteradmin, serverMessage, startLogin, loggedIn }
+const startGetAdminAccount = (token) => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/admin/account`, {
+            headers : {
+                "Authorization" : token
+            }
+        })
+            .then((response) => {
+                dispatch(adminAccount(response.data))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+const adminAccount = (adminData) => {
+    return {
+        type : 'ADMIN-ACCOUNT',
+        payload : adminData
+    }
+}
+
+export { startRegisteradmin, serverMessage, startLogin, loggedIn, startGetAdminAccount }

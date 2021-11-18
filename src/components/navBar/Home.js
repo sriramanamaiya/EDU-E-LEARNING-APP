@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppBar, Toolbar } from '@mui/material'
 
-import { loggedIn } from '../../actions/adminAction'
+import { loggedIn, startGetAdminAccount } from '../../actions/adminAction'
 
 import Heading from '../common-comp/Heading'
 import AlertComp from '../common-comp/AlertComp'
 
 const Home = (props) => {
+    const { history } = props
     const dispatch = useDispatch()
 
     const userData = useSelector((state) => {
@@ -21,6 +22,7 @@ const Home = (props) => {
         const token = localStorage.getItem('token')
         if( token ){
             dispatch(loggedIn())
+            dispatch(startGetAdminAccount(token))
         }
     },[])
 
@@ -29,13 +31,14 @@ const Home = (props) => {
         if( userConfirmation ){
             localStorage.removeItem('token')
             dispatch(loggedIn())
+            history.push('/')
         }
     }
 
     return (
         <>
-            <AppBar>
-                <Toolbar>
+            {/* <AppBar>
+                <Toolbar> */}
                     <Heading type="h1" title="E-learning App" />
                     <Link to="/" >Home</Link>
                     { isLoggedIn ? (
@@ -52,8 +55,8 @@ const Home = (props) => {
                             <Link to="/login" >Login</Link> 
                         </>
                     ) }
-                </Toolbar>
-            </AppBar>
+                {/* </Toolbar>
+            </AppBar> */}
         </>
     )
 }

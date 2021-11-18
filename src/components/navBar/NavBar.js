@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router'
 import Home from './Home'
 import Register from '../admin-auth/Register'
 import Login from '../admin-auth/Login'
+import Account from '../admin-auth/Account'
 
 const NavBar = (props) => {
     
@@ -13,6 +14,7 @@ const NavBar = (props) => {
             <Switch>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
+                <Route path="/account" component={Account} />
             </Switch>
         </>
     )

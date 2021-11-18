@@ -20,6 +20,9 @@ const adminReducer = ( state = adminInitialState, action ) => {
         case 'LOGGEDIN' : {
             return { ...state, isLoggedIn : !state.isLoggedIn }
         }
+        case 'ADMIN-ACCOUNT' : {
+            return { ...state, data : { ...action.payload } }
+        }
         default : {
             return { ...state }
         }
