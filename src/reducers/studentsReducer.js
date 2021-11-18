@@ -19,6 +19,9 @@ const studentsReducer = ( state = studentsInitialState, action ) => {
         case 'REGISTERED-STUDENT' : {
             return { ...state, data : [ ...state.data, action.payload ] }
         }
+        case 'ALL-STUDENTS' : {
+            return { ...state, data : [ ...action.payload ] }
+        }
         default : {
             return { ...state }
         }

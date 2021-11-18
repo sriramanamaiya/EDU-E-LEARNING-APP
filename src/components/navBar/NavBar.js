@@ -7,6 +7,7 @@ import Login from '../admin-auth/Login'
 import Account from '../admin-auth/Account'
 import Students from '../student-module/Students'
 import StudentsRegister from '../student-module/StudentsRegister'
+import StudentsRegistered from '../student-module/StudentsRegistered'
 
 const NavBar = (props) => {
     
@@ -19,6 +20,7 @@ const NavBar = (props) => {
                 <Route path="/account" component={Account} />
                 <Route path="/students" component={Students} exact />
                 <Route path="/students/register" component={StudentsRegister} />
+                <Route path="/students/learners" component={StudentsRegistered} />
             </Switch>
         </>
     )

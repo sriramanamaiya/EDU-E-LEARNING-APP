@@ -43,4 +43,28 @@ const registeredStudents = (data) => {
     }
 }
 
-export { startStudentRegister, studentServerMessages }
+const startGetAllStudents = (token) => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/admin/students`,{
+            headers : {
+                "Authorization" : token
+            }
+        })
+            .then((response) => {
+                console.log(response.data)
+                dispatch(allStudents(response.data))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+const allStudents = (data) => {
+    return {
+        type : 'ALL-STUDENTS',
+        payload : data
+    }
+}
+
+export { startStudentRegister, studentServerMessages, startGetAllStudents }
