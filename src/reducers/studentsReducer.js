@@ -32,6 +32,12 @@ const studentsReducer = ( state = studentsInitialState, action ) => {
             })
             return { ...state, data : [ ...result ] }
         }
+        case 'DELETE-STUDENT' : {
+            const result = state.data.filter((stud) => {
+                return stud._id !== action.payload._id
+            })
+            return { ...state, data : [ ...result ] }
+        }
         default : {
             return { ...state }
         }

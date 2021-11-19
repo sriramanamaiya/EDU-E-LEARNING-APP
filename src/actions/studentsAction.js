@@ -102,4 +102,28 @@ const editedStudentDetails = (data) => {
     }
 }
 
-export { startStudentRegister, studentServerMessages, startGetAllStudents, startEditStudent }
+const startDeleteStudent = (id)  => {
+    return (dispatch) => {
+        axios.delete(`${baseUrl}/admin/students/${id}`, {
+            headers : {
+                "Authorization" : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                const result = response.data
+                dispatch(deleteStudent(result))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+const deleteStudent = (data) => {
+    return {
+        type : 'DELETE-STUDENT',
+        payload : data
+    }
+}
+
+export { startStudentRegister, studentServerMessages, startGetAllStudents, startEditStudent, startDeleteStudent }
