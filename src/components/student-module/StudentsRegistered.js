@@ -24,7 +24,13 @@ const StudentsRegistered = (props) => {
                     <>
                         { studentsData.map((student) => {
                             return (
-                                <StudentsList key={student._id} studentsData={studentsData} id={student._id} name={student.name} />
+                                <StudentsList 
+                                    key={student._id} 
+                                    id={student._id} 
+                                    name={student.name} 
+                                    email={student.email} 
+                                    allowed={student.isAllowed} 
+                                />
                             )
                         }) }
                     </>

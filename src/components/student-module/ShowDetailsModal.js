@@ -1,22 +1,22 @@
 import React from 'react'
 
+import StudentsRegister from './StudentsRegister';
+
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress } from '@mui/material';
 
-const ViewStudent = (props) => {
-    const { show, handleShowClose, student } = props
+const ShowDetailsModal = (props) => {
+    const { show, handleShowClose, name } = props
 
     return (
         <>
-            <Dialog
-                fullWidth={true}
-                open={show}
-                onClose={handleShowClose}
-            >
-                <DialogTitle>{student.name}</DialogTitle>
+            <Dialog fullWidth={true} open={show} onClose={handleShowClose} >
+                <DialogTitle></DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                          { student.email }
+                          {/* { student.email } */}
+                          
                         </DialogContentText>
+                        <StudentsRegister />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleShowClose}>Close</Button>
@@ -26,4 +26,4 @@ const ViewStudent = (props) => {
     )
 }
 
-export default ViewStudent
+export default ShowDetailsModal

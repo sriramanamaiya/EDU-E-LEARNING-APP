@@ -67,4 +67,39 @@ const allStudents = (data) => {
     }
 }
 
-export { startStudentRegister, studentServerMessages, startGetAllStudents }
+const startEditStudent = (id,data, handleClose) => {
+    console.log(id,data,handleClose)
+    return (dispatch) => {
+        axios.put(`${baseUrl}/students/${id}`, data, {
+            headers : {
+                "Authorization" : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                console.log(response.data)
+                const result = response.data
+                if( result.hasOwnProperty('message') ){
+                    dispatch(studentServerMessages(result.errors))
+                }else{
+                    if( result.hasOwnProperty('errors') ){
+                        dispatch(studentServerMessages(result))
+                    }else{
+                        dispatch(editedStudentDetails(result))
+                        handleClose()
+                    }
+                }
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+const editedStudentDetails = (data) => {
+    return {
+        type : 'EDITED-STUDENT-DETAILS',
+        payload : data
+    }
+}
+
+export { startStudentRegister, studentServerMessages, startGetAllStudents, startEditStudent }

@@ -22,6 +22,16 @@ const studentsReducer = ( state = studentsInitialState, action ) => {
         case 'ALL-STUDENTS' : {
             return { ...state, data : [ ...action.payload ] }
         }
+        case 'EDITED-STUDENT-DETAILS' : {
+            const result = state.data.map((stud) => {
+                if( stud._id === action.payload._id ){
+                    return { ...stud, ...action.payload }
+                }else{
+                    return { ...stud }
+                }
+            })
+            return { ...state, data : [ ...result ] }
+        }
         default : {
             return { ...state }
         }

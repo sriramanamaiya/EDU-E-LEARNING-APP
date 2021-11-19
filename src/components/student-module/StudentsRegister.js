@@ -4,13 +4,14 @@ import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { FormControlLabel, Checkbox } from '@mui/material'
 
-import { startStudentRegister, studentServerMessages } from '../../actions/studentsAction'
+import { startStudentRegister, studentServerMessages, startEditStudent } from '../../actions/studentsAction'
  
 import InputField from'../common-comp/InputField'
 import AlertComp from '../common-comp/AlertComp'
 import ButtonComp from '../common-comp/ButtonComp'
 
 const StudentsRegister = (props) => {
+    const { id, name : studentName, email : studentEmail, allowed, handleShowClose } = props
     const { history } = props
 
     const dispatch = useDispatch()
@@ -26,20 +27,39 @@ const StudentsRegister = (props) => {
     },[])
     
     useEffect(() => {
+
+        setValues({
+            name : studentName,
+            email : studentEmail,
+            isAllowed : allowed
+        })
+
         setErrors(registerErrors)
-    },[registerErrors])
+    },[studentName,studentEmail,allowed, registerErrors])
     
     const handleCancel = () => {
         history.push('/students')
     }
 
-    const validationSchema = yup.object({
-        name : yup.string().required('Username Cannot be Blank'),
-        email : yup.string().email('Invalid Email').required('Required'),
-        password : yup.string().min(8,'Password is too short').max(128).required('Required'),
-    })
+    const redirect = () => {
+        history.push('/students/learners')
+    }
 
-    const { values, handleChange, handleSubmit, errors, setErrors, touched, handleBlur } = useFormik({
+    let validationSchema
+    if( id ){
+        validationSchema = yup.object({
+            name : yup.string().required('Username Cannot be Blank'),
+            email : yup.string().email('Invalid Email').required('Required'),
+        })
+    }else{
+        validationSchema = yup.object({
+            name : yup.string().required('Username Cannot be Blank'),
+            email : yup.string().email('Invalid Email').required('Required'),
+            password : yup.string().min(8,'Password is too short').max(128).required('Required'),
+        })
+    }
+    
+    const { values, setValues, handleChange, handleSubmit, errors, setErrors, touched, handleBlur } = useFormik({
         initialValues :{
             name : '',
             email : '',
@@ -49,10 +69,12 @@ const StudentsRegister = (props) => {
         validationSchema,
         validateOnChange : false,
         onSubmit : (values) => {
-            const redirect = () => {
-                history.push('/students/learners')
+            if( id ){
+                // console.log(values)
+                dispatch(startEditStudent(id,values,handleShowClose))
+            }else{
+                dispatch(startStudentRegister(values, redirect))
             }
-            dispatch(startStudentRegister(values, redirect))
         }
     })
 
@@ -83,18 +105,20 @@ const StudentsRegister = (props) => {
                 size="small" 
             />
 
-            <InputField 
-                label="Password" 
-                name="password" 
-                type="password"
-                value={values.password} 
-                handleChange={handleChange} 
-                handleBlur={handleBlur}
-                error={ touched.password && errors.password ? true : false } 
-                helperText = { touched.password && errors.password ?  errors.password : ''} 
-                margin="normal" 
-                size="small" 
-            />
+            { !id && (
+                <InputField 
+                    label="Password" 
+                    name="password" 
+                    type="password"
+                    value={values.password} 
+                    handleChange={handleChange} 
+                    handleBlur={handleBlur}
+                    error={ touched.password && errors.password ? true : false } 
+                    helperText = { touched.password && errors.password ?  errors.password : ''} 
+                    margin="normal" 
+                    size="small" 
+                />
+            )}
 
             <FormControlLabel
                 label="Allow Student"
@@ -106,8 +130,18 @@ const StudentsRegister = (props) => {
                     />
                 }
             /><br />
-            <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
-            <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" />
+
+            { id ?  (
+                <>
+                    <ButtonComp variant="contained" handleClick={handleSubmit} title="Update" />
+                    <ButtonComp variant="contained" handleClick={handleShowClose} title="Cancel" />
+                </>
+            ): (
+                <>
+                    <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
+                    <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" />
+                </>
+            )}
         </form>
     )
 }
