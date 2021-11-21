@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { AppBar, Toolbar } from '@mui/material'
 
 import { loggedIn, startGetAdminAccount } from '../../actions/adminAction'
 
-import Heading from '../common-comp/Heading'
-import AlertComp from '../common-comp/AlertComp'
+import HomeNavBar from './HomeNavBar'
 
 const Home = (props) => {
     const { history } = props
@@ -16,7 +13,7 @@ const Home = (props) => {
         return state.admin
     })
 
-    const { isLoggedIn, message } = userData
+    const { isLoggedIn } = userData
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -36,27 +33,8 @@ const Home = (props) => {
     }
 
     return (
-        <>
-            {/* <AppBar>
-                <Toolbar> */}
-                    <Heading type="h1" title="E-learning App" />
-                    <Link to="/" >Home</Link>
-                    { isLoggedIn ? (
-                        <>  
-                            <Link to="/account">Account</Link>
-                            <Link to="/course">Course</Link>
-                            <Link to="/students">Students</Link>
-                            <Link to="#" onClick={handleClick} >LogOut</Link>
-                            { message.hasOwnProperty('notice') && <AlertComp type="success" title={message.notice} />}
-                        </>
-                    ) : (
-                        <>
-                            <Link to="/register">Register</Link>
-                            <Link to="/login" >Login</Link> 
-                        </>
-                    ) }
-                {/* </Toolbar>
-            </AppBar> */}
+        <>  
+            <HomeNavBar isLoggedIn={isLoggedIn} handleClick={handleClick} />
         </>
     )
 }

@@ -44,10 +44,10 @@ const startLogin = (userData, redirect) => {
                     dispatch(serverMessage(result))
                 }else{
                     localStorage.setItem('token', result.token)
-                    dispatch(serverMessage({'notice' : 'Signed in successfully.'}))
-                    dispatch(loggedIn())
-                    dispatch(startGetAdminAccount(result.token))
                     redirect()
+                    dispatch(loggedIn())
+                    dispatch(serverMessage({'notice' : 'Signed in successfully.'}))
+                    dispatch(startGetAdminAccount(result.token))
                 }
             })
             .catch((error) => {

@@ -8,6 +8,8 @@ import { startRegisteradmin, serverMessage } from '../../actions/adminAction'
 import InputField from '../common-comp/InputField'
 import ButtonComp from '../common-comp/ButtonComp'
 import AlertComp from '../common-comp/AlertComp'
+import Heading from '../common-comp/Heading'
+import { Box, Typography } from '@mui/material'
 
 const Register = (props) => {
     const { history } = props
@@ -59,69 +61,76 @@ const Register = (props) => {
     })
 
     return (
-        <form onSubmit={handleSubmit}>
-            { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
-            <InputField 
-                label="Username" 
-                name="username" 
-                value={values.username} 
-                handleChange={handleChange} 
-                handleBlur={handleBlur}
-                error={ errors.username && touched.username ? true : false } 
-                helperText = { touched.username && errors.username ? errors.username : ''} 
-                margin="normal" 
-                size="small" 
-            />
+        <Box sx={{ display: 'flex', justifyContent: 'center', bgcolor: 'background.paper', textAlign : 'center' }}>
+            <form onSubmit={handleSubmit}>
+                <Heading type="h3" title="Register with us ➡️"  />
+                { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
+                <Typography variant="body2" sx={{textAlign : 'left'}} >Admin Details:</Typography>
+                <InputField 
+                    label="Username" 
+                    name="username" 
+                    value={values.username} 
+                    handleChange={handleChange} 
+                    handleBlur={handleBlur}
+                    error={ errors.username && touched.username ? true : false } 
+                    helperText = { touched.username && errors.username ? errors.username : ''} 
+                    margin="normal" 
+                    size="small" 
+                    />
 
-            <InputField 
-                label="Email" 
-                name="email" 
-                value={values.email} 
-                handleChange={handleChange} 
-                handleBlur={handleBlur}
-                error={errors.email && touched.email ? true : false } 
-                helperText = { touched.email && errors.email ? errors.email : ''} 
-                margin="normal" 
-                size="small" 
-            />
+                <InputField 
+                    label="Email" 
+                    name="email" 
+                    value={values.email} 
+                    handleChange={handleChange} 
+                    handleBlur={handleBlur}
+                    error={errors.email && touched.email ? true : false } 
+                    helperText = { touched.email && errors.email ? errors.email : ''} 
+                    margin="normal" 
+                    size="small" 
+                    />
 
-            <InputField 
-                label="Password" 
-                name="password" 
-                type="password"
-                value={values.password} 
-                handleChange={handleChange} 
-                handleBlur={handleBlur}
-                error={ touched.password && errors.password ? true : false } 
-                helperText = { touched.password && errors.password ?  errors.password : ''} 
-                margin="normal" 
-                size="small" 
-            />
+                <InputField 
+                    label="Password" 
+                    name="password" 
+                    type="password"
+                    value={values.password} 
+                    handleChange={handleChange} 
+                    handleBlur={handleBlur}
+                    error={ touched.password && errors.password ? true : false } 
+                    helperText = { touched.password && errors.password ?  errors.password : ''} 
+                    margin="normal" 
+                    size="small" 
+                    />
 
-            <InputField 
-                label="Academy Name" 
-                name="academy.name" 
-                value={values.academy.name} 
-                handleChange={handleChange} 
-                handleBlur={handleBlur}
-                error={ Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ? true : false } 
-                helperText = { Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ?  errors.academy.name : '' }
-                margin="normal" 
-                size="small" 
-            />
+                <Typography variant="body2" sx={{textAlign : 'left'}} >Academy Details:</Typography>
+                <InputField 
+                    label="Academy Name" 
+                    name="academy.name" 
+                    value={values.academy.name} 
+                    handleChange={handleChange} 
+                    handleBlur={handleBlur}
+                    error={ Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ? true : false } 
+                    helperText = { Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ?  errors.academy.name : '' }
+                    margin="normal" 
+                    size="small" 
+                    />
 
-            <InputField 
-                label="Academy website" 
-                name="academy.website" 
-                value={values.academy.website} 
-                handleChange={handleChange} 
-                margin="normal" 
-                size="small" 
-            />
+                <InputField 
+                    label="Academy website" 
+                    name="academy.website" 
+                    value={values.academy.website} 
+                    handleChange={handleChange} 
+                    margin="normal" 
+                    size="small" 
+                    />
 
-            <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
-            <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" />
-        </form>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
+                    <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
+                    <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" color="secondary" />
+                </Box>
+            </form>
+        </Box>
     )
 }
 

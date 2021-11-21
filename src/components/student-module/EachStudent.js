@@ -20,7 +20,7 @@ const EachStudent = (props) => {
 
     const handleDelete = () => {
         console.log('dele')
-        const confirmation = window.confirm('Are You Sure Yuu want delete')
+        const confirmation = window.confirm('Are You Sure You want delete')
         if( confirmation ){
             dispatch(startDeleteStudent(id))
         }

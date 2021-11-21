@@ -5,8 +5,8 @@ const Students = (props) => {
 
     return (
         <div>
-            <Link to="/students/register">Register a Student</Link> |
-            <Link to="/students/learners">View All Registered Student</Link>
+            <Link to="/admin/students/register">Register a Student</Link> |
+            <Link to="/admin/students/learners">View All Registered Student</Link>
         </div>
     )
 }

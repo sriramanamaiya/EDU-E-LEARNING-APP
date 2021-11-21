@@ -1,0 +1,36 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    border-top: 10px solid #1098ad;
+    margin-top: 0;
+}
+
+/* Home Comp */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #1098ad;
+}
+
+/* Home NavBar */
+.navigation a:link, .navigation a:visited {
+    margin-right: 30px;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.navigation a:hover, .navigation a:active {
+    color: #034c57;
+    font-size: 19px;
+    text-decoration: underline;
+}
+
+.home-comp {
+    background-color: #fdeded;
+}
+
+/* Login */
+.login-heading {
+    margin: 0 auto;
+}

@@ -2,15 +2,18 @@ import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
+import { Box } from '@mui/system'
+import { withRouter } from 'react-router'
 
 import { startLogin, serverMessage } from '../../actions/adminAction'
 
+import Heading from '../common-comp/Heading'
 import InputField from '../common-comp/InputField'
 import ButtonComp from '../common-comp/ButtonComp'
 import AlertComp from '../common-comp/AlertComp'
 
 const Login = (props) => {
-    const { history } = props
+    const { history, role } = props
     const dispatch = useDispatch()
 
     const loginErrors = useSelector((state) => {
@@ -18,9 +21,7 @@ const Login = (props) => {
     })
 
     useEffect(() => {
-        return () => {
-            dispatch(serverMessage({}))
-        }
+        dispatch(serverMessage({}))
     },[])
 
     useEffect(() => {
@@ -44,7 +45,11 @@ const Login = (props) => {
         validationSchema,
         validateOnChange : false,
         onSubmit : (values) => {
-            dispatch(startLogin(values,redirect))
+            if( role === 'admin' ){
+                dispatch(startLogin(values,redirect))
+            }else{
+                console.log(values)
+            }
         }
     })
 
@@ -52,6 +57,7 @@ const Login = (props) => {
         <form onSubmit={handleSubmit}>
             { errors.hasOwnProperty('notice') && <AlertComp type="success" title={errors.notice} />}
             { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} /> }
+            <Heading type="h3" title="Login 💻"  className="login-heading" />
             <InputField 
                 label="Email" 
                 name="email" 
@@ -77,10 +83,12 @@ const Login = (props) => {
                 size="small" 
             />
 
-            <ButtonComp variant="contained" handleClick={handleSubmit} title="LogIn" />
-            <ButtonComp variant="contained" handleClick={redirect} title="Cancel" />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
+                <ButtonComp variant="contained" handleClick={handleSubmit} title="LogIn" />
+                <ButtonComp variant="contained" handleClick={redirect} title="Cancel" color="secondary" />
+            </Box>
         </form>
     )
 }
 
-export default Login
+export default withRouter(Login)
