@@ -34,3 +34,8 @@ body {
 .login-heading {
     margin: 0 auto;
 }
+
+/* Account Details */
+.account-details {
+    margin-top: 8px;
+}

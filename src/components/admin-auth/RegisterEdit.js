@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { startRegisteradmin, serverMessage } from '../../actions/adminAction'
+import { startRegisteradmin, serverMessage, startEditAdminAccount } from '../../actions/adminAction'
 
 import InputField from '../common-comp/InputField'
 import ButtonComp from '../common-comp/ButtonComp'
@@ -11,8 +11,8 @@ import AlertComp from '../common-comp/AlertComp'
 import Heading from '../common-comp/Heading'
 import { Box, Typography } from '@mui/material'
 
-const Register = (props) => {
-    const { history } = props
+const RegisterEdit = (props) => {
+    const { history, role, name, email : userEmail, academyName, academyWebsite, show, handleShowClose } = props
     const dispatch = useDispatch()
 
     const registerErrors = useSelector((state) => {
@@ -24,23 +24,45 @@ const Register = (props) => {
     },[])
 
     useEffect(() => {
+        if( role ){
+            setValues({
+                username : name,
+                email : userEmail,
+                academy : {
+                    name : academyName,
+                    website : academyWebsite
+                }
+            })
+        }
+
         setErrors(registerErrors)
-    },[registerErrors])
+    },[registerErrors, role, name,userEmail, academyWebsite, academyName  ])
 
     const handleCancel = () => {
         history.push('/')
     }
 
-    const validationSchema = yup.object({
-        username : yup.string().required('Username Cannot be Blank'),
-        email : yup.string().email('Invalid Email').required('Required'),
-        password : yup.string().min(8,'Password is too short').max(128).required('Required'),
-        academy : yup.object({
-            name : yup.string().required('Academy Name Required')
+    let validationSchema
+    if( role ){
+        validationSchema = yup.object({
+            username : yup.string().required('Username Cannot be Blank'),
+            email : yup.string().email('Invalid Email').required('Required'),
+            academy : yup.object({
+                name : yup.string().required('Academy Name Required')
+            })
         })
-    })
+    }else{
+        validationSchema = yup.object({
+            username : yup.string().required('Username Cannot be Blank'),
+            email : yup.string().email('Invalid Email').required('Required'),
+            password : yup.string().min(8,'Password is too short').max(128).required('Required'),
+            academy : yup.object({
+                name : yup.string().required('Academy Name Required')
+            })
+        })
+    }
 
-    const { values, handleChange, handleSubmit, errors, setErrors, touched, handleBlur } = useFormik({
+    const { values, setValues, handleChange, handleSubmit, errors, setErrors, touched, handleBlur } = useFormik({
         initialValues :{
             username : '',
             email : '',
@@ -56,12 +78,16 @@ const Register = (props) => {
             const redirect = () => {
                 history.push('/login')
             }
-            dispatch(startRegisteradmin(values, redirect))
+            if( role ){
+                dispatch(startEditAdminAccount(values, handleShowClose))
+            }else{
+                dispatch(startRegisteradmin(values, redirect))
+            }
         }
     })
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', bgcolor: 'background.paper', textAlign : 'center' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', textAlign : 'center' }}>
             <form onSubmit={handleSubmit}>
                 <Heading type="h3" title="Register with us ➡️"  />
                 { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
@@ -76,7 +102,7 @@ const Register = (props) => {
                     helperText = { touched.username && errors.username ? errors.username : ''} 
                     margin="normal" 
                     size="small" 
-                    />
+                />
 
                 <InputField 
                     label="Email" 
@@ -88,8 +114,9 @@ const Register = (props) => {
                     helperText = { touched.email && errors.email ? errors.email : ''} 
                     margin="normal" 
                     size="small" 
-                    />
+                />
 
+                { !role && (
                 <InputField 
                     label="Password" 
                     name="password" 
@@ -101,7 +128,8 @@ const Register = (props) => {
                     helperText = { touched.password && errors.password ?  errors.password : ''} 
                     margin="normal" 
                     size="small" 
-                    />
+                />
+                ) }
 
                 <Typography variant="body2" sx={{textAlign : 'left'}} >Academy Details:</Typography>
                 <InputField 
@@ -114,7 +142,7 @@ const Register = (props) => {
                     helperText = { Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ?  errors.academy.name : '' }
                     margin="normal" 
                     size="small" 
-                    />
+                />
 
                 <InputField 
                     label="Academy website" 
@@ -123,15 +151,25 @@ const Register = (props) => {
                     handleChange={handleChange} 
                     margin="normal" 
                     size="small" 
-                    />
+                />
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
-                    <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
-                    <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" color="secondary" />
+                    { role ? (
+                        <>
+                            <ButtonComp variant="contained" handleClick={handleSubmit} title="Update" />
+                            <ButtonComp variant="contained" handleClick={handleShowClose} title="Cancel" color="secondary" />
+                        </>
+                    ) : (
+                        <>
+                            <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
+                            <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" color="secondary" />
+                        </>
+                    ) }
+                     
                 </Box>
             </form>
         </Box>
     )
 }
 
-export default Register
+export default RegisterEdit

@@ -22,7 +22,11 @@ const startRegisteradmin = (userData, redirect) => {
                 }
             })
             .catch((error) => {
-                alert(error.message)
+                if( error.message.includes('406') ){
+                    dispatch(serverMessage({errors : 'Email or name already created'}))
+                }else{
+                    alert(error.message)
+                }
             })
     }
 }

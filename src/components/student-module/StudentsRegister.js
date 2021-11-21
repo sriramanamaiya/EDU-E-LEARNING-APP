@@ -2,10 +2,11 @@ import React, { useEffect } from 'react'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { FormControlLabel, Checkbox } from '@mui/material'
+import { FormControlLabel, Checkbox, Box } from '@mui/material'
 
 import { startStudentRegister, studentServerMessages, startEditStudent } from '../../actions/studentsAction'
  
+import Heading from '../common-comp/Heading'
 import InputField from'../common-comp/InputField'
 import AlertComp from '../common-comp/AlertComp'
 import ButtonComp from '../common-comp/ButtonComp'
@@ -27,22 +28,23 @@ const StudentsRegister = (props) => {
     },[])
     
     useEffect(() => {
-
-        setValues({
-            name : studentName,
-            email : studentEmail,
-            isAllowed : allowed
-        })
+        if( id ){
+            setValues({
+                name : studentName,
+                email : studentEmail,
+                isAllowed : allowed
+            })
+        }
 
         setErrors(registerErrors)
     },[studentName,studentEmail,allowed, registerErrors])
     
     const handleCancel = () => {
-        history.push('/students')
+        history.push('/admin/students')
     }
 
     const redirect = () => {
-        history.push('/students/learners')
+        history.push('/admin/students')
     }
 
     let validationSchema
@@ -79,8 +81,10 @@ const StudentsRegister = (props) => {
     })
 
     return (
+        <Box sx={{ display: 'flex', justifyContent: 'center', bgcolor: 'background.paper', textAlign : 'center', mt : 2 }}>
         <form onSubmit={handleSubmit}>
             { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
+            <Heading type="h3" title="Register Students 🧑‍🎓➡️"  className="login-heading" />
             <InputField 
                 label="Name" 
                 name="name" 
@@ -91,7 +95,7 @@ const StudentsRegister = (props) => {
                 helperText = { touched.name && errors.name ? errors.name : ''} 
                 margin="normal" 
                 size="small" 
-            />
+                />
 
             <InputField 
                 label="Email" 
@@ -103,46 +107,49 @@ const StudentsRegister = (props) => {
                 helperText = { touched.email && errors.email ? errors.email : ''} 
                 margin="normal" 
                 size="small" 
-            />
+                />
 
             { !id && (
                 <InputField 
-                    label="Password" 
-                    name="password" 
-                    type="password"
-                    value={values.password} 
-                    handleChange={handleChange} 
-                    handleBlur={handleBlur}
-                    error={ touched.password && errors.password ? true : false } 
-                    helperText = { touched.password && errors.password ?  errors.password : ''} 
-                    margin="normal" 
-                    size="small" 
+                label="Password" 
+                name="password" 
+                type="password"
+                value={values.password} 
+                handleChange={handleChange} 
+                handleBlur={handleBlur}
+                error={ touched.password && errors.password ? true : false } 
+                helperText = { touched.password && errors.password ?  errors.password : ''} 
+                margin="normal" 
+                size="small" 
                 />
-            )}
+                )}
 
             <FormControlLabel
                 label="Allow Student"
                 control={
                     <Checkbox 
-                        name="isAllowed"
-                        checked={values.isAllowed}
-                        onChange={handleChange}
+                    name="isAllowed"
+                    checked={values.isAllowed}
+                    onChange={handleChange}
                     />
                 }
             /><br />
 
-            { id ?  (
-                <>
-                    <ButtonComp variant="contained" handleClick={handleSubmit} title="Update" />
-                    <ButtonComp variant="contained" handleClick={handleShowClose} title="Cancel" />
-                </>
-            ): (
-                <>
-                    <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
-                    <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" />
-                </>
-            )}
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }} >
+                { id ?  (
+                    <>
+                        <ButtonComp variant="contained" handleClick={handleSubmit} title="Update" />
+                        <ButtonComp variant="contained" handleClick={handleShowClose} title="Cancel" color="secondary" />
+                    </>
+                ): (
+                    <>
+                        <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
+                        <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" color="secondary" />
+                    </>
+                )}
+            </Box>
         </form>
+        </Box>
     )
 }
 
