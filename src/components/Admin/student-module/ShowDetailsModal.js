@@ -1,8 +1,11 @@
 import React from 'react'
-
-import StudentsRegister from './StudentsRegister';
-
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress } from '@mui/material';
+import { 
+    Button, 
+    Dialog, 
+    DialogActions, 
+    DialogContent, 
+    DialogContentText, 
+    DialogTitle, CircularProgress } from '@mui/material'
 
 const ShowDetailsModal = (props) => {
     const { show, handleShowClose, name } = props

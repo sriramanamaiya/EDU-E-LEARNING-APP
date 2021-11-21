@@ -3,9 +3,9 @@ import { TableBody,TableCell, TableRow } from '@mui/material'
 import { TableContainer, Table , TableHead } from '@mui/material'
 
 import EachStudent from './EachStudent'
-import ButtonComp from '../common-comp/ButtonComp'
+import ButtonComp from '../../Reusable-Comp/ButtonComp'
 
-const StudentsList = (props) => {
+const StudentsTable = (props) => {
     const { studentsData } = props
 
     return (
@@ -45,4 +45,4 @@ const StudentsList = (props) => {
     )
 }
 
-export default StudentsList
+export default StudentsTable

@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { startRegisteradmin, serverMessage, startEditAdminAccount } from '../../actions/adminAction'
-
-import InputField from '../common-comp/InputField'
-import ButtonComp from '../common-comp/ButtonComp'
-import AlertComp from '../common-comp/AlertComp'
-import Heading from '../common-comp/Heading'
 import { Box, Typography } from '@mui/material'
+
+import { startRegisteradmin, serverMessage, startEditAdminAccount } from '../../../actions/adminAction'
+
+import InputField from '../../Reusable-Comp/InputField'
+import ButtonComp from '../../Reusable-Comp/ButtonComp'
+import AlertComp from '../../Reusable-Comp/AlertComp'
+import Heading from '../../Reusable-Comp/Heading'
 
 const RegisterEdit = (props) => {
     const { history, role, name, email : userEmail, academyName, academyWebsite, show, handleShowClose } = props
@@ -20,7 +20,9 @@ const RegisterEdit = (props) => {
     })
 
     useEffect(() => {
-        dispatch(serverMessage({}))
+        return () => {
+            dispatch(serverMessage({}))
+        }
     },[])
 
     useEffect(() => {

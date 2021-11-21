@@ -1,4 +1,5 @@
 const adminInitialState = {
+    isLoading : false,
     isLoggedIn : false,
     message : {},
     data : {},
@@ -19,6 +20,9 @@ const adminReducer = ( state = adminInitialState, action ) => {
         }
         case 'LOGGEDIN' : {
             return { ...state, isLoggedIn : !state.isLoggedIn }
+        }
+        case 'ADMIN-LOADING' : {
+            return { ...state, isLoading : !state.isLoading }
         }
         case 'ADMIN-ACCOUNT' : {
             return { ...state, data : { ...action.payload } }

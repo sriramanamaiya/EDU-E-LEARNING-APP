@@ -4,9 +4,9 @@ import EditIcon from '@mui/icons-material/Edit'
 import { IconButton, TableCell } from '@mui/material'
 import { useDispatch } from 'react-redux'
 
-import { startDeleteStudent } from '../../actions/studentsAction'
+import { startDeleteStudent } from '../../../actions/studentsAction'
 
-import EditModal from './EditModal'
+import EditModal from '../../Reusable-Comp/EditModal'
 
 const EachStudent = (props) => {
     const {  id, name, email, allowed } = props
@@ -32,16 +32,15 @@ const EachStudent = (props) => {
     return (
         <>
             <TableCell align="center">
-
-            <IconButton onClick={handleDelete} >
-                <DeleteIcon/>
-            </IconButton>
+                <IconButton onClick={handleDelete} >
+                    <DeleteIcon/>
+                </IconButton>
             </TableCell>
             <TableCell align="center">
-            <IconButton onClick={handleEdit} >
-                <EditIcon/>
-            </IconButton>
-            <EditModal show={show} handleShowClose={handleShowClose} id={id} name={name} email={email} allowed={allowed} />
+                <IconButton onClick={handleEdit} >
+                    <EditIcon/>
+                </IconButton>
+                <EditModal show={show} handleShowClose={handleShowClose} id={id} name={name} email={email} allowed={allowed} />
             </TableCell>
         </>
     )

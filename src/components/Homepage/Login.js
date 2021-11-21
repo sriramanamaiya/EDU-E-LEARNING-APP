@@ -7,10 +7,10 @@ import { withRouter } from 'react-router'
 
 import { startLogin, serverMessage } from '../../actions/adminAction'
 
-import Heading from '../common-comp/Heading'
-import InputField from '../common-comp/InputField'
-import ButtonComp from '../common-comp/ButtonComp'
-import AlertComp from '../common-comp/AlertComp'
+import Heading from '../Reusable-Comp/Heading'
+import InputField from '../Reusable-Comp/InputField'
+import ButtonComp from '../Reusable-Comp/ButtonComp'
+import AlertComp from '../Reusable-Comp/AlertComp'
 
 const Login = (props) => {
     const { history, role } = props
@@ -21,7 +21,9 @@ const Login = (props) => {
     })
 
     useEffect(() => {
-        dispatch(serverMessage({}))
+        return () => {
+            dispatch(serverMessage({}))
+        }
     },[])
 
     useEffect(() => {
@@ -48,7 +50,7 @@ const Login = (props) => {
             if( role === 'admin' ){
                 dispatch(startLogin(values,redirect))
             }else{
-                console.log(values)
+                alert('Yet to implement the Project')
             }
         }
     })
@@ -57,7 +59,7 @@ const Login = (props) => {
         <form onSubmit={handleSubmit}>
             { errors.hasOwnProperty('notice') && <AlertComp type="success" title={errors.notice} />}
             { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} /> }
-            <Heading type="h3" title="Login 💻"  className="login-heading" />
+            <Heading type="h3" title="Login 💻"  className="heading" />
             <InputField 
                 label="Email" 
                 name="email" 

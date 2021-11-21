@@ -2,15 +2,14 @@ import React from 'react'
 import { Route, Switch } from 'react-router'
 
 import Home from './Home'
-import RegisterEdit from '../admin-auth/RegisterEdit'
-import Account from '../admin-auth/Account'
-import StudentsRegister from '../student-module/StudentsRegister'
-import StudentsRegistered from '../student-module/StudentsRegistered'
-
+import RegisterEdit from '../Admin/admin-auth/RegisterEdit'
+import Account from '../Admin/admin-auth/Account'
+import StudentsRegister from '../Admin/student-module/StudentsRegister'
+import StudentsContainer from '../Admin/student-module/StudentsContainer'
 import LoginPage from '../Homepage/LoginPage'
-import Dashboard from './Dashboard'
+import Dashboard from '../Admin/student-module/Dashboard'
 
-const NavBar = (props) => {
+const RouteComp = (props) => {
     
     return (
         <>
@@ -20,11 +19,12 @@ const NavBar = (props) => {
                 <Route path="/login" component={LoginPage} />
                 <Route path="/admin/dashboard" component={Dashboard} />
                 <Route path="/admin/account" component={Account} />
-                <Route path="/admin/students" component={StudentsRegistered} exact />
+                <Route path="/admin/students" component={StudentsContainer} exact />
                 <Route path="/admin/students/register" component={StudentsRegister} />
+                <Route path="/admin/course" component={Dashboard} />
             </Switch>
         </>
     )
 }
 
-export default NavBar
+export default RouteComp

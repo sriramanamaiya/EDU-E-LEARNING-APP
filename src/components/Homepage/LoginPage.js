@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Tab, Box } from '@mui/material'
 import { TabPanel, TabContext, TabList } from '@mui/lab'
 
-import Login from '../admin-auth/Login'
+import Login from './Login'
 
 const LoginPage = (props) => {
     const [ value, setValue ] = useState('admin')

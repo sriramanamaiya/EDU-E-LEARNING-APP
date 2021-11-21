@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { CircularProgress } from '@mui/material'
+import { Box } from '@mui/system'
 
 import { loggedIn, startGetAdminAccount } from '../../actions/adminAction'
 
@@ -13,7 +15,7 @@ const Home = (props) => {
         return state.admin
     })
 
-    const { isLoggedIn } = userData
+    const { isLoggedIn, isLoading } = userData
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -34,7 +36,13 @@ const Home = (props) => {
 
     return (
         <>  
-            <HomeNavBar isLoggedIn={isLoggedIn} handleClick={handleClick} />
+            { isLoading ? (
+                    <Box sx={{display: 'flex', justifyContent : 'center' , mt : 30}}>
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <HomeNavBar isLoggedIn={isLoggedIn} handleClick={handleClick} />
+            ) }
         </>
     )
 }

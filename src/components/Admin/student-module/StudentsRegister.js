@@ -4,12 +4,12 @@ import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { FormControlLabel, Checkbox, Box } from '@mui/material'
 
-import { startStudentRegister, studentServerMessages, startEditStudent } from '../../actions/studentsAction'
+import { startStudentRegister, studentServerMessages, startEditStudent } from '../../../actions/studentsAction'
  
-import Heading from '../common-comp/Heading'
-import InputField from'../common-comp/InputField'
-import AlertComp from '../common-comp/AlertComp'
-import ButtonComp from '../common-comp/ButtonComp'
+import Heading from '../../Reusable-Comp/Heading'
+import InputField from'../../Reusable-Comp/InputField'
+import AlertComp from '../../Reusable-Comp/AlertComp'
+import ButtonComp from '../../Reusable-Comp/ButtonComp'
 
 const StudentsRegister = (props) => {
     const { id, name : studentName, email : studentEmail, allowed, handleShowClose } = props
@@ -72,7 +72,6 @@ const StudentsRegister = (props) => {
         validateOnChange : false,
         onSubmit : (values) => {
             if( id ){
-                // console.log(values)
                 dispatch(startEditStudent(id,values,handleShowClose))
             }else{
                 dispatch(startStudentRegister(values, redirect))

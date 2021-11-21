@@ -50,7 +50,6 @@ const startLogin = (userData, redirect) => {
                     localStorage.setItem('token', result.token)
                     redirect()
                     dispatch(loggedIn())
-                    dispatch(serverMessage({'notice' : 'Signed in successfully.'}))
                     dispatch(startGetAdminAccount(result.token))
                 }
             })
@@ -60,7 +59,7 @@ const startLogin = (userData, redirect) => {
     }
 }
 
-const loggedIn = (props) => {
+const loggedIn = () => {
     return {
         type : 'LOGGEDIN'
     }
@@ -68,12 +67,14 @@ const loggedIn = (props) => {
 
 const startGetAdminAccount = (token) => {
     return (dispatch) => {
+        dispatch(loading())
         axios.get(`${baseUrl}/admin/account`, {
             headers : {
                 "Authorization" : token
             }
         })
             .then((response) => {
+                dispatch(loading())
                 dispatch(adminAccount(response.data))
             })
             .catch((error) => {
@@ -110,6 +111,12 @@ const editedAccountDetails = (data) => {
     return {
         type : 'EDITED-ACCOUNT',
         payload : data
+    }
+}
+
+const loading = () => {
+    return {
+        type : 'ADMIN-LOADING'
     }
 }
 

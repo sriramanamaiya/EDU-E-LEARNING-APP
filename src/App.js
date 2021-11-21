@@ -3,13 +3,13 @@ import { Container } from '@mui/material'
 
 import './App.css'
 
-import NavBar from './components/navBar/NavBar'
+import RouteComp from './components/NavBar/RouteComp'
 
 const App = (props) => {
 
     return (
         <Container>
-            <NavBar />
+            <RouteComp />
         </Container>
     )
 }

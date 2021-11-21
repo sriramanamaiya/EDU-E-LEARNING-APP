@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import Heading from '../common-comp/Heading'
 
-import EditAccount from './EditAccount'
-import ListItem from '../common-comp/ListItem'
-import ButtonComp from '../common-comp/ButtonComp'
-import EditModal from '../student-module/EditModal'
+import Heading from '../../Reusable-Comp/Heading'
+import ListItem from '../../Reusable-Comp/ListItem'
+import ButtonComp from '../../Reusable-Comp/ButtonComp'
+import EditModal from '../../Reusable-Comp/EditModal'
 
 const Account = (props) => {
     const [ toggle, setToggle ] = useState(false)
@@ -33,15 +32,25 @@ const Account = (props) => {
                                 academyName = {accountDetails.academy.name} 
                                 academyWebsite={accountDetails.academy.website}  
                             />
-                            {/* <EditAccount role={accountDetails.role} name={accountDetails.username} userEmail={accountDetails.email} academyName = {accountDetails.academy.name} academyWebsite={accountDetails.academy.website} handleToggle={handleToggle} /> */}
                         </>
                     ) : (
                         <>
-                            <Heading type="h4" title="Admin Account Details:" className="login-heading" />
-                            <ListItem title={`Username : ${accountDetails.username}`} className="account-details" />
-                            <ListItem title={`Email ID : ${accountDetails.email}`} className="account-details" />
-                            <ListItem title={`Academy Name : ${accountDetails.email}`} className="account-details" />
-                            { accountDetails.academy.website.trim().length !== 0 && <ListItem title={accountDetails.academy.website} /> }    
+                            <Heading type="h4" title="Admin Account Details:" className="heading" />
+                            <ListItem 
+                                title={`Username : ${accountDetails.username}`} 
+                                className="account-details" 
+                            />
+                            <ListItem 
+                                title={`Email ID : ${accountDetails.email}`} 
+                                className="account-details" 
+                            />
+                            <ListItem 
+                                title={`Academy Name : ${accountDetails.email}`} 
+                                className="account-details" 
+                            />
+                            { accountDetails.academy.website.trim().length !== 0 && ( 
+                                <ListItem title={accountDetails.academy.website} className="account-details" />
+                            )}    
                             <ButtonComp  variant="outlined" title="Edit" handleClick={handleToggle}/>
                         </>
                     )}

@@ -1,17 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Heading from '../common-comp/Heading'
+import Heading from '../Reusable-Comp/Heading'
 
 const HomeNavBar = (props) => {
     const { isLoggedIn, handleClick } = props
 
     return (
         <div className="nav-bar">
-            <Heading type="h1" title="E-learning App" />
+            <Heading type="h1" title="Edu E-learning App 📚" />
             <nav className="navigation">
                 { isLoggedIn ? (
-                    <>
+                    <>  
+                        <Link to="/">Home</Link>
                         <Link to="/admin/dashboard">Dashboard</Link>
                         <Link to="/admin/students">Students</Link>
                         <Link to="/admin/course">Course</Link>
