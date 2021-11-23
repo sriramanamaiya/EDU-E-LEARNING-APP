@@ -8,11 +8,9 @@ const startRegisteradmin = (userData, redirect) => {
         axios.post(`${baseUrl}/admin/register`, userData)
             .then((response) => {
                 const result = response.data
-                console.log(result)
                 if( result.hasOwnProperty('message') ){
                     dispatch(serverMessage(result.errors))
                 }else{
-                    console.log(result)
                     if( result.hasOwnProperty('errors') ){
                         dispatch(serverMessage(result))
                     }else{
@@ -98,8 +96,17 @@ const startEditAdminAccount = (editedData, handleToggle) => {
             }
         })
             .then((response) => {
-                dispatch(editedAccountDetails(response.data))
-                handleToggle()
+                const result = response.data
+                if( result.hasOwnProperty('message') ){
+                    dispatch(serverMessage(result.errors))
+                }else{
+                    if( result.hasOwnProperty('errors') ){
+                        dispatch(serverMessage(result))
+                    }else{
+                        dispatch(editedAccountDetails(response.data))
+                        handleToggle()
+                    }
+                }
             })
             .catch((err) => {
                 alert(err.message)

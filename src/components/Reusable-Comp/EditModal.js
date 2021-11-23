@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
+import { Dialog, DialogContent } from '@mui/material'
 
 import StudentsRegister from '../Admin/student-module/StudentsRegister'
 import RegisterEdit from '../Admin/admin-auth/RegisterEdit'
@@ -10,11 +10,9 @@ const EditModal = (props) => {
     return (
         <>
             <Dialog fullWidth={true} open={show} onClose={handleShowClose} >
-                <DialogTitle>Edit</DialogTitle>
                     <DialogContent>
                         { role ? ( 
                             <RegisterEdit 
-                                show={show} 
                                 handleShowClose={handleShowClose} 
                                 name={name} 
                                 email={email} 

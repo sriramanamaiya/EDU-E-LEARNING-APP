@@ -45,7 +45,7 @@ const Account = (props) => {
                                 className="account-details" 
                             />
                             <ListItem 
-                                title={`Academy Name : ${accountDetails.email}`} 
+                                title={`Academy Name : ${accountDetails.academy.name}`} 
                                 className="account-details" 
                             />
                             { accountDetails.academy.website.trim().length !== 0 && ( 

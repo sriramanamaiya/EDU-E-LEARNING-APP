@@ -12,18 +12,12 @@ import AlertComp from '../../Reusable-Comp/AlertComp'
 import Heading from '../../Reusable-Comp/Heading'
 
 const RegisterEdit = (props) => {
-    const { history, role, name, email : userEmail, academyName, academyWebsite, show, handleShowClose } = props
+    const { history, role, name, email : userEmail, academyName, academyWebsite, handleShowClose } = props
     const dispatch = useDispatch()
 
     const registerErrors = useSelector((state) => {
         return state.admin.message
     })
-
-    useEffect(() => {
-        return () => {
-            dispatch(serverMessage({}))
-        }
-    },[])
 
     useEffect(() => {
         if( role ){
@@ -37,8 +31,14 @@ const RegisterEdit = (props) => {
             })
         }
 
+        return () => {
+            dispatch(serverMessage({}))
+        }
+    },[])
+
+    useEffect(() => {
         setErrors(registerErrors)
-    },[registerErrors, role, name,userEmail, academyWebsite, academyName  ])
+    },[registerErrors])
 
     const handleCancel = () => {
         history.push('/')
@@ -91,7 +91,12 @@ const RegisterEdit = (props) => {
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', textAlign : 'center' }}>
             <form onSubmit={handleSubmit}>
-                <Heading type="h3" title="Register with us ➡️"  />
+                { role ? (
+                    <Heading type="h3" title="Edit ur Account"  /> 
+                ) : (
+                    <Heading type="h3" title="Register with us ➡️"  />
+                )}
+                
                 { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
                 <Typography variant="body2" sx={{textAlign : 'left'}} >Admin Details:</Typography>
                 <InputField 

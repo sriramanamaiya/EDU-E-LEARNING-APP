@@ -22,12 +22,6 @@ const StudentsRegister = (props) => {
     })
     
     useEffect(() => {
-       return () => {
-        dispatch(studentServerMessages({}))
-       }
-    },[])
-    
-    useEffect(() => {
         if( id ){
             setValues({
                 name : studentName,
@@ -36,8 +30,14 @@ const StudentsRegister = (props) => {
             })
         }
 
+       return () => {
+        dispatch(studentServerMessages({}))
+       }
+    },[])
+    
+    useEffect(() => {
         setErrors(registerErrors)
-    },[studentName,studentEmail,allowed, registerErrors])
+    },[registerErrors])
     
     const handleCancel = () => {
         history.push('/admin/students')
@@ -83,7 +83,13 @@ const StudentsRegister = (props) => {
         <Box sx={{ display: 'flex', justifyContent: 'center', bgcolor: 'background.paper', textAlign : 'center', mt : 2 }}>
         <form onSubmit={handleSubmit}>
             { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
-            <Heading type="h3" title="Register Students 🧑‍🎓➡️"  className="login-heading" />
+
+            { id ? (
+                <Heading type="h3" title="Update Student Info 🧑‍🎓➡️"  className="login-heading" />
+            ) : (
+                <Heading type="h3" title="Register Students 🧑‍🎓➡️"  className="login-heading" />
+            )}
+
             <InputField 
                 label="Name" 
                 name="name" 
