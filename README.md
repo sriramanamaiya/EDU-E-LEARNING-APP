@@ -19,8 +19,6 @@ A Edu E-Learning app, where academy tutor can add courses, register students to 
   - Students Module: 
     - Admin can register a student into his academy and can view, delete, update student information.
     - Admin can grant permission to a student to login into his account.
-  - Dashboard Module: 
-    - On this page Total Courses, Total Students, Total Duration and Recent Students added are shown.
 
 - As it is an ongoing project many features at to be added.
 
