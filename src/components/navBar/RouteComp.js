@@ -8,6 +8,7 @@ import StudentsRegisterAndEdit from '../Admin/student-module/StudentsRegisterAnd
 import StudentsContainer from '../Admin/student-module/StudentsContainer'
 import LoginPage from '../Homepage/LoginPage'
 import Dashboard from '../Admin/Dashboard-module/Dashboard'
+import CourseRegister from '../Admin/Course-Module/CourseRegister'
 
 const RouteComp = (props) => {
     
@@ -21,7 +22,7 @@ const RouteComp = (props) => {
                 <Route path="/admin/account" component={Account} />
                 <Route path="/admin/students" component={StudentsContainer} exact />
                 <Route path="/admin/students/register" component={StudentsRegisterAndEdit} />
-                <Route path="/admin/course" component={Dashboard} />
+                <Route path="/admin/course" component={CourseRegister} />
             </Switch>
         </>
     )
