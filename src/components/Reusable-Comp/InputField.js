@@ -7,7 +7,18 @@ const InputField = (props) => {
 
     return (
         <>  
-            <TextField label={label} name={name} type={type} value={value} onChange={handleChange} onBlur={handleBlur} helperText={helperText} error={error} margin={margin} size={size} />
+            <TextField 
+                label={label} 
+                name={name} 
+                type={type} 
+                value={value} 
+                onChange={handleChange} 
+                onBlur={handleBlur} 
+                helperText={helperText} 
+                error={error} 
+                margin={margin} 
+                size={size} 
+            />
             <br />
         </>
     )

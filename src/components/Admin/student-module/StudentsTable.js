@@ -2,15 +2,15 @@ import React from 'react'
 import { TableBody,TableCell, TableRow } from '@mui/material'
 import { TableContainer, Table , TableHead } from '@mui/material'
 
-import EachStudent from './EachStudent'
-import ButtonComp from '../../Reusable-Comp/ButtonComp'
+import EditAndDeleteStudents from './EditAndDeleteStudents'
+import ShowDetailsModal from './ShowDetailsModal'
 
 const StudentsTable = (props) => {
     const { studentsData } = props
 
     return (
         <>
-        <TableContainer sx={{mt: 4}}>
+            <TableContainer sx={{mt: 4}}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -19,7 +19,7 @@ const StudentsTable = (props) => {
                             <TableCell align="center">Allowed</TableCell>
                             <TableCell align="center">Delete</TableCell>
                             <TableCell align="center">Edit</TableCell>
-                            <TableCell  align="center">Details</TableCell>
+                            <TableCell align="center">Details</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -31,8 +31,13 @@ const StudentsTable = (props) => {
                                             <TableCell align="center">{student.name}</TableCell>
                                             <TableCell align="center">{student.email}</TableCell>
                                             <TableCell align="center">{student.isAllowed.toString()}</TableCell>
-                                            <EachStudent id={student._id} name={student.name} email={student.email} allowed={student.isAllowed} />
-                                            <TableCell  align="center"><ButtonComp variant="outlined" title="View Details" size="small" /></TableCell>
+                                            <EditAndDeleteStudents 
+                                                id={student._id} 
+                                                name={student.name} 
+                                                email={student.email} 
+                                                allowed={student.isAllowed} 
+                                            />
+                                            <TableCell align="center"><ShowDetailsModal {...student} /></TableCell>
                                         </TableRow>
                                     )
                                 }) }

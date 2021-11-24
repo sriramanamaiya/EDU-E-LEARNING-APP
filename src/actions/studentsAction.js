@@ -68,7 +68,6 @@ const allStudents = (data) => {
 }
 
 const startEditStudent = (id,data, handleClose) => {
-    console.log(id,data,handleClose)
     return (dispatch) => {
         axios.put(`${baseUrl}/students/${id}`, data, {
             headers : {
@@ -76,7 +75,6 @@ const startEditStudent = (id,data, handleClose) => {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 const result = response.data
                 if( result.hasOwnProperty('message') ){
                     dispatch(studentServerMessages(result.errors))

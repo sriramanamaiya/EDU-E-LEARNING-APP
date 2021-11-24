@@ -59,6 +59,7 @@ const Login = (props) => {
         <form onSubmit={handleSubmit}>
             { errors.hasOwnProperty('notice') && <AlertComp type="success" title={errors.notice} />}
             { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} /> }
+            
             <Heading type="h3" title="Login 💻"  className="heading" />
             <InputField 
                 label="Email" 

@@ -98,6 +98,7 @@ const RegisterEdit = (props) => {
                 )}
                 
                 { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
+
                 <Typography variant="body2" sx={{textAlign : 'left'}} >Admin Details:</Typography>
                 <InputField 
                     label="Username" 
@@ -124,19 +125,19 @@ const RegisterEdit = (props) => {
                 />
 
                 { !role && (
-                <InputField 
-                    label="Password" 
-                    name="password" 
-                    type="password"
-                    value={values.password} 
-                    handleChange={handleChange} 
-                    handleBlur={handleBlur}
-                    error={ touched.password && errors.password ? true : false } 
-                    helperText = { touched.password && errors.password ?  errors.password : ''} 
-                    margin="normal" 
-                    size="small" 
-                />
-                ) }
+                    <InputField 
+                        label="Password" 
+                        name="password" 
+                        type="password"
+                        value={values.password} 
+                        handleChange={handleChange} 
+                        handleBlur={handleBlur}
+                        error={ touched.password && errors.password ? true : false } 
+                        helperText = { touched.password && errors.password ?  errors.password : ''} 
+                        margin="normal" 
+                        size="small" 
+                    />
+                )}
 
                 <Typography variant="body2" sx={{textAlign : 'left'}} >Academy Details:</Typography>
                 <InputField 
@@ -145,8 +146,14 @@ const RegisterEdit = (props) => {
                     value={values.academy.name} 
                     handleChange={handleChange} 
                     handleBlur={handleBlur}
-                    error={ Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ? true : false } 
-                    helperText = { Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ?  errors.academy.name : '' }
+                    error={ 
+                        Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ? 
+                        true : false 
+                    } 
+                    helperText = { 
+                        Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ?  
+                        errors.academy.name : '' 
+                    }
                     margin="normal" 
                     size="small" 
                 />
@@ -164,15 +171,24 @@ const RegisterEdit = (props) => {
                     { role ? (
                         <>
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Update" />
-                            <ButtonComp variant="contained" handleClick={handleShowClose} title="Cancel" color="secondary" />
+                            <ButtonComp 
+                                variant="contained" 
+                                handleClick={handleShowClose} 
+                                title="Cancel" 
+                                color="secondary" 
+                            />
                         </>
                     ) : (
                         <>
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
-                            <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" color="secondary" />
+                            <ButtonComp 
+                                variant="contained" 
+                                handleClick={handleCancel} 
+                                title="Cancel" 
+                                color="secondary" 
+                            />
                         </>
                     ) }
-                     
                 </Box>
             </form>
         </Box>

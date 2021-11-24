@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 
-import Home from './Home'
+import Home from '../Homepage/Home'
 import RegisterEdit from '../Admin/admin-auth/RegisterEdit'
 import Account from '../Admin/admin-auth/Account'
-import StudentsRegister from '../Admin/student-module/StudentsRegister'
+import StudentsRegisterAndEdit from '../Admin/student-module/StudentsRegisterAndEdit'
 import StudentsContainer from '../Admin/student-module/StudentsContainer'
 import LoginPage from '../Homepage/LoginPage'
-import Dashboard from '../Admin/student-module/Dashboard'
+import Dashboard from '../Admin/Dashboard-module/Dashboard'
 
 const RouteComp = (props) => {
     
@@ -20,7 +20,7 @@ const RouteComp = (props) => {
                 <Route path="/admin/dashboard" component={Dashboard} />
                 <Route path="/admin/account" component={Account} />
                 <Route path="/admin/students" component={StudentsContainer} exact />
-                <Route path="/admin/students/register" component={StudentsRegister} />
+                <Route path="/admin/students/register" component={StudentsRegisterAndEdit} />
                 <Route path="/admin/course" component={Dashboard} />
             </Switch>
         </>

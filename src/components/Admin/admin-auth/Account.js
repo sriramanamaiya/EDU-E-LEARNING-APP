@@ -5,6 +5,7 @@ import Heading from '../../Reusable-Comp/Heading'
 import ListItem from '../../Reusable-Comp/ListItem'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import EditModal from '../../Reusable-Comp/EditModal'
+import RegisterEdit from './RegisterEdit'
 
 const Account = (props) => {
     const [ toggle, setToggle ] = useState(false)
@@ -26,11 +27,14 @@ const Account = (props) => {
                             <EditModal 
                                 show={toggle} 
                                 handleShowClose={handleToggle}  
-                                role={accountDetails.role} 
-                                name={accountDetails.username} 
-                                email={accountDetails.email} 
-                                academyName = {accountDetails.academy.name} 
-                                academyWebsite={accountDetails.academy.website}  
+                                component={<RegisterEdit 
+                                    handleShowClose={handleToggle}  
+                                    role={accountDetails.role} 
+                                    name={accountDetails.username} 
+                                    email={accountDetails.email} 
+                                    academyName={accountDetails.academy.name} 
+                                    academyWebsite={accountDetails.academy.website} 
+                                />} 
                             />
                         </>
                     ) : (
