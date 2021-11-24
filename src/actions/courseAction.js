@@ -39,4 +39,79 @@ const courseServerMessage = (data) => {
     }
 }
 
-export { startCreateCourse, courseServerMessage }
+const startGetAllCourse = () => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/courses`,{
+            headers : {
+                'Authorization' : token
+            }
+        })
+            .then((response) => {
+                dispatch(getAllCourse(response.data))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+const getAllCourse = (data) => {
+    return {
+        type : 'GET-ALL-COURSE',
+        payload : data
+    }
+}
+
+const startDeleteCourse = (id) => {
+    return (dispatch) => {
+        axios.delete(`${baseUrl}/courses/${id}`, {
+            headers : {
+                'Authorization' : token
+            }
+        })
+            .then((response) => {
+                dispatch(deleteCourse(response.data._id))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+const deleteCourse = (id) => {
+    return {
+        type : 'DELETE-COURSE',
+        payload : id
+    }
+}
+
+const startEditCourse = (id,data, handleClose) => {
+    return (dispatch) => {
+        axios.put(`${baseUrl}/courses/${id}`, data, {
+            headers : {
+                'Authorization' : token
+            }
+        })
+            .then((response) => {
+                const result = response.data
+                if( result.hasOwnProperty('errors') ){
+                    dispatch(courseServerMessage(result.errors))
+                }else{
+                    dispatch(editCourse(result))
+                    handleClose()
+                }
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+const editCourse = (data) => {
+    return {
+        type : 'EDIT-COURSE',
+        payload : data
+    }
+}
+
+export { startCreateCourse, courseServerMessage, startGetAllCourse, startDeleteCourse, startEditCourse }

@@ -7,16 +7,15 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker'
 
-import { courseServerMessage } from '../../../actions/courseAction'
+import { startCreateCourse, startEditCourse, courseServerMessage } from '../../../actions/courseAction'
 
 import InputField from '../../Reusable-Comp/InputField'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import AlertComp from '../../Reusable-Comp/AlertComp'
 import Heading from '../../Reusable-Comp/Heading'
-import { startCreateCourse } from '../../../actions/courseAction'
 
 const CourseRegister = (props) => {
-    const { history, role, handleShowClose } = props
+    const { history, role, handleShowClose, _id, name : courseName, description : courseDescription, duration : courseDuration, category : courseCateg, validity : courseValidity, level : courseLevel, author : courseAuthor } = props
 
     const dispatch = useDispatch()
 
@@ -27,6 +26,18 @@ const CourseRegister = (props) => {
     const courseCategory = ['HTML', 'CSS', 'javascript', 'reactjs', 'nodejs','expressjs', 'mongodb']
 
     useEffect(() => {
+        if( _id ){
+            setValues({
+                name : courseName,
+                description : courseDescription,
+                duration : courseDuration,
+                category : courseCateg,
+                validity : courseValidity,
+                level : courseLevel,
+                author : courseAuthor
+            })
+        }
+
         return () => {
             dispatch(courseServerMessage({}))
         }
@@ -64,14 +75,18 @@ const CourseRegister = (props) => {
         validationSchema,
         validateOnChange : false,
         onSubmit : (values) => {
-           dispatch(startCreateCourse(values))
+            if(_id){
+                dispatch(startEditCourse(_id,values,handleShowClose))
+            }else{
+                dispatch(startCreateCourse(values))
+            }
         }
     })
 
     return (
         <Grid container sx={{flexGrow : 1}} justifyContent="center" >
             <form onSubmit={handleSubmit}>
-                { role ? (
+                { _id ? (
                     <Heading type="h3" title="Edit ur Course"  /> 
                     ) : (
                     <Heading type="h3" title="Create Course Here 📖"  />
@@ -219,7 +234,7 @@ const CourseRegister = (props) => {
                 />
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
-                    { role ? (
+                    { _id ? (
                         <>
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Update" />
                             <ButtonComp 
