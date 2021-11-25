@@ -1,14 +1,13 @@
 import axios from 'axios'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
-const token = localStorage.getItem('token')
 
-const startCreateCourse = (data) => {
+const startCreateCourse = (data, handleRedirect) => {
 
     return (dispatch) => {
         axios.post(`${baseUrl}/courses`, data , {
             headers : {
-                'Authorization' : token
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -17,6 +16,7 @@ const startCreateCourse = (data) => {
                     dispatch(courseServerMessage(result.errors))
                 }else{
                     dispatch(createCourse(result))
+                    handleRedirect()
                 }
             })
             .catch((error) => {
@@ -43,7 +43,7 @@ const startGetAllCourse = () => {
     return (dispatch) => {
         axios.get(`${baseUrl}/courses`,{
             headers : {
-                'Authorization' : token
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -66,7 +66,7 @@ const startDeleteCourse = (id) => {
     return (dispatch) => {
         axios.delete(`${baseUrl}/courses/${id}`, {
             headers : {
-                'Authorization' : token
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -89,7 +89,7 @@ const startEditCourse = (id,data, handleClose) => {
     return (dispatch) => {
         axios.put(`${baseUrl}/courses/${id}`, data, {
             headers : {
-                'Authorization' : token
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {

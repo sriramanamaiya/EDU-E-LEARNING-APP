@@ -3,19 +3,17 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, Grid, MenuItem, TextField, Typography } from '@mui/material'
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { startCreateCourse, startEditCourse, courseServerMessage } from '../../../actions/courseAction'
 
 import InputField from '../../Reusable-Comp/InputField'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
-import AlertComp from '../../Reusable-Comp/AlertComp'
 import Heading from '../../Reusable-Comp/Heading'
 
 const CourseRegister = (props) => {
-    const { history, role, handleShowClose, _id, name : courseName, description : courseDescription, duration : courseDuration, category : courseCateg, validity : courseValidity, level : courseLevel, author : courseAuthor } = props
+    const { history, handleShowClose, _id, name : courseName, description : courseDescription, duration : courseDuration, releaseDate : courseReleaseDate, category : courseCateg, validity : courseValidity, level : courseLevel, author : courseAuthor } = props
 
     const dispatch = useDispatch()
 
@@ -31,6 +29,7 @@ const CourseRegister = (props) => {
                 name : courseName,
                 description : courseDescription,
                 duration : courseDuration,
+                releaseDate : '',
                 category : courseCateg,
                 validity : courseValidity,
                 level : courseLevel,
@@ -42,12 +41,12 @@ const CourseRegister = (props) => {
             dispatch(courseServerMessage({}))
         }
     },[])
-
+    
     useEffect(() => {
         setErrors(courseErrors)
     },[courseErrors])
 
-    const handleCancel = () => {
+    const handleRedirect = () => {
         history.push('/admin/course')
     }
 
@@ -78,7 +77,7 @@ const CourseRegister = (props) => {
             if(_id){
                 dispatch(startEditCourse(_id,values,handleShowClose))
             }else{
-                dispatch(startCreateCourse(values))
+                dispatch(startCreateCourse(values, handleRedirect))
             }
         }
     })
@@ -91,8 +90,6 @@ const CourseRegister = (props) => {
                     ) : (
                     <Heading type="h3" title="Create Course Here 📖"  />
                 )}
-                
-                { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
 
                 <Typography variant="body2" sx={{textAlign : 'left'}} >Add Course Details:</Typography>
                 <InputField 
@@ -134,40 +131,6 @@ const CourseRegister = (props) => {
                     size="small" 
                     required={true}
                 />
-                
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                        label="Basic example"
-                        value={values.releaseDate}
-                        onChange={handleChange}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                </LocalizationProvider>
-
-                {/* <InputField 
-                    label="Release Date" 
-                    name="releaseDate" 
-                    value={values.releaseDate} 
-                    handleChange={handleChange} 
-                    handleBlur={handleBlur}
-                    error={errors.releaseDate && touched.releaseDate ? true : false } 
-                    helperText = { touched.releaseDate && errors.releaseDate ? errors.releaseDate : ''} 
-                    margin="normal" 
-                    size="small" 
-                /> */}
-
-                {/* <InputField 
-                    label="Category" 
-                    name="category" 
-                    value={values.category} 
-                    handleChange={handleChange} 
-                    handleBlur={handleBlur}
-                    error={errors.category && touched.category ? true : false } 
-                    helperText = { touched.category && errors.category ? errors.category : ''} 
-                    margin="normal" 
-                    size="small" 
-                    required={true}
-                /> */}
 
                 <TextField 
                     sx={{width : '100%'}} 
@@ -178,7 +141,8 @@ const CourseRegister = (props) => {
                     label="Select Course Category"
                     error={errors.category && touched.category ? true : false }  
                     helperText={ touched.category && errors.category ? errors.category : ''} 
-                    select value={values.category}
+                    select 
+                    value={values.category}
                     onBlur={handleBlur} 
                     onChange={handleChange}
                 >
@@ -233,6 +197,24 @@ const CourseRegister = (props) => {
                     size="small" 
                 />
 
+                <Typography variant="body2" sx={{textAlign : 'left'}} >Add Release Date:</Typography>
+                {/* <DatePicker 
+                    name="releaseDate" 
+                    selected={values.releaseDate} 
+                    onChange={(date) => handleChange(date)} 
+                    minDate={new Date()}
+                    showDisabledMonthNavigation
+                /> */}
+
+                <InputField 
+                    label="Release Date" 
+                    name="releaseDate" 
+                    value={values.releaseDate} 
+                    handleChange={handleChange} 
+                    margin="normal" 
+                    size="small" 
+                />
+                
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
                     { _id ? (
                         <>
@@ -249,7 +231,7 @@ const CourseRegister = (props) => {
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Create" />
                             <ButtonComp 
                                 variant="contained" 
-                                handleClick={handleCancel} 
+                                handleClick={handleRedirect} 
                                 title="Cancel" 
                                 color="secondary" 
                             />

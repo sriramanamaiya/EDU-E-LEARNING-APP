@@ -23,7 +23,8 @@ const RouteComp = (props) => {
                 <Route path="/admin/account" component={Account} />
                 <Route path="/admin/students" component={StudentsContainer} exact />
                 <Route path="/admin/students/register" component={StudentsRegisterAndEdit} />
-                <Route path="/admin/course" component={CourseContainer} />
+                <Route path="/admin/course" component={CourseContainer} exact />
+                <Route path="/admin/course/create" component={CourseRegister} />
             </Switch>
         </>
     )

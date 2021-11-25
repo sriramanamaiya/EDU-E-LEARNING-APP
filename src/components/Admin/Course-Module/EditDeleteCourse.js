@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { IconButton, TableCell } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 import { startDeleteCourse } from '../../../actions/courseAction'
+
 import EditModal from '../../Reusable-Comp/EditModal'
 import CourseRegister from './CourseRegister'
 
