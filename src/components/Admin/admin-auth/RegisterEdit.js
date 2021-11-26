@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, Typography } from '@mui/material'
 
-import { startRegisteradmin, serverMessage, startEditAdminAccount } from '../../../actions/adminAction'
+import { startRegisteradmin, adminAuthErrors, startEditAdminAccount } from '../../../actions/adminAction'
 
 import InputField from '../../Reusable-Comp/InputField'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
@@ -16,7 +16,7 @@ const RegisterEdit = (props) => {
     const dispatch = useDispatch()
 
     const registerErrors = useSelector((state) => {
-        return state.admin.message
+        return state.admin.errors
     })
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const RegisterEdit = (props) => {
         }
 
         return () => {
-            dispatch(serverMessage({}))
+            dispatch(adminAuthErrors({}))
         }
     },[])
 

@@ -1,19 +1,19 @@
-const studentsInitialState = {
-    message : {},
+const adminstudentsInitialState = {
+    errors : {},
     data : [],
 }
 
-const studentsReducer = ( state = studentsInitialState, action ) => {
+const adminstudentsReducer = ( state = adminstudentsInitialState, action ) => {
     switch ( action.type ) {
-        case 'STUDENT-SERVER-MESSAGE' : {
-            if( action.payload.hasOwnProperty('errors') || action.payload.hasOwnProperty('notice') ){
-                return { ...state, message : { ...action.payload } }
+        case 'STUDENT-AUTH-ERRORS' : {
+            if( action.payload.hasOwnProperty('errors') ){
+                return { ...state, errors : { ...action.payload } }
             }else{
                 let result
                 for( const key in action.payload ){
                     result = { ...result , [key] : action.payload[key].message }
                 }
-                return { ...state, message : { ...result} }
+                return { ...state, errors : { ...result} }
             }
         }
         case 'REGISTERED-STUDENT' : {
@@ -44,4 +44,4 @@ const studentsReducer = ( state = studentsInitialState, action ) => {
     }
 }
 
-export default studentsReducer
+export default adminstudentsReducer

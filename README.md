@@ -19,8 +19,13 @@ A Edu E-Learning app, where academy tutor can add courses, register students to 
   - Students Module: 
     - Admin can register a student into his academy and can view, delete, update student information.
     - Admin can grant permission to a student to login into his account.
+  - Course Module:
+    - Admin can add, delete, edit courses.
+- Student.
+  - Student Authentication:
+    - Student can login to his account by clicking on Student Tab on Login Page.
 
-- As it is an ongoing project many features at to be added.
+- As it is an ongoing project many features yet to be added.
 
 ## Manual Setup
 - Download the project folder, then run `npm start` to view the Project.

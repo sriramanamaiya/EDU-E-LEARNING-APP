@@ -3,7 +3,6 @@ import axios from 'axios'
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
 const startCreateCourse = (data, handleRedirect) => {
-
     return (dispatch) => {
         axios.post(`${baseUrl}/courses`, data , {
             headers : {
@@ -13,7 +12,7 @@ const startCreateCourse = (data, handleRedirect) => {
             .then((response) => {
                 const result = response.data
                 if( result.hasOwnProperty('errors') ){
-                    dispatch(courseServerMessage(result.errors))
+                    dispatch(courseErrors(result.errors))
                 }else{
                     dispatch(createCourse(result))
                     handleRedirect()
@@ -32,9 +31,9 @@ const createCourse = (data) => {
     }
 }
 
-const courseServerMessage = (data) => {
+const courseErrors = (data) => {
     return {
-        type : 'COURSE-SERVER-MESSAGE',
+        type : 'COURSE-ERRORS',
         payload : data
     }
 }
@@ -95,7 +94,7 @@ const startEditCourse = (id,data, handleClose) => {
             .then((response) => {
                 const result = response.data
                 if( result.hasOwnProperty('errors') ){
-                    dispatch(courseServerMessage(result.errors))
+                    dispatch(courseErrors(result.errors))
                 }else{
                     dispatch(editCourse(result))
                     handleClose()
@@ -114,4 +113,4 @@ const editCourse = (data) => {
     }
 }
 
-export { startCreateCourse, courseServerMessage, startGetAllCourse, startDeleteCourse, startEditCourse }
+export { startCreateCourse, courseErrors, startGetAllCourse, startDeleteCourse, startEditCourse }

@@ -6,7 +6,7 @@ import { Box, Grid, MenuItem, TextField, Typography } from '@mui/material'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-import { startCreateCourse, startEditCourse, courseServerMessage } from '../../../actions/courseAction'
+import { startCreateCourse, startEditCourse, courseErrors } from '../../../actions/courseAction'
 
 import InputField from '../../Reusable-Comp/InputField'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
@@ -17,8 +17,8 @@ const CourseRegister = (props) => {
 
     const dispatch = useDispatch()
 
-    const courseErrors = useSelector((state) => {
-        return state.course.message
+    const error = useSelector((state) => {
+        return state.course.errors
     })
 
     const courseCategory = ['HTML', 'CSS', 'javascript', 'reactjs', 'nodejs','expressjs', 'mongodb']
@@ -38,13 +38,13 @@ const CourseRegister = (props) => {
         }
 
         return () => {
-            dispatch(courseServerMessage({}))
+            dispatch(courseErrors({}))
         }
     },[])
     
     useEffect(() => {
-        setErrors(courseErrors)
-    },[courseErrors])
+        setErrors(error)
+    },[error])
 
     const handleRedirect = () => {
         history.push('/admin/course')

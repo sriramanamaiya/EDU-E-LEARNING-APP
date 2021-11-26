@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { startGetAllStudents } from '../../../actions/studentsAction'
+import { startGetAllStudents } from '../../../actions/adminstudentsAction'
 
 import StudentsTable from './StudentsTable'
 import StudentsTableHeaders from './StudentsTableHeaders'
@@ -10,7 +10,7 @@ const StudentsContainer = (props) => {
     const dispatch = useDispatch()
 
     const data = useSelector((state) => {
-        return [state.students.data, state.admin.isLoading]
+        return [state.adminStudents.data, state.admin.isLoading]
     })
 
     const [ studentsData, isLoading ] = data

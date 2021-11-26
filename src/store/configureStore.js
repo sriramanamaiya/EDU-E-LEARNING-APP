@@ -2,14 +2,16 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import adminReducer from '../reducers/adminReducer'
-import studentsReducer from '../reducers/studentsReducer'
+import adminstudentsReducer from '../reducers/adminStudentsReducer'
 import courseReducer from '../reducers/courseReducer'
+import studentReducer from '../reducers/studentReducer'
 
 const configureStore = () => {
     const store = createStore(combineReducers({
         admin : adminReducer,
-        students : studentsReducer,
-        course : courseReducer
+        adminStudents : adminstudentsReducer,
+        course : courseReducer,
+        student : studentReducer
     }),applyMiddleware(thunk))
     return store
 }

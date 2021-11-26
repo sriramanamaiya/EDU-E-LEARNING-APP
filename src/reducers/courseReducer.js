@@ -1,16 +1,16 @@
 const courseInitialState = {
-    message : {},
+    errors : {},
     data : []
 }
 
 const courseReducer = (state = courseInitialState, action ) => {
     switch( action.type ){
-        case 'COURSE-SERVER-MESSAGE' : {
+        case 'COURSE-ERRORS' : {
             let result
                 for( const key in action.payload ){
                     result = { ...result , [key] : action.payload[key].message }
                 }
-            return { ...state, message : { ...result} }
+            return { ...state, errors : { ...result} }
         }
         case 'CREATE-COURSE' : {
             return { ...state, data : [ ...state.data, {...action.payload} ] }

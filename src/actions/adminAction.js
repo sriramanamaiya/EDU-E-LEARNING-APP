@@ -1,27 +1,34 @@
 import axios from 'axios'
+import Swal from 'sweetalert2'
+import jwt_decode from 'jwt-decode'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
 const startRegisteradmin = (userData, redirect) => {
-    console.log(userData)
+
     return (dispatch) => {
         axios.post(`${baseUrl}/admin/register`, userData)
             .then((response) => {
                 const result = response.data
                 if( result.hasOwnProperty('message') ){
-                    dispatch(serverMessage(result.errors))
+                    dispatch(adminAuthErrors(result.errors))
                 }else{
                     if( result.hasOwnProperty('errors') ){
-                        dispatch(serverMessage(result))
+                        dispatch(adminAuthErrors(result))
                     }else{
-                        dispatch(serverMessage(result))
+                        Swal.fire({
+                            icon: 'success',
+                            title: result.notice,
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
                         redirect()
                     }
                 }
             })
             .catch((error) => {
                 if( error.message.includes('406') ){
-                    dispatch(serverMessage({errors : 'Email or name already created'}))
+                    dispatch(adminAuthErrors({errors : 'Email or academy name already Exist'}))
                 }else{
                     alert(error.message)
                 }
@@ -29,9 +36,9 @@ const startRegisteradmin = (userData, redirect) => {
     }
 }
 
-const serverMessage = (errors) => {
+const adminAuthErrors = (errors) => {
     return {
-        type : 'SERVER-MESSAGE',
+        type : 'ADMIN-AUTH-ERRORS',
         payload : errors
     }
 }
@@ -41,14 +48,15 @@ const startLogin = (userData, redirect) => {
         axios.post(`${baseUrl}/admin/login`, userData)
             .then((response) => {
                 const result = response.data
-                console.log(result)
                 if( result.hasOwnProperty('errors') ){
-                    dispatch(serverMessage(result))
+                    dispatch(adminAuthErrors(result))
                 }else{
                     localStorage.setItem('token', result.token)
-                    redirect()
-                    dispatch(loggedIn())
                     dispatch(startGetAdminAccount(result.token))
+                    const res = jwt_decode(result.token)
+                    localStorage.setItem('role', res.role)
+                    dispatch(loggedIn())
+                    redirect()
                 }
             })
             .catch((error) => {
@@ -98,10 +106,10 @@ const startEditAdminAccount = (editedData, handleToggle) => {
             .then((response) => {
                 const result = response.data
                 if( result.hasOwnProperty('message') ){
-                    dispatch(serverMessage(result.errors))
+                    dispatch(adminAuthErrors(result.errors))
                 }else{
                     if( result.hasOwnProperty('errors') ){
-                        dispatch(serverMessage(result))
+                        dispatch(adminAuthErrors(result))
                     }else{
                         dispatch(editedAccountDetails(response.data))
                         handleToggle()
@@ -127,4 +135,4 @@ const loading = () => {
     }
 }
 
-export { startRegisteradmin, serverMessage, startLogin, loggedIn, startGetAdminAccount, startEditAdminAccount }
+export { startRegisteradmin, adminAuthErrors, startLogin, loggedIn, startGetAdminAccount, startEditAdminAccount }

@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Box } from '@mui/system'
 import { withRouter } from 'react-router'
 
-import { startLogin, serverMessage } from '../../actions/adminAction'
+import { startLogin, adminAuthErrors } from '../../actions/adminAction'
+import { startLoginStudent, studentErrors } from '../../actions/studentAction'
 
 import Heading from '../Reusable-Comp/Heading'
 import InputField from '../Reusable-Comp/InputField'
@@ -16,19 +17,29 @@ const Login = (props) => {
     const { history, role } = props
     const dispatch = useDispatch()
 
-    const loginErrors = useSelector((state) => {
-        return state.admin.message
+    const error = useSelector((state) => {
+        return [state.admin.errors, state.student.errors]
     })
+
+    const [ adminErrors, studentError ] = error
 
     useEffect(() => {
         return () => {
-            dispatch(serverMessage({}))
+            if( role === 'admin' ) {
+                dispatch(adminAuthErrors({}))
+            }else{
+                dispatch(studentErrors({}))
+            }
         }
     },[])
 
     useEffect(() => {
-        setErrors(loginErrors)
-    },[loginErrors])
+        if( role === 'admin'){
+            setErrors(adminErrors)
+        }else{
+            setErrors(studentError)
+        }
+    },[adminErrors,studentError])
 
     const redirect = () => {
         history.push('/')
@@ -50,7 +61,7 @@ const Login = (props) => {
             if( role === 'admin' ){
                 dispatch(startLogin(values,redirect))
             }else{
-                alert('Yet to implement the Project')
+                dispatch(startLoginStudent(values))
             }
         }
     })

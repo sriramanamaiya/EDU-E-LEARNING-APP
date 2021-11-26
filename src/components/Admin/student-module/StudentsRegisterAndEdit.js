@@ -4,7 +4,7 @@ import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { FormControlLabel, Checkbox, Box } from '@mui/material'
 
-import { startStudentRegister, studentServerMessages, startEditStudent } from '../../../actions/studentsAction'
+import { startStudentRegister, studentsAuthErrors, startEditStudent } from '../../../actions/adminstudentsAction'
  
 import Heading from '../../Reusable-Comp/Heading'
 import InputField from'../../Reusable-Comp/InputField'
@@ -18,7 +18,7 @@ const StudentsRegisterAndEdit = (props) => {
     const dispatch = useDispatch()
 
     const registerErrors = useSelector((state) => {
-        return state.students.message
+        return state.adminStudents.errors
     })
     
     useEffect(() => {
@@ -31,7 +31,7 @@ const StudentsRegisterAndEdit = (props) => {
         }
 
        return () => {
-        dispatch(studentServerMessages({}))
+        dispatch(studentsAuthErrors({}))
        }
     },[])
     

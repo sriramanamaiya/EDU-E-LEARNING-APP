@@ -12,11 +12,10 @@ const startStudentRegister = (data, redirect) => {
             .then((response) => {
                 const result = response.data
                 if( result.hasOwnProperty('message') ){
-                    dispatch(studentServerMessages(result.errors))
+                    dispatch(studentsAuthErrors(result.errors))
                 }else{
-                    console.log(result)
                     if( result.hasOwnProperty('errors') ){
-                        dispatch(studentServerMessages(result))
+                        dispatch(studentsAuthErrors(result))
                     }else{
                         dispatch(registeredStudents(result))
                         redirect()
@@ -29,9 +28,9 @@ const startStudentRegister = (data, redirect) => {
     }
 }
 
-const studentServerMessages = (data) => {
+const studentsAuthErrors = (data) => {
     return {
-        type : 'STUDENT-SERVER-MESSAGE',
+        type : 'STUDENT-AUTH-ERRORS',
         payload : data
     }
 }
@@ -77,10 +76,10 @@ const startEditStudent = (id,data, handleClose) => {
             .then((response) => {
                 const result = response.data
                 if( result.hasOwnProperty('message') ){
-                    dispatch(studentServerMessages(result.errors))
+                    dispatch(studentsAuthErrors(result.errors))
                 }else{
                     if( result.hasOwnProperty('errors') ){
-                        dispatch(studentServerMessages(result))
+                        dispatch(studentsAuthErrors(result))
                     }else{
                         dispatch(editedStudentDetails(result))
                         handleClose()
@@ -124,4 +123,4 @@ const deleteStudent = (data) => {
     }
 }
 
-export { startStudentRegister, studentServerMessages, startGetAllStudents, startEditStudent, startDeleteStudent }
+export { startStudentRegister, studentsAuthErrors, startGetAllStudents, startEditStudent, startDeleteStudent }

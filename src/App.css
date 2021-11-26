@@ -4,15 +4,16 @@ body {
     margin-top: 0;
 }
 
-/* Home Comp */
+/* Home NavBar Comp */
 .nav-bar {
+    position: static;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 3px solid #1098ad;
 }
 
-/* Home NavBar */
 .navigation a:link, .navigation a:visited {
     margin-right: 30px;
     color: black;
@@ -38,4 +39,10 @@ body {
 /* Account Details */
 .account-details {
     margin-top: 8px;
+}
+
+/* Home Comp */ 
+.about-heading {
+    margin: 0 auto;
+    font-size: 52px;
 }

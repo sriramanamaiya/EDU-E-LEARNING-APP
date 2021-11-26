@@ -1,21 +1,21 @@
 const adminInitialState = {
     isLoading : false,
     isLoggedIn : false,
-    message : {},
+    errors : {},
     data : {},
 }
 
 const adminReducer = ( state = adminInitialState, action ) => {
     switch ( action.type ) {
-        case 'SERVER-MESSAGE' : {
-            if( action.payload.hasOwnProperty('errors') || action.payload.hasOwnProperty('notice') ){
-                return { ...state, message : { ...action.payload } }
+        case 'ADMIN-AUTH-ERRORS' : {
+            if( action.payload.hasOwnProperty('errors')){
+                return { ...state, errors : { ...action.payload } }
             }else{
                 let result
                 for( const key in action.payload ){
                     result = { ...result , [key] : action.payload[key].message }
                 }
-                return { ...state, message : { ...result} }
+                return { ...state, errors : { ...result} }
             }
         }
         case 'LOGGEDIN' : {

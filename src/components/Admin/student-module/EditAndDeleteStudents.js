@@ -4,7 +4,7 @@ import { IconButton, TableCell } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 
-import { startDeleteStudent } from '../../../actions/studentsAction'
+import { startDeleteStudent } from '../../../actions/adminstudentsAction'
 
 import EditModal from '../../Reusable-Comp/EditModal'
 import StudentsRegisterAndEdit from './StudentsRegisterAndEdit'

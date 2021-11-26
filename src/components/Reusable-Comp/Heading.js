@@ -4,7 +4,7 @@ const Heading = (props) => {
     const { type, title, className } = props
 
     if( type === 'h1' ){
-        return <h1>{title}</h1>
+        return <h1 className={className}>{title}</h1>
     }else if( type === 'h2' ){
         return <h2>{title}</h2>
     } else if( type === 'h3' ){
