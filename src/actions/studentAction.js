@@ -11,7 +11,6 @@ const startLoginStudent = (data) => {
                 if(result.hasOwnProperty('errors')){
                     dispatch(studentErrors(result))
                 }else{
-                    console.log(result)
                     localStorage.setItem('token', result.token)
                     const res = jwt_decode(result.token)
                     localStorage.setItem('role', res.role)

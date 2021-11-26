@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { startGetStudentInfo } from './adminstudentsAction'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
@@ -113,4 +114,39 @@ const editCourse = (data) => {
     }
 }
 
-export { startCreateCourse, courseErrors, startGetAllCourse, startDeleteCourse, startEditCourse }
+const startEnrollCourse = (courseId, studentId) => {
+    console.log(courseId,studentId)
+    return (dispatch) => {
+        axios.patch(`${baseUrl}/courses/enroll?courseId=${courseId}&studentId=${studentId}`, {} ,{
+            headers : {
+                'Authorization' : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                console.log(response.data)
+                dispatch(startGetStudentInfo(studentId))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+const startUnenrollCourse = (courseId, studentId) => {
+    return (dispatch) => {
+        axios.patch(`${baseUrl}/courses/unenroll?courseId=${courseId}&studentId=${studentId}`, {} ,{
+            headers : {
+                'Authorization' : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                console.log(response.data)
+                dispatch(startGetStudentInfo(studentId))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+}
+
+export { startCreateCourse, courseErrors, startGetAllCourse, startDeleteCourse, startEditCourse, startEnrollCourse, startUnenrollCourse }

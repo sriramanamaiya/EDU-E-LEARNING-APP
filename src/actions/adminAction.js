@@ -54,8 +54,8 @@ const startLogin = (userData, redirect) => {
                     localStorage.setItem('token', result.token)
                     const res = jwt_decode(result.token)
                     localStorage.setItem('role', res.role)
-                    dispatch(startGetAdminAccount(result.token))
                     dispatch(loggedIn())
+                    dispatch(startGetAdminAccount(result.token))
                     redirect()
                 }
             })
@@ -82,7 +82,6 @@ const startGetAdminAccount = (token) => {
             .then((response) => {
                 dispatch(loading())
                 dispatch(adminAccount(response.data))
-                console.log(response.data)
             })
             .catch((error) => {
                 alert(error.message)
@@ -113,7 +112,6 @@ const startEditAdminAccount = (editedData, handleToggle) => {
                         dispatch(adminAuthErrors(result))
                     }else{
                         dispatch(editedAccountDetails(response.data))
-                        console.log(response.data)
                         handleToggle()
                     }
                 }

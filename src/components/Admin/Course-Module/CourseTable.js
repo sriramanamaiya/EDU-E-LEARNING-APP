@@ -6,9 +6,12 @@ import AddIcon from '@mui/icons-material/Add'
 
 import Heading from '../../Reusable-Comp/Heading'
 import EditDeleteCourse from './EditDeleteCourse'
+import EnrollUnrollCourses from './EnrollUnrollCourses'
 
 const CourseTable = (props) => {
     const { courseData } = props
+
+    console.log(courseData)
 
     return (
         <>
@@ -32,6 +35,7 @@ const CourseTable = (props) => {
                             <TableCell align="center">Category</TableCell>
                             <TableCell align="center">Edit</TableCell>
                             <TableCell align="center">Delete</TableCell>
+                            <TableCell align="center">Enroll Students</TableCell>
                             <TableCell align="center">More Details</TableCell>
                         </TableRow>
                     </TableHead>
@@ -43,6 +47,7 @@ const CourseTable = (props) => {
                                         <TableCell align="center">{course.duration}</TableCell>
                                         <TableCell align="center">{course.category}</TableCell>
                                         <EditDeleteCourse {...course} />
+                                        <EnrollUnrollCourses id={course._id} />
                                     </TableRow>
                                 )
                             }) }

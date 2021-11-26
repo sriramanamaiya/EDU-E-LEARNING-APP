@@ -50,7 +50,6 @@ const startGetAllStudents = (token) => {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 dispatch(allStudents(response.data))
             })
             .catch((error) => {
@@ -123,4 +122,29 @@ const deleteStudent = (data) => {
     }
 }
 
-export { startStudentRegister, studentsAuthErrors, startGetAllStudents, startEditStudent, startDeleteStudent }
+const startGetStudentInfo = (id) => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/students/${id}`, {
+            headers : {
+                "Authorization" : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                const result = response.data
+                dispatch(editedStudentDetails(result))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+    
+}
+
+// const studentInfo = (data) => {
+//     return {
+//         type : 'STUDENT-INFO',
+//         payload : data
+//     }
+// }
+
+export { startStudentRegister, studentsAuthErrors, startGetAllStudents, startEditStudent, startDeleteStudent, startGetStudentInfo }
