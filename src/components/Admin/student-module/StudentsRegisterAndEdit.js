@@ -47,23 +47,15 @@ const StudentsRegisterAndEdit = (props) => {
         history.push('/admin/students')
     }
 
-    let validationSchema
-    if( id ){
-        validationSchema = yup.object({
-            name : yup.string().required('Username Cannot be Blank'),
-            email : yup.string().email('Invalid Email').required('Required'),
-        })
-    }else{
-        validationSchema = yup.object({
-            name : yup.string().required('Username Cannot be Blank'),
-            email : yup.string().email('Invalid Email').required('Required'),
-            password : yup.string().min(8,'Password is too short').max(128).required('Required'),
-        })
-    }
+    const validationSchema = yup.object({
+        name : yup.string().required('Username Cannot be Blank'),
+        email : yup.string().email('Invalid Email').required('Required'),
+        password : !id && yup.string().min(8,'Password is too short').max(128).required('Required'),
+    })
     
     const { values, setValues, handleChange, handleSubmit, errors, setErrors, touched, handleBlur } = useFormik({
         initialValues :{
-            name : '',
+            name :  '',
             email : '',
             password : '',
             isAllowed : false

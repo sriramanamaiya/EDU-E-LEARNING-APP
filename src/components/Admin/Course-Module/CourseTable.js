@@ -15,7 +15,7 @@ const CourseTable = (props) => {
             <Box sx={{ display: 'flex', alignItems : 'center', justifyContent: 'space-between'}}>
                     <Heading type="h4" title={`Courses 📑 - (${courseData.length})`} />
                     <Typography variant="body1" >
-                        <Link to="/admin/course/create">
+                        <Link to="/admin/courses/new">
                             Add a New Course 
                                 <IconButton > 
                                     <AddIcon /> 

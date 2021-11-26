@@ -34,6 +34,9 @@ const courseReducer = (state = courseInitialState, action ) => {
             })
             return { ...state, data : [...result] }
         }
+        case 'ADMIN-LOGOUT' : {
+            return { ...courseInitialState }
+        }
         default : {
             return { ...state }
         }

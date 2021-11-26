@@ -30,6 +30,9 @@ const adminReducer = ( state = adminInitialState, action ) => {
         case 'EDITED-ACCOUNT' : {
             return { ...state, data : { ...state.data, ...action.payload } }
         }
+        case 'ADMIN-LOGOUT' : {
+            return { ...adminInitialState }
+        }
         default : {
             return { ...state }
         }

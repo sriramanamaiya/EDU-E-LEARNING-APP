@@ -4,10 +4,10 @@ import { CircularProgress } from '@mui/material'
 import { Box } from '@mui/system'
 import { withRouter } from 'react-router'
 
-import { loggedIn, startGetAdminAccount } from '../../actions/adminAction'
+import { adminLogOut, loggedIn, startGetAdminAccount } from '../../actions/adminAction'
+import { studentIsLoggedIn } from '../../actions/studentAction'
 
 import LoggedInNavBar from './LoggedInNavBar'
-import { studentIsLoggedIn } from '../../actions/studentAction'
 
 const NavBar = (props) => {
     const { history } = props
@@ -49,7 +49,7 @@ const NavBar = (props) => {
         const userConfirmation = window.confirm('Are You Sure')
         if( userConfirmation ){
             if( localStorage.getItem('role') === 'admin' ){
-                dispatch(loggedIn())
+                dispatch(adminLogOut())
             }else{
                 dispatch(studentIsLoggedIn())
             }

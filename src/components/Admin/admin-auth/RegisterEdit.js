@@ -44,26 +44,15 @@ const RegisterEdit = (props) => {
         history.push('/')
     }
 
-    let validationSchema
-    if( role ){
-        validationSchema = yup.object({
-            username : yup.string().required('Username Cannot be Blank'),
-            email : yup.string().email('Invalid Email').required('Required'),
-            academy : yup.object({
-                name : yup.string().required('Academy Name Required')
-            })
+    const validationSchema = yup.object({
+        username : yup.string().required('Username Cannot be Blank'),
+        email : yup.string().email('Invalid Email').required('Required'),
+        password : !role && yup.string().min(8,'Password is too short').max(128).required('Required'),
+        academy : yup.object({
+            name : yup.string().required('Academy Name Required')
         })
-    }else{
-        validationSchema = yup.object({
-            username : yup.string().required('Username Cannot be Blank'),
-            email : yup.string().email('Invalid Email').required('Required'),
-            password : yup.string().min(8,'Password is too short').max(128).required('Required'),
-            academy : yup.object({
-                name : yup.string().required('Academy Name Required')
-            })
-        })
-    }
-
+    })
+    
     const { values, setValues, handleChange, handleSubmit, errors, setErrors, touched, handleBlur } = useFormik({
         initialValues :{
             username : '',

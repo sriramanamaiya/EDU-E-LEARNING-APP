@@ -38,6 +38,9 @@ const adminstudentsReducer = ( state = adminstudentsInitialState, action ) => {
             })
             return { ...state, data : [ ...result ] }
         }
+        case 'ADMIN-LOGOUT' : {
+            return { ...adminstudentsInitialState }
+        }
         default : {
             return { ...state }
         }

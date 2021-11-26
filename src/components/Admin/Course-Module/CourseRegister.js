@@ -47,7 +47,7 @@ const CourseRegister = (props) => {
     },[error])
 
     const handleRedirect = () => {
-        history.push('/admin/course')
+        history.push('/admin/courses')
     }
 
     const validationSchema = yup.object({
