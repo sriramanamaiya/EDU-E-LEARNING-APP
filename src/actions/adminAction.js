@@ -2,6 +2,9 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import jwt_decode from 'jwt-decode'
 
+import { allStudents } from './adminstudentsAction'
+import { allCourse } from './courseAction'
+
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
 const startRegisteradmin = (userData, redirect) => {
@@ -54,8 +57,14 @@ const startLogin = (userData, redirect) => {
                     localStorage.setItem('token', result.token)
                     const res = jwt_decode(result.token)
                     localStorage.setItem('role', res.role)
-                    dispatch(startGetAdminAccount(result.token))
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'SucessFully Logged In',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                     dispatch(loggedIn())
+                    dispatch(startGetAdminStudentsCourses(result.token))
                     redirect()
                 }
             })
@@ -71,24 +80,39 @@ const loggedIn = () => {
     }
 }
 
-const startGetAdminAccount = (token) => {
+const startGetAdminStudentsCourses = (token) => {
+    const url1 = axios.get(`${baseUrl}/admin/account`, {
+        headers : {
+            "Authorization" : token
+        }
+    }),
+    url2 = axios.get(`${baseUrl}/admin/students`,{
+        headers : {
+            "Authorization" : token
+        }
+    }),
+    url3 = axios.get(`${baseUrl}/courses`,{
+        headers : {
+            'Authorization' : localStorage.getItem('token')
+        }
+    })
+
     return (dispatch) => {
         dispatch(loading())
-        axios.get(`${baseUrl}/admin/account`, {
-            headers : {
-                "Authorization" : token
-            }
-        })
+        Promise.all([url1,url2,url3])
             .then((response) => {
+                const [ account, student, course ] = response
+                console.log(response)
                 dispatch(loading())
-                dispatch(adminAccount(response.data))
-                console.log(response.data)
+                dispatch(adminAccount(account.data))
+                dispatch(allStudents(student.data))
+                dispatch(allCourse(course.data))
             })
             .catch((error) => {
                 alert(error.message)
             })
     }
-}
+} 
 
 const adminAccount = (adminData) => {
     return {
@@ -113,7 +137,6 @@ const startEditAdminAccount = (editedData, handleToggle) => {
                         dispatch(adminAuthErrors(result))
                     }else{
                         dispatch(editedAccountDetails(response.data))
-                        console.log(response.data)
                         handleToggle()
                     }
                 }
@@ -143,4 +166,5 @@ const adminLogOut = () => {
     }
 }
 
-export { startRegisteradmin, adminAuthErrors, startLogin, loggedIn, startGetAdminAccount, startEditAdminAccount, adminLogOut }
+export { startRegisteradmin, adminAuthErrors, startLogin, loggedIn, startEditAdminAccount, 
+    adminLogOut, startGetAdminStudentsCourses }

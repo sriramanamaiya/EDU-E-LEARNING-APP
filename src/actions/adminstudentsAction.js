@@ -42,23 +42,6 @@ const registeredStudents = (data) => {
     }
 }
 
-const startGetAllStudents = (token) => {
-    return (dispatch) => {
-        axios.get(`${baseUrl}/admin/students`,{
-            headers : {
-                "Authorization" : token
-            }
-        })
-            .then((response) => {
-                console.log(response.data)
-                dispatch(allStudents(response.data))
-            })
-            .catch((error) => {
-                alert(error.message)
-            })
-    }
-}
-
 const allStudents = (data) => {
     return {
         type : 'ALL-STUDENTS',
@@ -123,4 +106,23 @@ const deleteStudent = (data) => {
     }
 }
 
-export { startStudentRegister, studentsAuthErrors, startGetAllStudents, startEditStudent, startDeleteStudent }
+const startGetStudentInfo = (id) => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/students/${id}`, {
+            headers : {
+                "Authorization" : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                const result = response.data
+                dispatch(editedStudentDetails(result))
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+    }
+    
+}
+
+export { startStudentRegister, studentsAuthErrors, startEditStudent, startDeleteStudent, 
+    startGetStudentInfo, allStudents }

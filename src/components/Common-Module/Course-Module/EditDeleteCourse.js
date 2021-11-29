@@ -33,12 +33,12 @@ const EditDeleteCourse = (props) => {
     return (
         <>
             <TableCell align="center">
-                <IconButton onClick={handleDelete} >
+                <IconButton color="inherit" onClick={handleDelete} >
                     <DeleteIcon/>
                 </IconButton>
             </TableCell>
             <TableCell align="center">
-                <IconButton onClick={handleEdit} >
+                <IconButton color="inherit" onClick={handleEdit} >
                     <EditIcon/>
                 </IconButton>
             </TableCell>

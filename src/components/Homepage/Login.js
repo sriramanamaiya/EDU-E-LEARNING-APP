@@ -61,7 +61,7 @@ const Login = (props) => {
             if( role === 'admin' ){
                 dispatch(startLogin(values,redirect))
             }else{
-                dispatch(startLoginStudent(values))
+                dispatch(startLoginStudent(values, redirect))
             }
         }
     })
