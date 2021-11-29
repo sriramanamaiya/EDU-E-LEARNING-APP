@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { startGetStudentInfo } from './adminstudentsAction'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
@@ -39,25 +40,9 @@ const courseErrors = (data) => {
     }
 }
 
-const startGetAllCourse = () => {
-    return (dispatch) => {
-        axios.get(`${baseUrl}/courses`,{
-            headers : {
-                'Authorization' : localStorage.getItem('token')
-            }
-        })
-            .then((response) => {
-                dispatch(getAllCourse(response.data))
-            })
-            .catch((error) => {
-                alert(error.message)
-            })
-    }
-}
-
-const getAllCourse = (data) => {
+const allCourse = (data) => {
     return {
-        type : 'GET-ALL-COURSE',
+        type : 'ALL-COURSE',
         payload : data
     }
 }
@@ -115,7 +100,6 @@ const editCourse = (data) => {
 }
 
 const startEnrollCourse = (courseId, studentId) => {
-    console.log(courseId,studentId)
     return (dispatch) => {
         axios.patch(`${baseUrl}/courses/enroll?courseId=${courseId}&studentId=${studentId}`, {} ,{
             headers : {
@@ -123,8 +107,8 @@ const startEnrollCourse = (courseId, studentId) => {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 dispatch(startGetStudentInfo(studentId))
+                dispatch(enrollUnrollStudents(response.data))
             })
             .catch((error) => {
                 alert(error.message)
@@ -140,8 +124,8 @@ const startUnenrollCourse = (courseId, studentId) => {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 dispatch(startGetStudentInfo(studentId))
+                dispatch(enrollUnrollStudents(response.data))
             })
             .catch((error) => {
                 alert(error.message)
@@ -149,4 +133,12 @@ const startUnenrollCourse = (courseId, studentId) => {
     }
 }
 
-export { startCreateCourse, courseErrors, startGetAllCourse, startDeleteCourse, startEditCourse, startEnrollCourse, startUnenrollCourse }
+const enrollUnrollStudents = (data) => {
+    return {
+        type : 'ENROLL-UNROLL-STUDENTS',
+        payload : data
+    }
+}
+
+export { startCreateCourse, courseErrors, startDeleteCourse, startEditCourse, startEnrollCourse, 
+    startUnenrollCourse, allCourse }

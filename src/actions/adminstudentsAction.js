@@ -42,22 +42,6 @@ const registeredStudents = (data) => {
     }
 }
 
-const startGetAllStudents = (token) => {
-    return (dispatch) => {
-        axios.get(`${baseUrl}/admin/students`,{
-            headers : {
-                "Authorization" : token
-            }
-        })
-            .then((response) => {
-                dispatch(allStudents(response.data))
-            })
-            .catch((error) => {
-                alert(error.message)
-            })
-    }
-}
-
 const allStudents = (data) => {
     return {
         type : 'ALL-STUDENTS',
@@ -140,11 +124,5 @@ const startGetStudentInfo = (id) => {
     
 }
 
-// const studentInfo = (data) => {
-//     return {
-//         type : 'STUDENT-INFO',
-//         payload : data
-//     }
-// }
-
-export { startStudentRegister, studentsAuthErrors, startGetAllStudents, startEditStudent, startDeleteStudent, startGetStudentInfo }
+export { startStudentRegister, studentsAuthErrors, startEditStudent, startDeleteStudent, 
+    startGetStudentInfo, allStudents }

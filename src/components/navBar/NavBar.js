@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CircularProgress } from '@mui/material'
 import { Box } from '@mui/system'
 import { withRouter } from 'react-router'
+import jwtDecode from 'jwt-decode'
 
-import { adminLogOut, loggedIn, startGetAdminAccount } from '../../actions/adminAction'
-import { studentIsLoggedIn } from '../../actions/studentAction'
+import { adminLogOut, loggedIn, startGetAdminStudentsCourses } from '../../actions/adminAction'
+import { startGetAllCoursesStudent, studentAccountInfo, studentIsLoggedIn, studentLogOut } from '../../actions/studentAction'
 
 import LoggedInNavBar from './LoggedInNavBar'
 
@@ -21,16 +22,18 @@ const NavBar = (props) => {
 
     const [ userData, studentsData ] = data
     const { isLoggedIn, isLoading } = userData
-    const { studentLoggedIn } = studentsData
-
+    const { studentLoggedIn, isLoading : studentIsLoading } = studentsData
+   
     useEffect(() => {
         const token = localStorage.getItem('token')
         const role = localStorage.getItem('role')
         if( token ){
             if( role === 'admin' ){
                 dispatch(loggedIn())
-                dispatch(startGetAdminAccount(token))
+                dispatch(startGetAdminStudentsCourses(token))
             }else{
+                dispatch(studentAccountInfo(jwtDecode(token)))
+                dispatch(startGetAllCoursesStudent(token))
                 dispatch(studentIsLoggedIn())
             }
         }
@@ -51,7 +54,7 @@ const NavBar = (props) => {
             if( localStorage.getItem('role') === 'admin' ){
                 dispatch(adminLogOut())
             }else{
-                dispatch(studentIsLoggedIn())
+                dispatch(studentLogOut())
             }
             localStorage.removeItem('token')
             localStorage.removeItem('role')
@@ -61,7 +64,7 @@ const NavBar = (props) => {
 
     return (
         <>  
-            { isLoading ? (
+            { isLoading || studentIsLoading ? (
                 <Box sx={{display: 'flex', justifyContent : 'center' , mt : 30}}>
                     <CircularProgress />
                 </Box>

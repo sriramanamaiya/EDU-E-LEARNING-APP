@@ -1,23 +1,15 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { startGetAllStudents } from '../../../actions/adminstudentsAction'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 import StudentsTable from './StudentsTable'
 import StudentsTableHeaders from './StudentsTableHeaders'
 
 const StudentsContainer = (props) => {
-    const dispatch = useDispatch()
-
     const data = useSelector((state) => {
         return [state.adminStudents.data, state.admin.isLoading]
     })
 
     const [ studentsData, isLoading ] = data
-
-    useEffect(() => {
-        dispatch(startGetAllStudents(localStorage.getItem('token')))
-    },[])
 
     return (
         <div>
