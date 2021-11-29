@@ -13,7 +13,9 @@ import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import Heading from '../../Reusable-Comp/Heading'
 
 const CourseRegister = (props) => {
-    const { history, handleShowClose, _id, name : courseName, description : courseDescription, duration : courseDuration, releaseDate : courseReleaseDate, category : courseCateg, validity : courseValidity, level : courseLevel, author : courseAuthor } = props
+    const { history, handleShowClose, _id, name : courseName, description : courseDescription, 
+        duration : courseDuration, releaseDate : courseReleaseDate, category : courseCateg, 
+        validity : courseValidity, level : courseLevel, author : courseAuthor } = props
 
     const dispatch = useDispatch()
 

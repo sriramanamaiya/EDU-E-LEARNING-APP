@@ -15,19 +15,22 @@ const LoggedInNavBar = (props) => {
                         <Heading type="h1" title="Edu E-learning App 📚" />
                         <nav className="navigation">
                             <Link to="/">Home</Link>
-                            { userRole === 'admin' ? ( 
-                                <>
-                                    <Link to="/admin/dashboard">Dashboard</Link>
-                                    <Link to="/admin/courses">Course</Link>
-                                </>
+                            <Link to={ userRole === 'admin' ? (
+                                "/admin/dashboard"
                             ) : (
-                                <> 
-                                    <Link to="/student/dashboard">Dashboard</Link>
-                                    <Link to="/student/course">Course</Link>
-                                </>
-                            )}
+                                "/student/dashboard" 
+                            )}>Dashboard</Link>
+                            <Link to={ userRole === 'admin' ? (
+                                "/admin/courses" 
+                            ) : (
+                                "/student/courses"
+                            )}>Course</Link>
                             { userRole === 'admin' && <Link to="/admin/students">Students</Link> }
-                            <Link to="/admin/account">Account</Link>
+                            <Link to={ userRole === 'admin' ? (
+                                "/admin/account"
+                            ) : (
+                                "/student/account" 
+                            )}>Account</Link>
                             <Link to="#" onClick={handleClick} >LogOut</Link>
                         </nav>
                     </div>

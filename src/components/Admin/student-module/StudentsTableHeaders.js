@@ -16,7 +16,7 @@ const StudentsTableHeaders = (props) => {
                 <Typography variant="body1" >
                     <Link to="/admin/students/register">
                         Register a New Student 
-                            <IconButton > 
+                            <IconButton color="inherit" > 
                                 <AddIcon /> 
                             </IconButton>
                         </Link>

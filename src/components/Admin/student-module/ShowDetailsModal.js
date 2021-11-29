@@ -5,7 +5,6 @@ import ButtonComp from '../../Reusable-Comp/ButtonComp'
 
 const ShowDetailsModal = (props) => {
     const { name, email, role, isAllowed, courses, updatedAt } = props
-    
     const [ show, setShow ] = useState(false)
 
     const handleShowClose = () => {

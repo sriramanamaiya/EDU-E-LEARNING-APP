@@ -5,7 +5,7 @@ import { IconButton } from '@mui/material'
 import EditModal from '../../Reusable-Comp/EditModal'
 import EnrollCourses from './EnrollCourses'
 
-const EnrollUnrollCourses = (props) => {
+const EnrollUnrollContainer = (props) => {
     const { id }= props
     const [ show, setShow ] = useState(false)
 
@@ -33,4 +33,4 @@ const EnrollUnrollCourses = (props) => {
     )
 }
 
-export default EnrollUnrollCourses
+export default EnrollUnrollContainer
