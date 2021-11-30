@@ -71,7 +71,7 @@ const Login = (props) => {
             { errors.hasOwnProperty('notice') && <AlertComp type="success" title={errors.notice} />}
             { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} /> }
             
-            <Heading type="h3" title="Login 💻"  className="heading" />
+            <Heading type="h3" title="Login 💻"  className="login-heading" />
             <InputField 
                 label="Email" 
                 name="email" 

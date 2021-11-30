@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
@@ -22,8 +23,8 @@ const startStudentRegister = (data, redirect) => {
                     }
                 }
             })
-            .catch((err) => {
-                alert(err.message)
+            .catch((error) => {
+                Swal.fire(error.message)
             })
     }
 }
@@ -70,7 +71,7 @@ const startEditStudent = (id,data, handleClose) => {
                 }
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }
@@ -94,7 +95,7 @@ const startDeleteStudent = (id)  => {
                 dispatch(deleteStudent(result))
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }
@@ -118,7 +119,7 @@ const startGetStudentInfo = (id) => {
                 dispatch(editedStudentDetails(result))
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
     

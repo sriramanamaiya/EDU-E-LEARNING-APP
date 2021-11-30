@@ -48,7 +48,12 @@ const ShowDetailsModal = (props) => {
                                 </ListItem>
                             </List>
                         <DialogActions>
-                            <ButtonComp variant="contained" handleClick={handleShowClose} color="secondary" title="Close" />
+                            <ButtonComp 
+                                variant="contained" 
+                                handleClick={handleShowClose} 
+                                color="secondary" 
+                                title="Close" 
+                            />
                         </DialogActions>
                     </DialogContent>
             </Dialog>

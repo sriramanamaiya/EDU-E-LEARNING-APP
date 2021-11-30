@@ -135,12 +135,22 @@ const StudentsRegisterAndEdit = (props) => {
                     { id ?  (
                         <>
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Update" />
-                            <ButtonComp variant="contained" handleClick={handleShowClose} title="Cancel" color="secondary" />
+                            <ButtonComp 
+                                variant="contained" 
+                                handleClick={handleShowClose} 
+                                title="Cancel" 
+                                color="secondary" 
+                            />
                         </>
                     ): (
                         <>
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
-                            <ButtonComp variant="contained" handleClick={handleCancel} title="Cancel" color="secondary" />
+                            <ButtonComp 
+                                variant="contained" 
+                                handleClick={handleCancel} 
+                                title="Cancel" 
+                                color="secondary" 
+                            />
                         </>
                     )}
                 </Box>

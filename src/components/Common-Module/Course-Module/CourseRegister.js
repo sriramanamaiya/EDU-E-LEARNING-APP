@@ -3,14 +3,13 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, Grid, MenuItem, TextField, Typography } from '@mui/material'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 
 import { startCreateCourse, startEditCourse, courseErrors } from '../../../actions/courseAction'
 
 import InputField from '../../Reusable-Comp/InputField'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import Heading from '../../Reusable-Comp/Heading'
+import DatePickerComp from './DatePicker'
 
 const CourseRegister = (props) => {
     const { history, handleShowClose, _id, name : courseName, description : courseDescription, 
@@ -20,7 +19,7 @@ const CourseRegister = (props) => {
     const dispatch = useDispatch()
 
     const error = useSelector((state) => {
-        return state.course.errors
+        return state.courses.errors
     })
 
     const courseCategory = ['HTML', 'CSS', 'javascript', 'reactjs', 'nodejs','expressjs', 'mongodb']
@@ -83,6 +82,12 @@ const CourseRegister = (props) => {
             }
         }
     })
+
+    const handleDatePicker = (date) => {
+        setValues({ ...values, releaseDate : date })
+    }
+
+    console.log(errors)
 
     return (
         <Grid container sx={{flexGrow : 1}} justifyContent="center" >
@@ -199,23 +204,7 @@ const CourseRegister = (props) => {
                     size="small" 
                 />
 
-                <Typography variant="body2" sx={{textAlign : 'left'}} >Add Release Date:</Typography>
-                {/* <DatePicker 
-                    name="releaseDate" 
-                    selected={values.releaseDate} 
-                    onChange={(date) => handleChange(date)} 
-                    minDate={new Date()}
-                    showDisabledMonthNavigation
-                /> */}
-
-                <InputField 
-                    label="Release Date" 
-                    name="releaseDate" 
-                    value={values.releaseDate} 
-                    handleChange={handleChange} 
-                    margin="normal" 
-                    size="small" 
-                />
+                <DatePickerComp value={values.releaseDate} handleDatePicker={handleDatePicker} />
                 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
                     { _id ? (

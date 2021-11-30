@@ -16,7 +16,6 @@ const startLoginStudent = (data,redirect) => {
                     const res = jwt_decode(result.token)
                     localStorage.setItem('role', res.role)
                     dispatch(studentAccountInfo(res))
-                    console.log(res)
                     Swal.fire({
                         icon: 'success',
                         title: 'SucessFully Logged In',
@@ -29,7 +28,7 @@ const startLoginStudent = (data,redirect) => {
                 }
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }

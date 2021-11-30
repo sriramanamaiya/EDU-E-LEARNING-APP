@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 import { startGetStudentInfo } from './adminstudentsAction'
 
@@ -21,7 +22,7 @@ const startCreateCourse = (data, handleRedirect) => {
                 }
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }
@@ -58,7 +59,7 @@ const startDeleteCourse = (id) => {
                 dispatch(deleteCourse(response.data._id))
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }
@@ -87,7 +88,7 @@ const startEditCourse = (id,data, handleClose) => {
                 }
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }
@@ -111,7 +112,7 @@ const startEnrollCourse = (courseId, studentId) => {
                 dispatch(enrollUnrollStudents(response.data))
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }
@@ -128,7 +129,7 @@ const startUnenrollCourse = (courseId, studentId) => {
                 dispatch(enrollUnrollStudents(response.data))
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }

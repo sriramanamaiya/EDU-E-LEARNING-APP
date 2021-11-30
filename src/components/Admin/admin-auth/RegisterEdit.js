@@ -99,6 +99,7 @@ const RegisterEdit = (props) => {
                     helperText = { touched.username && errors.username ? errors.username : ''} 
                     margin="normal" 
                     size="small" 
+                    required={true}
                 />
 
                 <InputField 
@@ -111,6 +112,7 @@ const RegisterEdit = (props) => {
                     helperText = { touched.email && errors.email ? errors.email : ''} 
                     margin="normal" 
                     size="small" 
+                    required={true}
                 />
 
                 { !role && (
@@ -125,6 +127,7 @@ const RegisterEdit = (props) => {
                         helperText = { touched.password && errors.password ?  errors.password : ''} 
                         margin="normal" 
                         size="small" 
+                        required={true}
                     />
                 )}
 
@@ -145,6 +148,7 @@ const RegisterEdit = (props) => {
                     }
                     margin="normal" 
                     size="small" 
+                    required={true}
                 />
 
                 <InputField 

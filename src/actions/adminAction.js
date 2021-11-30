@@ -33,7 +33,7 @@ const startRegisteradmin = (userData, redirect) => {
                 if( error.message.includes('406') ){
                     dispatch(adminAuthErrors({errors : 'Email or academy name already Exist'}))
                 }else{
-                    alert(error.message)
+                    Swal.fire(error.message)
                 }
             })
     }
@@ -69,7 +69,7 @@ const startLogin = (userData, redirect) => {
                 }
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 }
@@ -93,7 +93,7 @@ const startGetAdminStudentsCourses = (token) => {
     }),
     url3 = axios.get(`${baseUrl}/courses`,{
         headers : {
-            'Authorization' : localStorage.getItem('token')
+            'Authorization' : token
         }
     })
 
@@ -102,14 +102,13 @@ const startGetAdminStudentsCourses = (token) => {
         Promise.all([url1,url2,url3])
             .then((response) => {
                 const [ account, student, course ] = response
-                console.log(response)
                 dispatch(loading())
                 dispatch(adminAccount(account.data))
                 dispatch(allStudents(student.data))
                 dispatch(allCourse(course.data))
             })
             .catch((error) => {
-                alert(error.message)
+                Swal.fire(error.message)
             })
     }
 } 
@@ -141,8 +140,8 @@ const startEditAdminAccount = (editedData, handleToggle) => {
                     }
                 }
             })
-            .catch((err) => {
-                alert(err.message)
+            .catch((error) => {
+                Swal.fire(error.message)
             })
     }
 }

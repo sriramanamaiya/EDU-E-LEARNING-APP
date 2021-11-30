@@ -14,12 +14,12 @@ const StudentsTableHeaders = (props) => {
             <Box sx={{ display: 'flex', alignItems : 'center', justifyContent: 'space-between'}}>
                 <Heading type="h4" title={`Registered Students 🧑‍🎓 - (${studentsData.length})`} />
                 <Typography variant="body1" >
-                    <Link to="/admin/students/register">
+                    <Link className="register-links" to="/admin/students/register">
                         Register a New Student 
                             <IconButton color="inherit" > 
                                 <AddIcon /> 
                             </IconButton>
-                        </Link>
+                    </Link>
                 </Typography>
             </Box>
         </>
