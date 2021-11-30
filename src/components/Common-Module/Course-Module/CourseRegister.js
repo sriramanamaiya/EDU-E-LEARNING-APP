@@ -78,8 +78,7 @@ const CourseRegister = (props) => {
             if(_id){
                 dispatch(startEditCourse(_id,values,handleShowClose))
             }else{
-                console.log(values)
-                // dispatch(startCreateCourse(values, handleRedirect))
+                dispatch(startCreateCourse(values, handleRedirect))
             }
         }
     })

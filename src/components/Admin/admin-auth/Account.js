@@ -39,7 +39,7 @@ const Account = (props) => {
                         </>
                     ) : (
                         <>
-                            <Heading type="h4" title="Admin Account Details:" className="heading" />
+                            <Heading type="h4" title="Account Details:" className="account-heading" />
                             <ListItem 
                                 title={`Username : ${accountDetails.username}`} 
                                 className="account-details" 
@@ -55,7 +55,13 @@ const Account = (props) => {
                             { accountDetails.academy.website.trim().length !== 0 && ( 
                                 <ListItem title={accountDetails.academy.website} className="account-details" />
                             )}    
-                            <ButtonComp  variant="outlined" title="Edit" handleClick={handleToggle}/>
+                            <ButtonComp 
+                                variant="outlined" 
+                                color="secondary" 
+                                sx={{mt : 2}} 
+                                title="Edit" 
+                                handleClick={handleToggle}
+                            />
                         </>
                     )}
                 </>

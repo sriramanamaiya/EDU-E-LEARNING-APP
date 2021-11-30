@@ -63,7 +63,8 @@ const allLectures= (data) => {
     }
 }
 
-const startEditLecture = (courseId,id,data) => {
+const startEditLecture = (courseId,id,data, handleShowClose) => {
+    console.log(courseId,id,data)
     return (dispatch) => {
         axios.put(`${baseUrl}/courses/${courseId}/lectures/${id}`, data, {
             headers : {
@@ -71,12 +72,12 @@ const startEditLecture = (courseId,id,data) => {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 const result = response.data
                 if( result.hasOwnProperty('errors')){
                     dispatch(lecturesErrors(result.errors))
                 }else{
                     dispatch(editLecture(result))
+                    handleShowClose()
                 }
             })
             .catch((error) => {

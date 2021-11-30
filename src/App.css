@@ -32,17 +32,38 @@ body {
 }
 
 /* Login */
-.heading {
+.account-heading {
     margin: 0 auto;
+    font-size: 32px;
 }
 
 /* Account Details */
 .account-details {
-    margin-top: 8px;
+    margin-top: 10px;
+    list-style: none;
+    font-size: 20px;
 }
 
 /* Home Comp */ 
 .about-heading {
     margin: 0 auto;
     font-size: 52px;
+}
+
+/* Login Comp */
+.login-heading {
+    margin: 0 auto;
+}
+
+/* Register Links */
+.register-links a:link, .register-links a:visited {
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.register-links a:hover, .register-links a:active {
+    color: #034c57;
+    font-size: 19px;
+    text-decoration: underline;
 }

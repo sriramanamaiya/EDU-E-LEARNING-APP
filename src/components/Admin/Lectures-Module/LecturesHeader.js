@@ -3,7 +3,7 @@ import { Typography, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 import EditModal from '../../Reusable-Comp/EditModal'
-import CreateLectures from './CreateLectures'
+import CreateEditLectures from './CreateEditLectures'
 
 const LecturesHeader = (props) => {
     const { findCourse, courseId, lecturesData } = props
@@ -29,7 +29,10 @@ const LecturesHeader = (props) => {
                                 <EditModal 
                                     show={show} 
                                     handleShowClose={handleShowClose} 
-                                    component={<CreateLectures id={courseId} handleShowClose={handleShowClose} />} />
+                                    component={<CreateEditLectures 
+                                    courseId={courseId} 
+                                    handleShowClose={handleShowClose} 
+                                />} />
                             </>
                         ) }
                     </Box>

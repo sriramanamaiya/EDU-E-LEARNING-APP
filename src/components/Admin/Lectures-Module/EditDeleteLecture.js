@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { startDeleteLecture } from '../../../actions/lectureAction'
 
 import EditModal from '../../Reusable-Comp/EditModal'
-import CreateLectures from './CreateLectures'
+import CreateEditLectures from './CreateEditLectures'
 
 const EditDeleteLecture = (props) => {
     const { _id, course } = props
@@ -36,7 +36,7 @@ const EditDeleteLecture = (props) => {
                 <EditModal 
                     show={show} 
                     handleShowClose={handleShowClose} 
-                    component={<CreateLectures {...props} handleShowClose={handleShowClose} />} />
+                    component={<CreateEditLectures {...props} handleShowClose={handleShowClose} />} />
             </TableCell>
             <TableCell>
                 <IconButton color="inherit" onClick={handleDelete} >

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import EditModal from '../../Reusable-Comp/EditModal'
-import CreateLectures from './CreateLectures'
+import CreateEditLectures from './CreateEditLectures'
 
 const LecturesNotFound = (props) => {
     const { courseId } = props
@@ -25,7 +25,10 @@ const LecturesNotFound = (props) => {
             <EditModal 
                 show={show} 
                 handleShowClose={handleShowClose} 
-                component={<CreateLectures courseId={courseId} handleShowClose={handleShowClose} />} 
+                component={<CreateEditLectures 
+                    courseId={courseId} 
+                    handleShowClose={handleShowClose} 
+                />} 
             />
         </>
     )

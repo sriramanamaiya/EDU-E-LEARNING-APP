@@ -4,14 +4,14 @@ import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, Grid, MenuItem, TextField, Typography } from '@mui/material'
 
-import { startCreateLecture, lecturesErrors } from '../../../actions/lectureAction'
+import { startCreateLecture, lecturesErrors, startEditLecture } from '../../../actions/lectureAction'
 
 import InputField from '../../Reusable-Comp/InputField'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import Heading from '../../Reusable-Comp/Heading'
 
-const CreateLectures = (props) => {
-    const { history, handleShowClose, courseId, _id, title, description, assetType, assetURL, comments, students, 
+const CreateEditLectures = (props) => {
+    const { handleShowClose, courseId, _id, title, description, assetType, assetURL, comments, students, 
         course, isDelete} = props
 
     const dispatch = useDispatch()
@@ -25,18 +25,18 @@ const CreateLectures = (props) => {
     const fileType = ['video','audio','text', 'pdf','img']
 
     useEffect(() => {
-        // if( _id ){
-        //     setValues({
-        //         title : title,
-        //         description : description,
-        //         assetType : assetType,
-        //         assetURL : assetURL,
-        //         comments : comments,
-        //         students : students,
-        //         course : course,
-        //         isDelete  : isDelete
-        //     })
-        // }
+        if( _id ){
+            setValues({
+                title : title,
+                description : description,
+                assetType : assetType,
+                assetURL : assetURL,
+                comments : comments,
+                students : students,
+                course : course,
+                isDelete  : isDelete
+            })
+        }
 
         return () => {
             dispatch(lecturesErrors({}))
@@ -69,9 +69,8 @@ const CreateLectures = (props) => {
         validateOnChange : false,
         onSubmit : (values) => {
             if( _id ){
-                console.log(values)
+                dispatch(startEditLecture(values.course,_id,values,handleShowClose))
             }else{
-                console.log(values)
                 dispatch(startCreateLecture(courseId,values, handleShowClose))
             }
         }
@@ -221,4 +220,4 @@ const CreateLectures = (props) => {
     )
 }
 
-export default CreateLectures
+export default CreateEditLectures
