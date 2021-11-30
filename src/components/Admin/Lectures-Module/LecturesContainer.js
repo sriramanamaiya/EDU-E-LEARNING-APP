@@ -1,34 +1,39 @@
 import React, { useEffect } from 'react'
 import { Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { startGetAllLectures } from '../../../actions/lectureAction'
 import LecturesNotFound from './LecturesNotFound'
+import LecturesTable from './LecturesTable'
+import LecturesHeader from './LecturesHeader'
 
 const LecturesContainer = (props) => {
-    const { id } = props.match.params
-    console.log(id)
+    const { id: courseId } = props.match.params
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(startGetAllLectures(id))
+        dispatch(startGetAllLectures(courseId))
     },[])
     
-    const courseData = useSelector((state) => {
-        return state.course.data
-    })
-    console.log(courseData)
-
-    const find = courseData.find((ele) => {
-        return ele._id === id
+    const data = useSelector((state) => {
+        return [ state.courses.data, state.lectures.data ]
     })
 
-    console.log(find)
+    const [ courseData, lecturesData ] = data
+
+    const findCourse = courseData.find((ele) => {
+        return ele._id === courseId
+    })
 
     return (
         <>
-            <Typography variant="h5">{find.name}</Typography>
-            <LecturesNotFound id={id}/>
+            <LecturesHeader findCourse={findCourse} courseId={courseId} lecturesData={lecturesData} />
+            { lecturesData.length === 0  ? (
+                <LecturesNotFound courseId={courseId}/>
+            ) : ( 
+                <LecturesTable lecturesData={lecturesData} />
+            )}
         </>
     )
 }

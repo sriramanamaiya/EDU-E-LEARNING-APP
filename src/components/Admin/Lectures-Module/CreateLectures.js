@@ -4,21 +4,22 @@ import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, Grid, MenuItem, TextField, Typography } from '@mui/material'
 
-import { startCreateLecture } from '../../../actions/lectureAction'
+import { startCreateLecture, lecturesErrors } from '../../../actions/lectureAction'
 
 import InputField from '../../Reusable-Comp/InputField'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import Heading from '../../Reusable-Comp/Heading'
 
 const CreateLectures = (props) => {
-    const { history, handleShowClose, id, _id} = props
-    console.log(id)
+    const { history, handleShowClose, courseId, _id} = props
 
     const dispatch = useDispatch()
 
-    const courseData = useSelector((state) => {
-        return state.course.data
+    const data = useSelector((state) => {
+        return [ state.courses.data, state.lectures.errors ] 
     })
+
+    const [ courseData, lectureErrors ] = data
 
     const fileType = ['video','audio','text', 'pdf','img']
 
@@ -36,21 +37,16 @@ const CreateLectures = (props) => {
         //     })
         // }
 
-        // return () => {
-        //     dispatch(courseErrors({}))
-        // }
+        return () => {
+            dispatch(lecturesErrors({}))
+        }
     },[])
     
-    // useEffect(() => {
-    //     setErrors(error)
-    // },[error])
-
-    const handleRedirect = () => {
-        history.push('/admin/courses')
-    }
+    useEffect(() => {
+        setErrors(lectureErrors)
+    },[lectureErrors])
 
     const validationSchema = yup.object({
-        title : yup.string().required('Required'),
         description : yup.string().required('Required'),
         assetType : yup.string().required('Required'),
         assetURL : yup.string().required('Required'),
@@ -71,8 +67,11 @@ const CreateLectures = (props) => {
         validationSchema,
         validateOnChange : false,
         onSubmit : (values) => {
-            console.log(values)
-            dispatch(startCreateLecture(values))
+            if( _id ){
+                console.log(values)
+            }else{
+                dispatch(startCreateLecture(courseId,values, handleShowClose))
+            }
         }
     })
     
@@ -208,7 +207,7 @@ const CreateLectures = (props) => {
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Create" />
                             <ButtonComp 
                                 variant="contained" 
-                                handleClick={handleRedirect} 
+                                handleClick={handleShowClose} 
                                 title="Cancel" 
                                 color="secondary" 
                             />

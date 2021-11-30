@@ -7,7 +7,7 @@ const CourseContainer = (props) => {
     const [ userRole, setUserRole ] = useState('')
 
     const data = useSelector((state) => {
-        return [state.course.data, state.student.data]
+        return [state.courses.data, state.student.data]
     })
 
     const [ courseData, studentData ] = data

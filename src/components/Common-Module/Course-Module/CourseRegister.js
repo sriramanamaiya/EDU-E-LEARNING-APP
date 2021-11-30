@@ -20,7 +20,7 @@ const CourseRegister = (props) => {
     const dispatch = useDispatch()
 
     const error = useSelector((state) => {
-        return state.course.errors
+        return state.courses.errors
     })
 
     const courseCategory = ['HTML', 'CSS', 'javascript', 'reactjs', 'nodejs','expressjs', 'mongodb']

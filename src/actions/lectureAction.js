@@ -5,26 +5,18 @@ const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
 const startCreateLecture = (id,data) => {
     return (dispatch) => {
-        axios.post(`${baseUrl}/course/${id}/lectures`, data, {
+        axios.post(`${baseUrl}/courses/${id}/lectures`, data, {
             headers : {
                 'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
-                console.log(response.data)
-            })
-    }
-} 
-
-const startGetAllLectures = (id) => {
-    return (dispatch) => {
-        axios.get(`${baseUrl}/course/${id}/lectures` , {
-            headers : {
-                'Authorization' : localStorage.getItem('token')
-            }
-        })
-            .then((response) => {
-                console.log(response.data)
+                const result = response.data
+                if( result.hasOwnProperty('errors')){
+                    dispatch(lecturesErrors(result.errors))
+                }else{
+                    dispatch(createLecture(result))
+                }
             })
             .catch((error) => {
                 Swal.fire(error.message)
@@ -32,4 +24,41 @@ const startGetAllLectures = (id) => {
     }
 }
 
-export { startCreateLecture, startGetAllLectures }
+const lecturesErrors = (data) => {
+    return {
+        type : 'LECTURES_ERRORS',
+        payload : data
+    }
+}
+
+const createLecture = (data) => {
+    return {
+        type : 'CREATE_LECTURE',
+        payload : data
+    }
+}
+
+const startGetAllLectures = (id) => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/courses/${id}/lectures` , {
+            headers : {
+                'Authorization' : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                dispatch(allLectures(response.data))
+            })
+            .catch((error) => {
+                Swal.fire(error.message)
+            })
+    }
+}
+
+const allLectures= (data) => {
+    return {
+        type : 'ALL_LECTURES',
+        payload : data
+    }
+}
+
+export { startCreateLecture, startGetAllLectures, lecturesErrors }

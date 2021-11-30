@@ -1,11 +1,12 @@
 import { Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import EditModal from '../../Reusable-Comp/EditModal'
 import CreateLectures from './CreateLectures'
 
 const LecturesNotFound = (props) => {
-    const { id } = props
+    const { courseId } = props
     const [ show, setShow ] = useState(false)
 
     const handleClick = () => {
@@ -21,7 +22,11 @@ const LecturesNotFound = (props) => {
             <Typography variant="h5">
                 No Lectures Found. Add Your First Lecture. <Link to="#" onClick={handleClick} >Click here 👇</Link>
             </Typography>
-            <EditModal show={show} handleShowClose={handleShowClose} component={<CreateLectures id ={id} />} />
+            <EditModal 
+                show={show} 
+                handleShowClose={handleShowClose} 
+                component={<CreateLectures courseId={courseId} handleShowClose={handleShowClose} />} 
+            />
         </>
     )
 }
