@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { startGetAllLectures } from '../../../actions/lectureAction'
@@ -28,12 +28,14 @@ const LecturesContainer = (props) => {
 
     return (
         <>
-            <LecturesHeader findCourse={findCourse} courseId={courseId} lecturesData={lecturesData} />
-            { lecturesData.length === 0  ? (
-                <LecturesNotFound courseId={courseId}/>
-            ) : ( 
-                <LecturesTable lecturesData={lecturesData} />
-            )}
+            <Box sx={{ mt : 2 }}>
+                <LecturesHeader findCourse={findCourse} courseId={courseId} lecturesData={lecturesData} />
+                { lecturesData.length === 0  ? (
+                    <LecturesNotFound courseId={courseId}/>
+                ) : ( 
+                    <LecturesTable lecturesData={lecturesData} />
+                )}
+            </Box>
         </>
     )
 }

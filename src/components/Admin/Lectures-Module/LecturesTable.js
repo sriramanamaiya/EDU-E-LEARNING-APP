@@ -1,7 +1,7 @@
 import React from 'react'
 import { TableContainer,TableCell,Table, TableRow,TableBody, TableHead } from '@mui/material'
 
-import EditLecture from './EditLecture' 
+import EditDeleteLecture from './EditDeleteLecture' 
 
 const LecturesTable = (props) => {
     const  { lecturesData } = props
@@ -15,6 +15,7 @@ const LecturesTable = (props) => {
                         <TableCell>Asset Type</TableCell>
                         <TableCell>Asset URL</TableCell>
                         <TableCell>Edit</TableCell>
+                        <TableCell>Delete</TableCell>
                         <TableCell>View</TableCell>
                     </TableRow>
                 </TableHead>
@@ -25,7 +26,7 @@ const LecturesTable = (props) => {
                                 <TableCell>{lectures.title}</TableCell>
                                 <TableCell>{lectures.assetType}</TableCell>
                                 <TableCell>{lectures.assetURL}</TableCell>
-                                <EditLecture {...lectures} />
+                                <EditDeleteLecture {...lectures} />
                             </TableRow>
                         )
                     }) }

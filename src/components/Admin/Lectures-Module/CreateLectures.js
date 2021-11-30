@@ -11,7 +11,8 @@ import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import Heading from '../../Reusable-Comp/Heading'
 
 const CreateLectures = (props) => {
-    const { history, handleShowClose, courseId, _id} = props
+    const { history, handleShowClose, courseId, _id, title, description, assetType, assetURL, comments, students, 
+        course, isDelete} = props
 
     const dispatch = useDispatch()
 
@@ -26,14 +27,14 @@ const CreateLectures = (props) => {
     useEffect(() => {
         // if( _id ){
         //     setValues({
-        //         name : courseName,
-        //         description : courseDescription,
-        //         duration : courseDuration,
-        //         releaseDate : '',
-        //         category : courseCateg,
-        //         validity : courseValidity,
-        //         level : courseLevel,
-        //         author : courseAuthor
+        //         title : title,
+        //         description : description,
+        //         assetType : assetType,
+        //         assetURL : assetURL,
+        //         comments : comments,
+        //         students : students,
+        //         course : course,
+        //         isDelete  : isDelete
         //     })
         // }
 
@@ -60,7 +61,7 @@ const CreateLectures = (props) => {
             assetType : '',
             assetURL : '',
             comments : '',
-            students : '',
+            students : [],
             course : '',
             isDelete : false
         },
@@ -70,6 +71,7 @@ const CreateLectures = (props) => {
             if( _id ){
                 console.log(values)
             }else{
+                console.log(values)
                 dispatch(startCreateLecture(courseId,values, handleShowClose))
             }
         }
