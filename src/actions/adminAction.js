@@ -93,7 +93,7 @@ const startGetAdminStudentsCourses = (token) => {
     }),
     url3 = axios.get(`${baseUrl}/courses`,{
         headers : {
-            'Authorization' : localStorage.getItem('token')
+            'Authorization' : token
         }
     })
 

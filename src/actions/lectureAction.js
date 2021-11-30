@@ -16,4 +16,20 @@ const startCreateLecture = (id,data) => {
     }
 } 
 
-export { startCreateLecture }
+const startGetAllLectures = (id) => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/course/${id}/lectures` , {
+            headers : {
+                'Authorization' : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {
+                Swal.fire(error.message)
+            })
+    }
+}
+
+export { startCreateLecture, startGetAllLectures }

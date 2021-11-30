@@ -16,6 +16,7 @@ import NotFound from '../Homepage/NotFound'
 import PrivateRouteAdmin from './PrivateRouteAdmin'
 import PrivateRouteStudent from './PrivateRouteStudent'
 import CreateLectures from '../Admin/Lectures-Module/CreateLectures'
+import LecturesContainer from '../Admin/Lectures-Module/LecturesContainer'
 
 const RouteComp = (props) => {
     const loading = useSelector((state) => {
@@ -40,6 +41,7 @@ const RouteComp = (props) => {
                         <PrivateRouteAdmin path="/admin/courses" Component={CourseContainer} exact={true} />
                         <PrivateRouteAdmin path="/admin/courses/new" Component={CourseRegister} />
                         <PrivateRouteAdmin path="/admin/lectures/create" Component={CreateLectures} />
+                        <PrivateRouteAdmin path="/:id/:id" Component={LecturesContainer} />
                         <PrivateRouteStudent path="/student/courses" studentIsLoading={studentIsLoading} Component={CourseContainer} />
                         <Route path="*" component={NotFound} />
                     </Switch>

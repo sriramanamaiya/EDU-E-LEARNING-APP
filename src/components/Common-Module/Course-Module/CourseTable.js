@@ -44,6 +44,7 @@ const CourseTable = (props) => {
                             ) }
                             <TableCell align="center">{ userRole === 'admin' ? 'Enroll/Unenroll Students' : 'Enroll/Unenroll Course'}</TableCell>
                             <TableCell align="center">More Details</TableCell>
+                            <TableCell>Add/Update Lectures</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -61,6 +62,7 @@ const CourseTable = (props) => {
                                             <StudentEnrollUnroll id={course._id} students={course.students} />
                                         )}
                                         <TableCell align="center"><ViewCourseDetails course={course} /></TableCell>
+                                        <TableCell align="center"><Link to={`/${course.name.split(' ').join('')}/${course._id}`} ><AddIcon /></Link></TableCell>
                                     </TableRow>
                                 )
                             }) }

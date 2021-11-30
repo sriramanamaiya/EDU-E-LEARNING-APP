@@ -11,7 +11,8 @@ import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import Heading from '../../Reusable-Comp/Heading'
 
 const CreateLectures = (props) => {
-    const { history, handleShowClose, _id} = props
+    const { history, handleShowClose, id, _id} = props
+    console.log(id)
 
     const dispatch = useDispatch()
 
