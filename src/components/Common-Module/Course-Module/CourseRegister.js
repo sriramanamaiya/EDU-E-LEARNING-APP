@@ -12,9 +12,8 @@ import Heading from '../../Reusable-Comp/Heading'
 import DatePickerComp from './DatePicker'
 
 const CourseRegister = (props) => {
-    const { history, handleShowClose, _id, name : courseName, description : courseDescription, 
-        duration : courseDuration, releaseDate : courseReleaseDate, category : courseCateg, 
-        validity : courseValidity, level : courseLevel, author : courseAuthor } = props
+    const { history, handleShowClose, _id, name, description, duration, releaseDate, category, validity, level, 
+        author } = props
 
     const dispatch = useDispatch()
 
@@ -27,14 +26,14 @@ const CourseRegister = (props) => {
     useEffect(() => {
         if( _id ){
             setValues({
-                name : courseName,
-                description : courseDescription,
-                duration : courseDuration,
+                name,
+                description,
+                duration,
                 releaseDate : '',
-                category : courseCateg,
-                validity : courseValidity,
-                level : courseLevel,
-                author : courseAuthor
+                category,
+                validity,
+                level,
+                author
             })
         }
 
@@ -86,8 +85,6 @@ const CourseRegister = (props) => {
     const handleDatePicker = (date) => {
         setValues({ ...values, releaseDate : date })
     }
-
-    console.log(errors)
 
     return (
         <Grid container sx={{flexGrow : 1}} justifyContent="center" >

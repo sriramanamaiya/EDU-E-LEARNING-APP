@@ -27,14 +27,14 @@ const CreateEditLectures = (props) => {
     useEffect(() => {
         if( _id ){
             setValues({
-                title : title,
-                description : description,
-                assetType : assetType,
-                assetURL : assetURL,
-                comments : comments,
-                students : students,
-                course : course,
-                isDelete  : isDelete
+                title,
+                description,
+                assetType,
+                assetURL,
+                comments,
+                students,
+                course,
+                isDelete
             })
         }
 
@@ -187,7 +187,7 @@ const CreateEditLectures = (props) => {
                 >
                     { courseData.map((course) => {
                         return (
-                            <MenuItem key={course._id} value={course.name}>{course.name}</MenuItem>
+                            <MenuItem key={course._id} value={course._id}>{course.name}</MenuItem>
                         )
                     })}
                 </TextField>

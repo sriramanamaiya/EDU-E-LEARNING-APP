@@ -12,7 +12,7 @@ import AlertComp from '../../Reusable-Comp/AlertComp'
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 
 const StudentsRegisterAndEdit = (props) => {
-    const { id, name : studentName, email : studentEmail, allowed, handleShowClose } = props
+    const { id, name, email, allowed, handleShowClose } = props
     const { history } = props
 
     const dispatch = useDispatch()
@@ -24,8 +24,8 @@ const StudentsRegisterAndEdit = (props) => {
     useEffect(() => {
         if( id ){
             setValues({
-                name : studentName,
-                email : studentEmail,
+                name,
+                email,
                 isAllowed : allowed
             })
         }
