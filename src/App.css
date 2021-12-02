@@ -67,3 +67,12 @@ body {
     font-size: 19px;
     text-decoration: underline;
 }
+
+/* Link */
+.goback {
+    font-size: 28px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    color: inherit;
+}

@@ -29,7 +29,7 @@ const EditDeleteLecture = (props) => {
 
     return (
         <>
-            <TableCell>
+            <TableCell align="left">
                 <IconButton color="inherit" onClick={handleEdit} >
                     <EditIcon/>
                 </IconButton>
@@ -38,7 +38,7 @@ const EditDeleteLecture = (props) => {
                     handleShowClose={handleShowClose} 
                     component={<CreateEditLectures {...props} handleShowClose={handleShowClose} />} />
             </TableCell>
-            <TableCell>
+            <TableCell align="left">
                 <IconButton color="inherit" onClick={handleDelete} >
                     <DeleteIcon/>
                 </IconButton>

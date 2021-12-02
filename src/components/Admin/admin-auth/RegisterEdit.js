@@ -12,7 +12,7 @@ import AlertComp from '../../Reusable-Comp/AlertComp'
 import Heading from '../../Reusable-Comp/Heading'
 
 const RegisterEdit = (props) => {
-    const { history, role, name, email : userEmail, academyName, academyWebsite, handleShowClose } = props
+    const { history, role, name, email, academyName, academyWebsite, handleShowClose } = props
     const dispatch = useDispatch()
 
     const registerErrors = useSelector((state) => {
@@ -23,7 +23,7 @@ const RegisterEdit = (props) => {
         if( role ){
             setValues({
                 username : name,
-                email : userEmail,
+                email,
                 academy : {
                     name : academyName,
                     website : academyWebsite

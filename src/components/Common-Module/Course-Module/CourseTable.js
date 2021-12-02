@@ -62,7 +62,7 @@ const CourseTable = (props) => {
                                             <StudentEnrollUnroll id={course._id} students={course.students} />
                                         )}
                                         <TableCell align="center"><ViewCourseDetails course={course} /></TableCell>
-                                        <TableCell align="center"><Link to={`/${course.name.split(' ').join('')}/${course._id}`} ><AddIcon /></Link></TableCell>
+                                        <TableCell align="center"><Link to={`/admin/lectures/${course._id}`} ><AddIcon /></Link></TableCell>
                                     </TableRow>
                                 )
                             }) }
