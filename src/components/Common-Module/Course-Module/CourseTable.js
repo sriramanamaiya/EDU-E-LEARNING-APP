@@ -40,11 +40,11 @@ const CourseTable = (props) => {
                               <>
                                 <TableCell align="center">Edit</TableCell>
                                 <TableCell align="center">Delete</TableCell>
+                                <TableCell>Add/Update Lectures</TableCell>
                               </>  
                             ) }
                             <TableCell align="center">{ userRole === 'admin' ? 'Enroll/Unenroll Students' : 'Enroll/Unenroll Course'}</TableCell>
                             <TableCell align="center">More Details</TableCell>
-                            <TableCell>Add/Update Lectures</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -57,12 +57,14 @@ const CourseTable = (props) => {
                                         <TableCell align="center">{course.duration}hr</TableCell>
                                         { userRole === 'admin' && <EditDeleteCourse {...course} /> }
                                         { userRole === 'admin' ? (
-                                            <EnrollUnrollContainer id={course._id} />
+                                            <>
+                                                <TableCell align="center"><Link to={`/admin/lectures/${course._id}`} ><AddIcon /></Link></TableCell>
+                                                <EnrollUnrollContainer id={course._id} />
+                                            </>
                                         ) : (
                                             <StudentEnrollUnroll id={course._id} students={course.students} />
                                         )}
                                         <TableCell align="center"><ViewCourseDetails course={course} /></TableCell>
-                                        <TableCell align="center"><Link to={`/admin/lectures/${course._id}`} ><AddIcon /></Link></TableCell>
                                     </TableRow>
                                 )
                             }) }

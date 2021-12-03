@@ -3,7 +3,7 @@ const studentInitialState = {
     isLoading : false,
     errors : {},
     accountData : {},
-    data : [],
+    data : []
 }
 
 const studentReducer = ( state = studentInitialState, action ) => {
