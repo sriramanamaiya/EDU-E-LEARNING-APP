@@ -23,7 +23,7 @@ const Login = (props) => {
         return [state.admin.errors, state.student.errors]
     })
 
-    const [ adminErrors, studentErrors ] = error
+    const [ adminErrors, studentError ] = error
 
     useEffect(() => {
         return () => {
@@ -39,9 +39,9 @@ const Login = (props) => {
         if( role ){
             setErrors(adminErrors)
         }else{
-            setErrors(studentErrors)
+            setErrors(studentError)
         }
-    },[adminErrors,studentErrors])
+    },[adminErrors,studentError])
 
     const redirect = () => {
         history.push('/')
@@ -104,7 +104,7 @@ const Login = (props) => {
                 </Box>
             </form>
             { role && (
-                <Typography variant="body1" sx={{textAlign : 'right', mt : 2 }} >Don't have an account?<Link className="link-color" to="/register">Sign up</Link></Typography>
+                <Typography variant="body1" sx={{textAlign : 'right', mt : 2 }} >Don't have an account? <Link className="link-color" to="/register">Sign up</Link></Typography>
             )}
         </>
     )

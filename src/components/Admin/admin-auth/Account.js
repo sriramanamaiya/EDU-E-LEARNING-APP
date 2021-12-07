@@ -66,7 +66,10 @@ const Account = (props) => {
                                         className="account-details" 
                                     />
                                     { accountDetails.academy.website.trim().length !== 0 && ( 
-                                        <ListItem title={accountDetails.academy.website} className="account-details" />
+                                        <ListItem 
+                                            title={accountDetails.academy.website} 
+                                            className="account-details" 
+                                        />
                                     )}
                                     <ButtonComp 
                                         variant="outlined" 

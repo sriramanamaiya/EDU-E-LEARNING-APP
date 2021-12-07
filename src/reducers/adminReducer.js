@@ -10,6 +10,8 @@ const adminReducer = ( state = adminInitialState, action ) => {
         case 'ADMIN-AUTH-ERRORS' : {
             if( action.payload.hasOwnProperty('errors')){
                 return { ...state, errors : { ...action.payload } }
+            }else if( action.payload.hasOwnProperty('academy.name') ){
+                return { ...state, errors : { academy : { name : action.payload['academy.name'].message } } }
             }else{
                 let result
                 for( const key in action.payload ){
