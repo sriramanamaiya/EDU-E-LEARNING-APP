@@ -15,7 +15,8 @@ const startLoginStudent = (data,redirect) => {
                     localStorage.setItem('token', result.token)
                     const res = jwt_decode(result.token)
                     localStorage.setItem('role', res.role)
-                    dispatch(studentAccountInfo(res))
+                    console.log(res)
+                    dispatch(startGetStudentAccountInfo(res._id,result.token))
                     Swal.fire({
                         icon: 'success',
                         title: 'SucessFully Logged In',
@@ -43,6 +44,22 @@ const studentErrors = (err) => {
 const studentIsLoggedIn = () => {
     return {
         type : 'STUDENT-LOGGED_IN'
+    }
+}
+
+const startGetStudentAccountInfo = (id,token) => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/students/${id}`, {
+            headers : {
+                'Authorization' : token
+            }
+        })
+            .then((response) => {
+                dispatch(studentAccountInfo(response.data))
+            })
+            .catch((error) => {
+                Swal.fire(error.message)
+            })
     }
 }
 

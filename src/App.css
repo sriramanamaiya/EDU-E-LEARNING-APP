@@ -76,3 +76,7 @@ body {
     margin-top: 10px;
     color: inherit;
 }
+
+.link-color {
+    font-weight: bold;
+}

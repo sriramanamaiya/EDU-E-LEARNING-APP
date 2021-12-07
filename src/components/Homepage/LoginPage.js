@@ -25,7 +25,7 @@ const LoginPage = (props) => {
                         <Login role={value} />
                     </TabPanel>
                     <TabPanel value="student">
-                        <Login role={value} />
+                        <Login />
                     </TabPanel>
                 </TabContext>
             </Box>

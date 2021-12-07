@@ -24,12 +24,7 @@ const LoggedInNavBar = (props) => {
                                 "/admin/courses" 
                             ) : (
                                 "/student/courses"
-                            )}>Course</Link>
-                            <Link to={ userRole === 'admin' ? (
-                                "/admin/lectures/create" 
-                            ) : (
-                                "/student/mycourses"
-                            )}>My Lectures</Link>
+                            )}>Courses</Link>
                             { userRole === 'admin' && <Link to="/admin/students">Students</Link> }
                             <Link to={ userRole === 'admin' ? (
                                 "/admin/account"

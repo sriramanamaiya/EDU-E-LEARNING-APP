@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 import { startRegisteradmin, adminAuthErrors, startEditAdminAccount } from '../../../actions/adminAction'
 
@@ -13,6 +14,7 @@ import Heading from '../../Reusable-Comp/Heading'
 
 const RegisterEdit = (props) => {
     const { history, role, name, email, academyName, academyWebsite, handleShowClose } = props
+    
     const dispatch = useDispatch()
 
     const registerErrors = useSelector((state) => {
@@ -70,6 +72,7 @@ const RegisterEdit = (props) => {
                 history.push('/login')
             }
             if( role ){
+                console.log(values)
                 dispatch(startEditAdminAccount(values, handleShowClose))
             }else{
                 dispatch(startRegisteradmin(values, redirect))
@@ -78,16 +81,16 @@ const RegisterEdit = (props) => {
     })
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', textAlign : 'center' }}>
-            <form onSubmit={handleSubmit}>
-                { role ? (
-                    <Heading type="h3" title="Edit ur Account"  /> 
-                ) : (
-                    <Heading type="h3" title="Register with us ➡️"  />
-                )}
-                
-                { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
+        <Box sx={{ display: 'flex', flexDirection : 'column', alignItems : 'center', justifyContent: 'center', textAlign : 'center' }}>
+            { role ? (
+                <Heading type="h3" title="Edit ur Account"  /> 
+            ) : (
+                <Heading type="h3" title="Register with us ➡️"  />
+            )}
 
+            { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
+
+            <form onSubmit={handleSubmit}>
                 <Typography variant="body2" sx={{textAlign : 'left'}} >Admin Details:</Typography>
                 <InputField 
                     label="Username" 
@@ -182,8 +185,13 @@ const RegisterEdit = (props) => {
                             />
                         </>
                     ) }
+
                 </Box>
             </form>
+
+            { !role && (
+                <Typography variant="body2" sx={{textAlign : 'right', mt : 1 }} >Already have an account? <Link className="link-color" to="/login">Log In</Link></Typography>
+            )}
         </Box>
     )
 }

@@ -8,7 +8,6 @@ import { allCourse } from './courseAction'
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
 const startRegisteradmin = (userData, redirect) => {
-
     return (dispatch) => {
         axios.post(`${baseUrl}/admin/register`, userData)
             .then((response) => {
@@ -23,7 +22,7 @@ const startRegisteradmin = (userData, redirect) => {
                             icon: 'success',
                             title: result.notice,
                             showConfirmButton: false,
-                            timer: 3000
+                            timer: 2000
                         })
                         redirect()
                     }
@@ -31,7 +30,7 @@ const startRegisteradmin = (userData, redirect) => {
             })
             .catch((error) => {
                 if( error.message.includes('406') ){
-                    dispatch(adminAuthErrors({errors : 'Email or academy name already Exist'}))
+                    dispatch(adminAuthErrors({errors : 'Email or Academy Name already Exist'}))
                 }else{
                     Swal.fire(error.message)
                 }
@@ -120,7 +119,7 @@ const adminAccount = (adminData) => {
     }
 }
 
-const startEditAdminAccount = (editedData, handleToggle) => {
+const startEditAdminAccount = (editedData, handleShowClose) => {
     return (dispatch) => {
         axios.put(`${baseUrl}/admin`, editedData , {
             headers : {
@@ -129,6 +128,7 @@ const startEditAdminAccount = (editedData, handleToggle) => {
         })
             .then((response) => {
                 const result = response.data
+                console.log(result)
                 if( result.hasOwnProperty('message') ){
                     dispatch(adminAuthErrors(result.errors))
                 }else{
@@ -136,7 +136,7 @@ const startEditAdminAccount = (editedData, handleToggle) => {
                         dispatch(adminAuthErrors(result))
                     }else{
                         dispatch(editedAccountDetails(response.data))
-                        handleToggle()
+                        handleShowClose()
                     }
                 }
             })

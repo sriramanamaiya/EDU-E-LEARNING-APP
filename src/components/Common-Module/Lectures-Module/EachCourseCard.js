@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom'
 import PreviewIcon from '@mui/icons-material/Preview'
 
 const EachCourseCard = (props) => {
-    console.log(props)
-    const { name, author, category, description, level  } = props
+    const { _id, name, author, category, description, level  } = props
 
     return (
-        <Card sx={{ width: 220, height : 220 }}>
+        <Card elevation={3} sx={{ width: 220, height : 220 }}>
             <CardContent sx={{display : 'flex', justifyContent : 'center'  }}>
                 <Box>
                     <Typography variant="body1" >Name : {name}</Typography>
@@ -19,7 +18,7 @@ const EachCourseCard = (props) => {
                 </Box>
             </CardContent>
             <CardActions  sx={{display : 'flex', justifyContent : 'center'  }}>
-                <Link to="/student/mycourses"> <PreviewIcon /></Link>
+                <Link to={`/student/lectures/${_id}`}> <PreviewIcon /></Link>
             </CardActions>
         </Card>
     )

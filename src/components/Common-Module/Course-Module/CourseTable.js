@@ -3,6 +3,7 @@ import { TableContainer,TableCell,Table, TableRow,TableBody, TableHead } from '@
 import { IconButton,Typography, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
+import AddBoxIcon from '@mui/icons-material/AddBox'
 
 import Heading from '../../Reusable-Comp/Heading'
 import EditDeleteCourse from './EditDeleteCourse'
@@ -40,7 +41,7 @@ const CourseTable = (props) => {
                               <>
                                 <TableCell align="center">Edit</TableCell>
                                 <TableCell align="center">Delete</TableCell>
-                                <TableCell>Add/Update Lectures</TableCell>
+                                <TableCell>Add/Update/View Lectures</TableCell>
                               </>  
                             ) }
                             <TableCell align="center">{ userRole === 'admin' ? 'Enroll/Unenroll Students' : 'Enroll/Unenroll Course'}</TableCell>
@@ -58,7 +59,11 @@ const CourseTable = (props) => {
                                         { userRole === 'admin' && <EditDeleteCourse {...course} /> }
                                         { userRole === 'admin' ? (
                                             <>
-                                                <TableCell align="center"><Link to={`/admin/lectures/${course._id}`} ><AddIcon /></Link></TableCell>
+                                                <TableCell align="center">
+                                                    <Link to={`/admin/courses/${course._id}`} >
+                                                        <AddBoxIcon color="primary" />
+                                                    </Link>
+                                                </TableCell>
                                                 <EnrollUnrollContainer id={course._id} />
                                             </>
                                         ) : (

@@ -17,6 +17,8 @@ const MediaContainer = (props) => {
         return lecture._id === id
     })
 
+    console.log(findLecture,lectureData)
+
     return (
         <div>
             { findLecture && (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import Heading from '../../Reusable-Comp/Heading'
@@ -9,10 +9,21 @@ import RegisterEdit from './RegisterEdit'
 
 const Account = (props) => {
     const [ toggle, setToggle ] = useState(false)
+    const [ accountDetails, setAccountDetails ] = useState({})
 
-    const accountDetails = useSelector((state) => {
-        return state.admin.data
+    const data = useSelector((state) => {
+        return [ state.admin.data, state.student.accountData ]
     })
+
+    const [ adminAccount, studentAccount ] = data
+
+    useEffect(() => {
+        if( adminAccount.role === 'admin' ){
+            setAccountDetails(adminAccount)
+        }else if( studentAccount.role === 'student' ){
+            setAccountDetails(studentAccount)
+        }
+    },[adminAccount,studentAccount])
 
     const handleToggle = () => {
         setToggle(!toggle)
@@ -41,27 +52,31 @@ const Account = (props) => {
                         <>
                             <Heading type="h4" title="Account Details:" className="account-heading" />
                             <ListItem 
-                                title={`Username : ${accountDetails.username}`} 
+                                title={`Username : ${ accountDetails.role === 'admin' ? accountDetails.username : accountDetails.name }`} 
                                 className="account-details" 
                             />
                             <ListItem 
                                 title={`Email ID : ${accountDetails.email}`} 
                                 className="account-details" 
                             />
-                            <ListItem 
-                                title={`Academy Name : ${accountDetails.academy.name}`} 
-                                className="account-details" 
-                            />
-                            { accountDetails.academy.website.trim().length !== 0 && ( 
-                                <ListItem title={accountDetails.academy.website} className="account-details" />
-                            )}    
-                            <ButtonComp 
-                                variant="outlined" 
-                                color="secondary" 
-                                sx={{mt : 2}} 
-                                title="Edit" 
-                                handleClick={handleToggle}
-                            />
+                            { accountDetails.role === 'admin' && (
+                                <>
+                                    <ListItem 
+                                        title={`Academy Name : ${accountDetails.academy.name}`} 
+                                        className="account-details" 
+                                    />
+                                    { accountDetails.academy.website.trim().length !== 0 && ( 
+                                        <ListItem title={accountDetails.academy.website} className="account-details" />
+                                    )}
+                                    <ButtonComp 
+                                        variant="outlined" 
+                                        color="secondary" 
+                                        sx={{mt : 2}} 
+                                        title="Edit" 
+                                        handleClick={handleToggle}
+                                    />
+                                </>
+                            ) }    
                         </>
                     )}
                 </>
