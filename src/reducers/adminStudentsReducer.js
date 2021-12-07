@@ -6,7 +6,7 @@ const adminstudentsInitialState = {
 const adminstudentsReducer = ( state = adminstudentsInitialState, action ) => {
     switch ( action.type ) {
         case 'STUDENT-AUTH-ERRORS' : {
-            if( action.payload.hasOwnProperty('errors') ){
+            if( action.payload.hasOwnProperty('errors') || action.payload.hasOwnProperty('notice') ){
                 return { ...state, errors : { ...action.payload } }
             }else{
                 let result

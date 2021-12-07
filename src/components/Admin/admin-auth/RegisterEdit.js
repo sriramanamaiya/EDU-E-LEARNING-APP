@@ -72,7 +72,6 @@ const RegisterEdit = (props) => {
                 history.push('/login')
             }
             if( role ){
-                console.log(values)
                 dispatch(startEditAdminAccount(values, handleShowClose))
             }else{
                 dispatch(startRegisteradmin(values, redirect))
@@ -111,7 +110,7 @@ const RegisterEdit = (props) => {
                     value={values.email} 
                     handleChange={handleChange} 
                     handleBlur={handleBlur}
-                    error={errors.email && touched.email ? true : false } 
+                    error={ errors.email && touched.email ? true : false } 
                     helperText = { touched.email && errors.email ? errors.email : ''} 
                     margin="normal" 
                     size="small" 
@@ -142,12 +141,18 @@ const RegisterEdit = (props) => {
                     handleChange={handleChange} 
                     handleBlur={handleBlur}
                     error={ 
-                        Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ? 
-                        true : false 
+                        Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ? (
+                            true
+                        ):(
+                            false
+                        )
                     } 
                     helperText = { 
-                        Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ?  
-                        errors.academy.name : '' 
+                        Object.keys(touched).includes('academy') && Object.keys(errors).includes('academy') ?  (
+                            errors.academy.name
+                        ) : (
+                            ''
+                        )
                     }
                     margin="normal" 
                     size="small" 

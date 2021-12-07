@@ -10,10 +10,10 @@ const StudentsContainer = (props) => {
     })
 
     return (
-        <div>
+        <>
             <StudentsTableHeaders studentsData={studentsData} />
             <StudentsTable studentsData={studentsData} /> 
-        </div>
+        </>
     )
 }
 

@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
-const startStudentRegister = (data, redirect) => {
+const startStudentRegister = (data, resetForm) => {
     return (dispatch) => {
         axios.post(`${baseUrl}/admin/students`, data , {
             headers : {
@@ -19,7 +19,8 @@ const startStudentRegister = (data, redirect) => {
                         dispatch(studentsAuthErrors(result))
                     }else{
                         dispatch(registeredStudents(result))
-                        redirect()
+                        resetForm()
+                        dispatch(studentsAuthErrors({ notice : 'Sucessfully Registered Student' }))
                     }
                 }
             })

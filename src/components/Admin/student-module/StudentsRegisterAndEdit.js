@@ -13,7 +13,6 @@ import ButtonComp from '../../Reusable-Comp/ButtonComp'
 
 const StudentsRegisterAndEdit = (props) => {
     const { id, name, email, allowed, handleShowClose } = props
-    const { history } = props
 
     const dispatch = useDispatch()
 
@@ -38,14 +37,6 @@ const StudentsRegisterAndEdit = (props) => {
     useEffect(() => {
         setErrors(registerErrors)
     },[registerErrors])
-    
-    const handleCancel = () => {
-        history.push('/admin/students')
-    }
-
-    const redirect = () => {
-        history.push('/admin/students')
-    }
 
     const validationSchema = yup.object({
         name : yup.string().required('Username Cannot be Blank'),
@@ -62,26 +53,28 @@ const StudentsRegisterAndEdit = (props) => {
         },
         validationSchema,
         validateOnChange : false,
-        onSubmit : (values) => {
+        onSubmit : (values ,{resetForm}) => {
             if( id ){
                 dispatch(startEditStudent(id,values,handleShowClose))
             }else{
-                dispatch(startStudentRegister(values, redirect))
+                dispatch(startStudentRegister(values, resetForm))
             }
         }
     })
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', bgcolor: 'background.paper', textAlign : 'center', mt : 2 }}>
+        <Box sx={{ display: 'flex', flexDirection : 'column', alignItems : 'center', justifyContent: 'center', textAlign : 'center', mt : 2 }}>
+
+            { id ? (
+                <Heading type="h3" title="Update Student Info 🧑‍🎓➡️"  className="login-heading" />
+            ) : (
+                <Heading type="h3" title="Register Students 🧑‍🎓➡️"  className="login-heading" />
+            )}
+
+            { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
+            { errors.hasOwnProperty('notice') && <AlertComp type="success" title={errors.notice} />}
+
             <form onSubmit={handleSubmit}>
-                { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} />}
-
-                { id ? (
-                    <Heading type="h3" title="Update Student Info 🧑‍🎓➡️"  className="login-heading" />
-                ) : (
-                    <Heading type="h3" title="Register Students 🧑‍🎓➡️"  className="login-heading" />
-                )}
-
                 <InputField 
                     label="Name" 
                     name="name" 
@@ -92,6 +85,7 @@ const StudentsRegisterAndEdit = (props) => {
                     helperText = { touched.name && errors.name ? errors.name : ''} 
                     margin="normal" 
                     size="small" 
+                    required={true}
                 />
 
                 <InputField 
@@ -104,6 +98,7 @@ const StudentsRegisterAndEdit = (props) => {
                     helperText = { touched.email && errors.email ? errors.email : ''} 
                     margin="normal" 
                     size="small" 
+                    required={true}
                 />
 
                 { !id && (
@@ -118,18 +113,20 @@ const StudentsRegisterAndEdit = (props) => {
                         helperText = { touched.password && errors.password ?  errors.password : ''} 
                         margin="normal" 
                         size="small" 
+                        required={true}
                     />
                 )}
 
                 <FormControlLabel
                     label="Allow Student"
+                    margin="normal"
                     control={
                         <Checkbox 
                         name="isAllowed"
                         checked={values.isAllowed}
                         onChange={handleChange}
                     />}
-                /><br />
+                />
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }} >
                     { id ?  (
@@ -147,7 +144,7 @@ const StudentsRegisterAndEdit = (props) => {
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Register" />
                             <ButtonComp 
                                 variant="contained" 
-                                handleClick={handleCancel} 
+                                handleClick={handleShowClose} 
                                 title="Cancel" 
                                 color="secondary" 
                             />
