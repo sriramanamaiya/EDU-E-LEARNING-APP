@@ -7,7 +7,7 @@ const adminInitialState = {
 
 const adminReducer = ( state = adminInitialState, action ) => {
     switch ( action.type ) {
-        case 'ADMIN-AUTH-ERRORS' : {
+        case 'ADMIN_AUTH_ERRORS' : {
             if( action.payload.hasOwnProperty('errors')){
                 return { ...state, errors : { ...action.payload } }
             }else if( action.payload.hasOwnProperty('academy.name') ){
@@ -23,16 +23,16 @@ const adminReducer = ( state = adminInitialState, action ) => {
         case 'LOGGEDIN' : {
             return { ...state, isLoggedIn : !state.isLoggedIn }
         }
-        case 'ADMIN-LOADING' : {
+        case 'ADMIN_LOADING' : {
             return { ...state, isLoading : !state.isLoading }
         }
-        case 'ADMIN-ACCOUNT' : {
+        case 'ADMIN_ACCOUNT' : {
             return { ...state, data : { ...action.payload } }
         }
-        case 'EDITED-ACCOUNT' : {
+        case 'EDITED_ACCOUNT' : {
             return { ...state, data : { ...state.data, ...action.payload } }
         }
-        case 'ADMIN-LOGOUT' : {
+        case 'ADMIN_LOGOUT' : {
             return { ...adminInitialState }
         }
         default : {

@@ -11,8 +11,8 @@ import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import Heading from '../../Reusable-Comp/Heading'
 import DatePickerComp from './DatePicker'
 
-const CourseRegister = (props) => {
-    const { history, handleShowClose, _id, name, description, duration, releaseDate, category, validity, level, 
+const CourseRegisterEdit = (props) => {
+    const { handleShowClose, _id, name, description, duration, releaseDate, category, validity, level, 
         author } = props
 
     const dispatch = useDispatch()
@@ -46,10 +46,6 @@ const CourseRegister = (props) => {
         setErrors(error)
     },[error])
 
-    const handleRedirect = () => {
-        history.push('/admin/courses')
-    }
-
     const validationSchema = yup.object({
         name : yup.string().required('Required'),
         description : yup.string().required('Required'),
@@ -77,7 +73,7 @@ const CourseRegister = (props) => {
             if(_id){
                 dispatch(startEditCourse(_id,values,handleShowClose))
             }else{
-                dispatch(startCreateCourse(values, handleRedirect))
+                dispatch(startCreateCourse(values, handleShowClose))
             }
         }
     })
@@ -219,7 +215,7 @@ const CourseRegister = (props) => {
                             <ButtonComp variant="contained" handleClick={handleSubmit} title="Create" />
                             <ButtonComp 
                                 variant="contained" 
-                                handleClick={handleRedirect} 
+                                handleClick={handleShowClose} 
                                 title="Cancel" 
                                 color="secondary" 
                             />
@@ -231,4 +227,4 @@ const CourseRegister = (props) => {
     )
 }
 
-export default CourseRegister
+export default CourseRegisterEdit

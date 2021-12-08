@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { TextField, MenuItem } from '@mui/material'
+import { TextField, MenuItem, Box } from '@mui/material'
 
-const StudentsSortSearch = (props) => {
-    const { handleSort, handleSearch } = props
+const SortSearch = (props) => {
+    const { handleSort, handleSearch, selectItems } = props
     const [ search, setSearch ] = useState('')
     const [ select, setSelect ]= useState('')
 
@@ -17,7 +17,7 @@ const StudentsSortSearch = (props) => {
     }
 
     return (
-        <>
+        <Box sx={{ display : "flex", justifyContent : "space-between" }}>
             <TextField
                 label="Search by Name" 
                 name="search" 
@@ -27,6 +27,7 @@ const StudentsSortSearch = (props) => {
                 size="small" 
                 sx={{ width : "50%" }}
             />
+            
             <TextField 
                 sx={{width : '30%'}} 
                 margin="normal"  
@@ -37,12 +38,14 @@ const StudentsSortSearch = (props) => {
                 value={select}
                 onChange={handleSelect}
             >
-                <MenuItem value="">Sort</MenuItem>
-                <MenuItem value="AToZ">Sort A to Z</MenuItem>
-                <MenuItem value="ZToA">Sort Z to A</MenuItem>
+                { selectItems.map((item,i) => {
+                    return (
+                        <MenuItem key={i} value={item.value}>{item.name}</MenuItem>
+                    )
+                }) }
             </TextField>
-        </>
+        </Box>
     )
 }
 
-export default StudentsSortSearch
+export default SortSearch

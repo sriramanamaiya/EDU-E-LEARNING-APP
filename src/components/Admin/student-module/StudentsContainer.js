@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import StudentsSortSearch from './StudentsSortSearch'
-import { Box } from '@mui/system'
 
+import { searchFilter, sortAllowed, sortAlphaInAToZ, sortAlphaInZToA, sortUnAllowed } from '../../helperFunctions/helperFunctions'
+
+import SortSearch from './SortSearch'
+import StudentsRegisterAndEdit from './StudentsRegisterAndEdit'
 import StudentsTable from './StudentsTable'
-import StudentsTableHeaders from './StudentsTableHeaders'
-import { searchFilter, sortAlphaInAToZ, sortAlphaInZToA } from '../../helperFunctions/helperFunctions'
+import TableHeaders from './TableHeaders'
 
 const StudentsContainer = (props) => {
     const [ studentsData, setStudentsData ] = useState([])
@@ -21,10 +22,14 @@ const StudentsContainer = (props) => {
     const handleSort = (value) => {
         if( value.length === 0 ){
             setStudentsData(studData)
-        }else if( value === 'AToZ' ){
+        }else if( value === "AToZ" ){
             setStudentsData(sortAlphaInAToZ(studData))
-        }else if( value === 'ZToA' ){
+        }else if( value === "ZToA" ){
             setStudentsData(sortAlphaInZToA(studData))
+        }else if( value === "unallowed" ){
+            setStudentsData(sortUnAllowed(studData))
+        }else if( value === "allowed" ){
+            setStudentsData(sortAllowed(studData))
         }
     }
 
@@ -32,18 +37,31 @@ const StudentsContainer = (props) => {
         setStudentsData(searchFilter(studData,value))
     }
 
+    const selectItems = [ 
+        { name : 'Sort', value : '' } , 
+        { name : 'Sort A to Z', value : 'AToZ' } ,
+        { name : 'Sort Z to A', value : 'ZToA' },
+        { name : 'Sort By Unallowed', value : 'unallowed' },
+        { name : 'Sort By Allowed', value : 'allowed' } 
+    ]
+
     return (
         <>
-            <StudentsTableHeaders studentsData={studentsData} />
+            <TableHeaders 
+                noDataTitle="No Students found add Student "
+                buttonTitle="Add Student"
+                registerTitle="Register a New Student"
+                headingTitle={`Registered Students 🧑‍🎓 - (${studentsData.length})`}
+                data={studentsData} 
+                component={StudentsRegisterAndEdit}
+            />
             { studentsData.length > 0 && (
                 <>
-                    <Box sx={{ display : "flex", justifyContent : "space-between" }}>
-                        <StudentsSortSearch 
-                            studentsData={studentsData} 
-                            handleSort={handleSort} 
-                            handleSearch={handleSearch} 
-                        />
-                    </Box>
+                    <SortSearch 
+                        selectItems={selectItems}
+                        handleSort={handleSort} 
+                        handleSearch={handleSearch} 
+                    />
                     <StudentsTable studentsData={studentsData} /> 
                 </>
             ) }

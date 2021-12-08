@@ -13,4 +13,14 @@ const searchFilter = (data, value) => {
     return result
 }
 
-export { sortAlphaInAToZ, sortAlphaInZToA, searchFilter }
+const sortUnAllowed = (data) => {
+    const result = data.slice(0).sort((a,b) => a.isAllowed - b.isAllowed)
+    return result
+}
+
+const sortAllowed = (data) => {
+    const result = data.slice(0).sort((a,b) => b.isAllowed - a.isAllowed)
+    return result
+}
+
+export { sortAlphaInAToZ, sortAlphaInZToA, searchFilter, sortUnAllowed, sortAllowed }

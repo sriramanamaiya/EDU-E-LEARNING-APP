@@ -10,7 +10,7 @@ import Account from '../Admin/Admin-Auth/Account'
 import StudentsRegisterAndEdit from '../Admin/Student-Module/StudentsRegisterAndEdit'
 import StudentsContainer from '../Admin/Student-Module/StudentsContainer'
 import Dashboard from '../Common-Module/Dashboard-Module/Dashboard'
-import CourseRegister from '../Common-Module/Course-Module/CourseRegister'
+import CourseRegisterEdit from '../Common-Module/Course-Module/CourseRegisterEdit'
 import CourseContainer from '../Common-Module/Course-Module/CourseContainer'
 import NotFound from '../Homepage/NotFound'
 import PrivateRouteAdmin from './PrivateRouteAdmin'
@@ -43,7 +43,7 @@ const RouteComp = (props) => {
                         <PrivateRouteAdmin path="/admin/students" Component={StudentsContainer} exact={true} />
                         <PrivateRouteAdmin path="/admin/students/register" Component={StudentsRegisterAndEdit} />
                         <PrivateRouteAdmin path="/admin/courses" Component={CourseContainer} exact={true} />
-                        <PrivateRouteAdmin path="/admin/courses/new" Component={CourseRegister} />
+                        <PrivateRouteAdmin path="/admin/courses/new" Component={CourseRegisterEdit} />
                         <PrivateRouteAdmin path="/admin/courses/:id" Component={LecturesContainer} />
                         <PrivateRouteAdmin path="/admin/lectures/create" Component={CreateEditLectures} />
                         <PrivateRouteAdmin path="/admin/lecture/:id" Component={MediaContainer}/>

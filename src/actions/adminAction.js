@@ -40,7 +40,7 @@ const startRegisteradmin = (userData, redirect) => {
 
 const adminAuthErrors = (errors) => {
     return {
-        type : 'ADMIN-AUTH-ERRORS',
+        type : 'ADMIN_AUTH_ERRORS',
         payload : errors
     }
 }
@@ -82,12 +82,12 @@ const loggedIn = () => {
 const startGetAdminStudentsCourses = (token) => {
     const url1 = axios.get(`${baseUrl}/admin/account`, {
         headers : {
-            "Authorization" : token
+            'Authorization' : token
         }
     }),
     url2 = axios.get(`${baseUrl}/admin/students`,{
         headers : {
-            "Authorization" : token
+            'Authorization' : token
         }
     }),
     url3 = axios.get(`${baseUrl}/courses`,{
@@ -114,7 +114,7 @@ const startGetAdminStudentsCourses = (token) => {
 
 const adminAccount = (adminData) => {
     return {
-        type : 'ADMIN-ACCOUNT',
+        type : 'ADMIN_ACCOUNT',
         payload : adminData
     }
 }
@@ -123,12 +123,11 @@ const startEditAdminAccount = (editedData, handleShowClose) => {
     return (dispatch) => {
         axios.put(`${baseUrl}/admin`, editedData , {
             headers : {
-                "Authorization" : localStorage.getItem('token')
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
                 const result = response.data
-                console.log(result)
                 if( result.hasOwnProperty('message') ){
                     dispatch(adminAuthErrors(result.errors))
                 }else{
@@ -148,20 +147,20 @@ const startEditAdminAccount = (editedData, handleShowClose) => {
 
 const editedAccountDetails = (data) => {
     return {
-        type : 'EDITED-ACCOUNT',
+        type : 'EDITED_ACCOUNT',
         payload : data
     }
 }
 
 const loading = () => {
     return {
-        type : 'ADMIN-LOADING'
+        type : 'ADMIN_LOADING'
     }
 }
 
 const adminLogOut = () => {
     return {
-        type : 'ADMIN-LOGOUT'
+        type : 'ADMIN_LOGOUT'
     }
 }
 

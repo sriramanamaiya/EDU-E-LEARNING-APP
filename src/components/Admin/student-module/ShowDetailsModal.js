@@ -31,10 +31,6 @@ const ShowDetailsModal = (props) => {
                                     <ListItemText primary={email} />
                                 </ListItem>
                                 <ListItem>
-                                    <ListItemText primary="Role:" />
-                                    <ListItemText primary={role} />
-                                </ListItem>
-                                <ListItem>
                                     <ListItemText primary="Allowed:" />
                                     <ListItemText primary={isAllowed.toString()} />
                                 </ListItem>

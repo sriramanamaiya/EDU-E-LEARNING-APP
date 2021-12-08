@@ -7,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { startDeleteCourse } from '../../../actions/courseAction'
 
 import EditModal from '../../Reusable-Comp/EditModal'
-import CourseRegister from './CourseRegister'
+import CourseRegisterEdit from './CourseRegisterEdit'
 
 const EditDeleteCourse = (props) => {
     const {  _id } = props
@@ -45,7 +45,7 @@ const EditDeleteCourse = (props) => {
             <EditModal 
                 show={show} 
                 handleShowClose={handleShowClose} 
-                component={<CourseRegister handleShowClose={handleShowClose} {...props} />} 
+                component={<CourseRegisterEdit handleShowClose={handleShowClose} {...props} />} 
             />
         </>
     )

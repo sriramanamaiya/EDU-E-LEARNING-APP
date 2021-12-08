@@ -36,14 +36,14 @@ const startLoginStudent = (data,redirect) => {
 
 const studentErrors = (err) => {
     return {
-        type : 'STUDENT-ERRORS',
+        type : 'STUDENT_ERRORS',
         payload : err
     }
 }
 
 const studentIsLoggedIn = () => {
     return {
-        type : 'STUDENT-LOGGED_IN'
+        type : 'STUDENT_LOGGED_IN'
     }
 }
 
@@ -65,7 +65,7 @@ const startGetStudentAccountInfo = (id,token) => {
 
 const studentAccountInfo = (data) => {
     return {
-        type : 'STUDENT-ACCOUNT-INFO',
+        type : 'STUDENT_ACCOUNT_INFO',
         payload : data
     }
 }
@@ -91,7 +91,7 @@ const startGetAllCoursesStudent = (token) => {
 
 const allCourseStudent = (data) => {
     return {
-        type : 'ALL-COURSE-STUDENT',
+        type : 'ALL_COURSE_STUDENT',
         payload : data
     }
 }
@@ -140,20 +140,20 @@ const startUnrollCourseStudent = (courseId) => {
 
 const enrollUnrollStudentCourse = (data) => {
     return {
-        type : 'ENROLL-UNROLL-STUDENT-COURSE',
+        type : 'ENROLL_UNROLL_STUDENT_COURSE',
         payload : data
     }
 }
 
 const studentLoading = () => {
     return {
-        type : 'STUDENT-LOADING'
+        type : 'STUDENT_LOADING'
     }
 }
 
 const studentLogOut = () => {
     return {
-        type : 'STUDENT-LOGOUT'
+        type : 'STUDENT_LOGOUT'
     }
 }
 

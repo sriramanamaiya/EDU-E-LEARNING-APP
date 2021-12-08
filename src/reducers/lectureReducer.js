@@ -35,7 +35,7 @@ const lectureReducer = ( state=lectureInitialState, action ) => {
             })
             return { ...state, data : [...result] }
         }
-        case 'ADMIN-LOGOUT' : {
+        case 'ADMIN_LOGOUT' : {
             return { ...lectureInitialState }
         }
         default : {
