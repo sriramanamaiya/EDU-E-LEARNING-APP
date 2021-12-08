@@ -113,4 +113,4 @@ const deleteLecture = (data) => {
     }
 }
 
-export { startCreateLecture, startGetAllLectures, lecturesErrors, startEditLecture, startDeleteLecture }
+export { startCreateLecture, startGetAllLectures, lecturesErrors, startEditLecture, startDeleteLecture, allLectures }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Box } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { startGetAllLectures } from '../../../actions/lectureAction'
+import { allLectures, startGetAllLectures } from '../../../actions/lectureAction'
 import LecturesNotFound from './LecturesNotFound'
 import LecturesTable from './LecturesTable'
 import LecturesHeader from './LecturesHeader'

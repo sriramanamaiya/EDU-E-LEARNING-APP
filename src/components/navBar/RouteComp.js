@@ -10,7 +10,7 @@ import Account from '../Admin/Admin-Auth/Account'
 import StudentsRegisterAndEdit from '../Admin/Student-Module/StudentsRegisterAndEdit'
 import StudentsContainer from '../Admin/Student-Module/StudentsContainer'
 import Dashboard from '../Common-Module/Dashboard-Module/Dashboard'
-import CourseRegister from '../Common-Module/Course-Module/CourseRegister'
+import CourseRegisterEdit from '../Common-Module/Course-Module/CourseRegisterEdit'
 import CourseContainer from '../Common-Module/Course-Module/CourseContainer'
 import NotFound from '../Homepage/NotFound'
 import PrivateRouteAdmin from './PrivateRouteAdmin'
@@ -18,6 +18,9 @@ import PrivateRouteStudent from './PrivateRouteStudent'
 import CreateEditLectures from '../Admin/Lectures-Module/CreateEditLectures'
 import LecturesContainer from '../Admin/Lectures-Module/LecturesContainer'
 import MediaContainer from '../Admin/Lectures-Module/MediaContainer'
+import MyCourses from '../Common-Module/Lectures-Module/MyCourses'
+import CourseDashboard from '../Common-Module/Course-Module/CourseDashboard'
+import LecturesMain from '../Common-Module/Lectures-Module/LecturesMain'
 
 const RouteComp = (props) => {
     const loading = useSelector((state) => {
@@ -40,11 +43,16 @@ const RouteComp = (props) => {
                         <PrivateRouteAdmin path="/admin/students" Component={StudentsContainer} exact={true} />
                         <PrivateRouteAdmin path="/admin/students/register" Component={StudentsRegisterAndEdit} />
                         <PrivateRouteAdmin path="/admin/courses" Component={CourseContainer} exact={true} />
-                        <PrivateRouteAdmin path="/admin/courses/new" Component={CourseRegister} />
+                        <PrivateRouteAdmin path="/admin/courses/new" Component={CourseRegisterEdit} />
+                        <PrivateRouteAdmin path="/admin/courses/:id" Component={LecturesContainer} />
                         <PrivateRouteAdmin path="/admin/lectures/create" Component={CreateEditLectures} />
-                        <PrivateRouteAdmin path="/admin/lectures/:id" Component={LecturesContainer} />
                         <PrivateRouteAdmin path="/admin/lecture/:id" Component={MediaContainer}/>
-                        <PrivateRouteStudent path="/student/courses" studentIsLoading={studentIsLoading} Component={CourseContainer} />
+                        <PrivateRouteStudent path="/student/courses" studentIsLoading={studentIsLoading} Component={CourseDashboard} exact={true} />
+                        <PrivateRouteStudent path="/student/courses/enroll-unenroll" studentIsLoading={studentIsLoading} Component={CourseContainer} />
+                        <PrivateRouteStudent path="/student/mycourses" studentIsLoading={studentIsLoading} Component={MyCourses} />
+                        <PrivateRouteStudent path="/student/lectures/:id" studentIsLoading={studentIsLoading} Component={LecturesMain} exact={true} />
+                        <PrivateRouteStudent path="/student/dashboard" studentIsLoading={studentIsLoading} Component={Dashboard} />
+                        <PrivateRouteStudent path="/student/account" studentIsLoading={studentIsLoading} Component={Account} />
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </>

@@ -5,7 +5,7 @@ import { startGetStudentInfo } from './adminstudentsAction'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
-const startCreateCourse = (data, handleRedirect) => {
+const startCreateCourse = (data, handleShowClose) => {
     return (dispatch) => {
         axios.post(`${baseUrl}/courses`, data , {
             headers : {
@@ -18,7 +18,7 @@ const startCreateCourse = (data, handleRedirect) => {
                     dispatch(courseErrors(result.errors))
                 }else{
                     dispatch(createCourse(result))
-                    handleRedirect()
+                    handleShowClose()
                 }
             })
             .catch((error) => {
@@ -29,21 +29,21 @@ const startCreateCourse = (data, handleRedirect) => {
 
 const createCourse = (data) => {
     return {
-        type : 'CREATE-COURSE',
+        type : 'CREATE_COURSE',
         payload : data
     }
 }
 
 const courseErrors = (data) => {
     return {
-        type : 'COURSE-ERRORS',
+        type : 'COURSE_ERRORS',
         payload : data
     }
 }
 
 const allCourse = (data) => {
     return {
-        type : 'ALL-COURSE',
+        type : 'ALL_COURSE',
         payload : data
     }
 }
@@ -66,7 +66,7 @@ const startDeleteCourse = (id) => {
 
 const deleteCourse = (id) => {
     return {
-        type : 'DELETE-COURSE',
+        type : 'DELETE_COURSE',
         payload : id
     }
 }
@@ -95,7 +95,7 @@ const startEditCourse = (id,data, handleClose) => {
 
 const editCourse = (data) => {
     return {
-        type : 'EDIT-COURSE',
+        type : 'EDIT_COURSE',
         payload : data
     }
 }
@@ -136,10 +136,28 @@ const startUnenrollCourse = (courseId, studentId) => {
 
 const enrollUnrollStudents = (data) => {
     return {
-        type : 'ENROLL-UNROLL-STUDENTS',
+        type : 'ENROLL_UNROLL_STUDENTS',
         payload : data
     }
 }
 
+/* Student Course */
+const startGetStudentEnrolledCourses = () => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/courses/enrolled`, {
+            headers : {
+                'Authorization' : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                console.log(response.data)
+                dispatch(allCourse(response.data))
+            })
+            .catch((error) => {
+                Swal.fire(error.message)
+            })
+    }
+}
+
 export { startCreateCourse, courseErrors, startDeleteCourse, startEditCourse, startEnrollCourse, 
-    startUnenrollCourse, allCourse }
+    startUnenrollCourse, allCourse, startGetStudentEnrolledCourses }

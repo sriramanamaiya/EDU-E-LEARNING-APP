@@ -3,11 +3,11 @@ import Swal from 'sweetalert2'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
-const startStudentRegister = (data, redirect) => {
+const startStudentRegister = (data, resetForm) => {
     return (dispatch) => {
         axios.post(`${baseUrl}/admin/students`, data , {
             headers : {
-                "Authorization" : localStorage.getItem('token')
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -19,7 +19,8 @@ const startStudentRegister = (data, redirect) => {
                         dispatch(studentsAuthErrors(result))
                     }else{
                         dispatch(registeredStudents(result))
-                        redirect()
+                        resetForm()
+                        dispatch(studentsAuthErrors({ notice : 'Sucessfully Registered Student' }))
                     }
                 }
             })
@@ -31,21 +32,21 @@ const startStudentRegister = (data, redirect) => {
 
 const studentsAuthErrors = (data) => {
     return {
-        type : 'STUDENT-AUTH-ERRORS',
+        type : 'STUDENT_AUTH_ERRORS',
         payload : data
     }
 }
 
 const registeredStudents = (data) => {
     return {
-        type : 'REGISTERED-STUDENT',
+        type : 'REGISTERED_STUDENT',
         payload : data
     }
 }
 
 const allStudents = (data) => {
     return {
-        type : 'ALL-STUDENTS',
+        type : 'ALL_STUDENTS',
         payload : data
     }
 }
@@ -54,7 +55,7 @@ const startEditStudent = (id,data, handleClose) => {
     return (dispatch) => {
         axios.put(`${baseUrl}/students/${id}`, data, {
             headers : {
-                "Authorization" : localStorage.getItem('token')
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -78,7 +79,7 @@ const startEditStudent = (id,data, handleClose) => {
 
 const editedStudentDetails = (data) => {
     return {
-        type : 'EDITED-STUDENT-DETAILS',
+        type : 'EDITED_STUDENT_DETAILS',
         payload : data
     }
 }
@@ -87,7 +88,7 @@ const startDeleteStudent = (id)  => {
     return (dispatch) => {
         axios.delete(`${baseUrl}/admin/students/${id}`, {
             headers : {
-                "Authorization" : localStorage.getItem('token')
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
@@ -102,7 +103,7 @@ const startDeleteStudent = (id)  => {
 
 const deleteStudent = (data) => {
     return {
-        type : 'DELETE-STUDENT',
+        type : 'DELETE_STUDENT',
         payload : data
     }
 }
@@ -111,7 +112,7 @@ const startGetStudentInfo = (id) => {
     return (dispatch) => {
         axios.get(`${baseUrl}/students/${id}`, {
             headers : {
-                "Authorization" : localStorage.getItem('token')
+                'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {

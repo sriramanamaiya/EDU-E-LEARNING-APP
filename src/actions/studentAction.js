@@ -15,7 +15,8 @@ const startLoginStudent = (data,redirect) => {
                     localStorage.setItem('token', result.token)
                     const res = jwt_decode(result.token)
                     localStorage.setItem('role', res.role)
-                    dispatch(studentAccountInfo(res))
+                    console.log(res)
+                    dispatch(startGetStudentAccountInfo(res._id,result.token))
                     Swal.fire({
                         icon: 'success',
                         title: 'SucessFully Logged In',
@@ -35,20 +36,36 @@ const startLoginStudent = (data,redirect) => {
 
 const studentErrors = (err) => {
     return {
-        type : 'STUDENT-ERRORS',
+        type : 'STUDENT_ERRORS',
         payload : err
     }
 }
 
 const studentIsLoggedIn = () => {
     return {
-        type : 'STUDENT-LOGGED_IN'
+        type : 'STUDENT_LOGGED_IN'
+    }
+}
+
+const startGetStudentAccountInfo = (id,token) => {
+    return (dispatch) => {
+        axios.get(`${baseUrl}/students/${id}`, {
+            headers : {
+                'Authorization' : token
+            }
+        })
+            .then((response) => {
+                dispatch(studentAccountInfo(response.data))
+            })
+            .catch((error) => {
+                Swal.fire(error.message)
+            })
     }
 }
 
 const studentAccountInfo = (data) => {
     return {
-        type : 'STUDENT-ACCOUNT-INFO',
+        type : 'STUDENT_ACCOUNT_INFO',
         payload : data
     }
 }
@@ -74,7 +91,7 @@ const startGetAllCoursesStudent = (token) => {
 
 const allCourseStudent = (data) => {
     return {
-        type : 'ALL-COURSE-STUDENT',
+        type : 'ALL_COURSE_STUDENT',
         payload : data
     }
 }
@@ -123,20 +140,20 @@ const startUnrollCourseStudent = (courseId) => {
 
 const enrollUnrollStudentCourse = (data) => {
     return {
-        type : 'ENROLL-UNROLL-STUDENT-COURSE',
+        type : 'ENROLL_UNROLL_STUDENT_COURSE',
         payload : data
     }
 }
 
 const studentLoading = () => {
     return {
-        type : 'STUDENT-LOADING'
+        type : 'STUDENT_LOADING'
     }
 }
 
 const studentLogOut = () => {
     return {
-        type : 'STUDENT-LOGOUT'
+        type : 'STUDENT_LOGOUT'
     }
 }
 

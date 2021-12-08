@@ -4,6 +4,8 @@ import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
 import { Box } from '@mui/system'
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
+import { Typography } from '@mui/material'
 
 import { startLogin, adminAuthErrors } from '../../actions/adminAction'
 import { startLoginStudent, studentErrors } from '../../actions/studentAction'
@@ -25,7 +27,7 @@ const Login = (props) => {
 
     useEffect(() => {
         return () => {
-            if( role === 'admin' ) {
+            if( role ) {
                 dispatch(adminAuthErrors({}))
             }else{
                 dispatch(studentErrors({}))
@@ -34,7 +36,7 @@ const Login = (props) => {
     },[])
 
     useEffect(() => {
-        if( role === 'admin'){
+        if( role ){
             setErrors(adminErrors)
         }else{
             setErrors(studentError)
@@ -58,7 +60,7 @@ const Login = (props) => {
         validationSchema,
         validateOnChange : false,
         onSubmit : (values) => {
-            if( role === 'admin' ){
+            if( role ){
                 dispatch(startLogin(values,redirect))
             }else{
                 dispatch(startLoginStudent(values, redirect))
@@ -67,41 +69,44 @@ const Login = (props) => {
     })
 
     return (
-        <form onSubmit={handleSubmit}>
-            { errors.hasOwnProperty('notice') && <AlertComp type="success" title={errors.notice} />}
+        <>
             { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} /> }
-            
-            <Heading type="h3" title="Login 💻"  className="login-heading" />
-            <InputField 
-                label="Email" 
-                name="email" 
-                value={values.email} 
-                handleChange={handleChange} 
-                handleBlur={handleBlur}
-                error={errors.email && touched.email ? true : false } 
-                helperText = { touched.email && errors.email ? errors.email : ''} 
-                margin="normal" 
-                size="small" 
-            />
+            <form onSubmit={handleSubmit}>
+                <Heading type="h3" title="Login 💻"  className="login-heading" />
+                <InputField 
+                    label="Email" 
+                    name="email" 
+                    value={values.email} 
+                    handleChange={handleChange} 
+                    handleBlur={handleBlur}
+                    error={errors.email && touched.email ? true : false } 
+                    helperText = { touched.email && errors.email ? errors.email : ''} 
+                    margin="normal" 
+                    size="small" 
+                />
 
-            <InputField 
-                label="Password" 
-                name="password" 
-                type="password"
-                value={values.password} 
-                handleChange={handleChange} 
-                handleBlur={handleBlur}
-                error={ touched.password && errors.password ? true : false } 
-                helperText = { touched.password && errors.password ?  errors.password : ''} 
-                margin="normal" 
-                size="small" 
-            />
+                <InputField 
+                    label="Password" 
+                    name="password" 
+                    type="password"
+                    value={values.password} 
+                    handleChange={handleChange} 
+                    handleBlur={handleBlur}
+                    error={ touched.password && errors.password ? true : false } 
+                    helperText = { touched.password && errors.password ?  errors.password : ''} 
+                    margin="normal" 
+                    size="small" 
+                />
 
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
-                <ButtonComp variant="contained" handleClick={handleSubmit} title="LogIn" />
-                <ButtonComp variant="contained" handleClick={redirect} title="Cancel" color="secondary" />
-            </Box>
-        </form>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
+                    <ButtonComp variant="contained" handleClick={handleSubmit} title="LogIn" />
+                    <ButtonComp variant="contained" handleClick={redirect} title="Cancel" color="secondary" />
+                </Box>
+            </form>
+            { role && (
+                <Typography variant="body1" sx={{textAlign : 'right', mt : 2 }} >Don't have an account? <Link className="link-color" to="/register">Sign up</Link></Typography>
+            )}
+        </>
     )
 }
 

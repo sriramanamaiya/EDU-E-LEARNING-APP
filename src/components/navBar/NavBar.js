@@ -9,6 +9,7 @@ import { adminLogOut, loggedIn, startGetAdminStudentsCourses } from '../../actio
 import { startGetAllCoursesStudent, studentAccountInfo, studentIsLoggedIn, studentLogOut } from '../../actions/studentAction'
 
 import LoggedInNavBar from './LoggedInNavBar'
+import { startGetStudentEnrolledCourses } from '../../actions/courseAction'
 
 const NavBar = (props) => {
     const { history } = props
@@ -33,8 +34,9 @@ const NavBar = (props) => {
                 dispatch(startGetAdminStudentsCourses(token))
             }else{
                 dispatch(studentAccountInfo(jwtDecode(token)))
-                dispatch(startGetAllCoursesStudent(token))
                 dispatch(studentIsLoggedIn())
+                dispatch(startGetAllCoursesStudent(token))
+                dispatch(startGetStudentEnrolledCourses())
             }
         }
     },[])
@@ -54,6 +56,7 @@ const NavBar = (props) => {
             if( localStorage.getItem('role') === 'admin' ){
                 dispatch(adminLogOut())
             }else{
+                dispatch(adminLogOut())
                 dispatch(studentLogOut())
             }
             localStorage.removeItem('token')

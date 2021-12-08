@@ -5,8 +5,8 @@ const adminstudentsInitialState = {
 
 const adminstudentsReducer = ( state = adminstudentsInitialState, action ) => {
     switch ( action.type ) {
-        case 'STUDENT-AUTH-ERRORS' : {
-            if( action.payload.hasOwnProperty('errors') ){
+        case 'STUDENT_AUTH_ERRORS' : {
+            if( action.payload.hasOwnProperty('errors') || action.payload.hasOwnProperty('notice') ){
                 return { ...state, errors : { ...action.payload } }
             }else{
                 let result
@@ -16,13 +16,13 @@ const adminstudentsReducer = ( state = adminstudentsInitialState, action ) => {
                 return { ...state, errors : { ...result} }
             }
         }
-        case 'REGISTERED-STUDENT' : {
+        case 'REGISTERED_STUDENT' : {
             return { ...state, data : [ ...state.data, action.payload ] }
         }
-        case 'ALL-STUDENTS' : {
+        case 'ALL_STUDENTS' : {
             return { ...state, data : [ ...action.payload ] }
         }
-        case 'EDITED-STUDENT-DETAILS' : {
+        case 'EDITED_STUDENT_DETAILS' : {
             const result = state.data.map((stud) => {
                 if( stud._id === action.payload._id ){
                     return { ...stud, ...action.payload }
@@ -32,13 +32,13 @@ const adminstudentsReducer = ( state = adminstudentsInitialState, action ) => {
             })
             return { ...state, data : [ ...result ] }
         }
-        case 'DELETE-STUDENT' : {
+        case 'DELETE_STUDENT' : {
             const result = state.data.filter((stud) => {
                 return stud._id !== action.payload._id
             })
             return { ...state, data : [ ...result ] }
         }
-        case 'ADMIN-LOGOUT' : {
+        case 'ADMIN_LOGOUT' : {
             return { ...adminstudentsInitialState }
         }
         default : {

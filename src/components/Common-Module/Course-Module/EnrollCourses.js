@@ -1,19 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { List,ListItem, ListItemText, Typography} from '@mui/material'
 
 import { startEnrollCourse, startUnenrollCourse } from '../../../actions/courseAction'
 
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
+import SortSearch from '../../Admin/Student-Module/SortSearch'
+import { searchFilter } from '../../helperFunctions/helperFunctions'
 
 const EnrollCourses = (props) => {
     const { courseId } = props
+    const [ studentsData, setStudentsData ] = useState([])
 
     const dispatch = useDispatch()
 
-    const studentsData = useSelector((state) => {
+    const studData = useSelector((state) => {
         return state.adminStudents.data
     })
+
+    useEffect(() => {
+        setStudentsData(studData)
+    },[studData])
 
     const handleEnroll = (id) => {
         dispatch(startEnrollCourse(courseId,id))
@@ -23,9 +30,46 @@ const EnrollCourses = (props) => {
         dispatch(startUnenrollCourse(courseId,id))
     }
 
+    const handleSort = (value) => {
+        if( value.length === 0 ){
+            setStudentsData(studData)
+        }else if( value === 'unenroll'  ){
+            const result = []
+            studentsData.forEach((student) => {
+                if( student.courses.some((ele) => ele.course === courseId )){
+                    result.unshift(student)
+                }else{
+                    result.push(student)
+                }
+            })
+            setStudentsData(result)
+        }else if( value === 'enroll' ){
+            const result = []
+            studentsData.forEach((student) => {
+                if( student.courses.some((ele) => ele.course === courseId )){
+                    result.push(student)
+                }else{
+                    result.unshift(student)
+                }
+            })
+            setStudentsData(result)
+        }
+    }
+
+    const handleSearch = (value) => {
+        setStudentsData(searchFilter(studData,value))
+    }
+
+    const selectItems = [ 
+        { name : 'Sort', value : '' }, 
+        { name : 'Sort By Unenroll', value : 'unenroll' },
+        { name : 'Sort By Enroll', value : 'enroll' } 
+    ]
+
     return (
         <>
             <Typography variant="h6">Add Students to Your Course: </Typography>
+            <SortSearch selectItems={selectItems} handleSearch={handleSearch} handleSort={handleSort} />
             <List>
                 { studentsData.map((students) => {
                     return (

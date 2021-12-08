@@ -24,7 +24,10 @@ const EditDeleteLecture = (props) => {
     }
 
     const handleDelete = () => {
-        dispatch(startDeleteLecture(course,_id))
+        const confirmation = window.confirm('Are You Sure')
+        if( confirmation ){
+            dispatch(startDeleteLecture(course,_id))
+        }
     }
 
     return (

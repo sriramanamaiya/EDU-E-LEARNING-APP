@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player'
 
 const MediaPlayer = (props) => {
     const { url } = props
+    console.log(url)
 
     return (
         <>

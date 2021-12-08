@@ -11,7 +11,7 @@ import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import Heading from '../../Reusable-Comp/Heading'
 
 const CreateEditLectures = (props) => {
-    const { handleShowClose, courseId, _id, title, description, assetType, assetURL, comments, students, 
+    const { handleShowClose, courseId, _id, title, description, assetType, assetURL, 
         course, isDelete} = props
 
     const dispatch = useDispatch()
@@ -31,8 +31,6 @@ const CreateEditLectures = (props) => {
                 description,
                 assetType,
                 assetURL,
-                comments,
-                students,
                 course,
                 isDelete
             })
@@ -60,8 +58,6 @@ const CreateEditLectures = (props) => {
             description : '',
             assetType : '',
             assetURL : '',
-            comments : '',
-            students : [],
             course : '',
             isDelete : false
         },
@@ -145,30 +141,6 @@ const CreateEditLectures = (props) => {
                     margin="normal" 
                     size="small" 
                     required={true}
-                />
-
-                <InputField 
-                    label="Comments" 
-                    name="comments" 
-                    value={values.comments} 
-                    handleChange={handleChange} 
-                    handleBlur={handleBlur}
-                    error={errors.comments && touched.comments ? true : false } 
-                    helperText = { touched.comments && errors.comments ? errors.comments : ''} 
-                    margin="normal" 
-                    size="small" 
-                />
-
-                <InputField 
-                    label="Students" 
-                    name="students" 
-                    value={values.students} 
-                    handleChange={handleChange} 
-                    handleBlur={handleBlur}
-                    error={errors.students && touched.students ? true : false } 
-                    helperText = { touched.students && errors.students ? errors.students : ''} 
-                    margin="normal" 
-                    size="small" 
                 />
 
                 <TextField 

@@ -3,24 +3,24 @@ const studentInitialState = {
     isLoading : false,
     errors : {},
     accountData : {},
-    data : [],
+    data : []
 }
 
 const studentReducer = ( state = studentInitialState, action ) => {
     switch (action.type) {
-        case 'STUDENT-ERRORS' : {
+        case 'STUDENT_ERRORS' : {
             return { ...state, errors : { ...action.payload } }
         }
-        case 'STUDENT-LOGGED_IN' : {
+        case 'STUDENT_LOGGED_IN' : {
             return { ...state, studentLoggedIn: !state.studentLoggedIn }
         }
-        case 'STUDENT-LOADING' : {
+        case 'STUDENT_LOADING' : {
             return { ...state, isLoading : !state.isLoading }
         }
-        case 'STUDENT-ACCOUNT-INFO' : {
+        case 'STUDENT_ACCOUNT_INFO' : {
             return { ...state, accountData : { ...action.payload } }
         }
-        case 'ENROLL-UNROLL-STUDENT-COURSE' : {
+        case 'ENROLL_UNROLL_STUDENT_COURSE' : {
             const result = state.data.map((course) => {
                 if( course._id === action.payload._id ){
                     return { ...course, ...action.payload }
@@ -30,10 +30,10 @@ const studentReducer = ( state = studentInitialState, action ) => {
             })
             return { ...state, data : [ ...result ]}
         }
-        case 'ALL-COURSE-STUDENT' : {
+        case 'ALL_COURSE_STUDENT' : {
             return { ...state, data : [ ...action.payload ] }
         }
-        case 'STUDENT-LOGOUT' : {
+        case 'STUDENT_LOGOUT' : {
             return { ...studentInitialState }
         }
         default : {
