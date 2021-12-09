@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit'
 
 import { startDeleteStudent } from '../../../actions/adminstudentsAction'
 
-import EditModal from '../../Reusable-Comp/EditModal'
+import Modal from '../../Reusable-Comp/Modal'
 import StudentsRegisterAndEdit from './StudentsRegisterAndEdit'
 
 const EditAndDeleteStudents = (props) => {
@@ -42,7 +42,7 @@ const EditAndDeleteStudents = (props) => {
                     <EditIcon/>
                 </IconButton>
             </TableCell>
-            <EditModal 
+            <Modal 
                 show={show} 
                 handleShowClose={handleShowClose} 
                 component={

@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { List,ListItem, ListItemText, Typography} from '@mui/material'
 
 import { startEnrollCourse, startUnenrollCourse } from '../../../actions/courseAction'
+import { searchFilter } from '../../helperFunctions/helperFunctions'
 
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
-import SortSearch from '../../Admin/Student-Module/SortSearch'
-import { searchFilter } from '../../helperFunctions/helperFunctions'
+import SortSearch from '../../Common-Comp/SortSearch'
 
 const EnrollCourses = (props) => {
     const { courseId } = props

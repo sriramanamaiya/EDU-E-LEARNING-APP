@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 
 import { searchFilter, sortAllowed, sortAlphaInAToZ, sortAlphaInZToA, sortUnAllowed } from '../../helperFunctions/helperFunctions'
 
-import SortSearch from './SortSearch'
+import SortSearch from '../../Common-Comp/SortSearch'
 import StudentsRegisterAndEdit from './StudentsRegisterAndEdit'
 import StudentsTable from './StudentsTable'
-import TableHeaders from './TableHeaders'
+import TableHeaders from '../../Common-Comp/TableHeaders'
 
 const StudentsContainer = (props) => {
     const [ studentsData, setStudentsData ] = useState([])

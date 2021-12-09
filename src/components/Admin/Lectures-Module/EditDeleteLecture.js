@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 import { startDeleteLecture } from '../../../actions/lectureAction'
 
-import EditModal from '../../Reusable-Comp/EditModal'
+import Modal from '../../Reusable-Comp/Modal'
 import CreateEditLectures from './CreateEditLectures'
 
 const EditDeleteLecture = (props) => {
@@ -36,7 +36,7 @@ const EditDeleteLecture = (props) => {
                 <IconButton color="inherit" onClick={handleEdit} >
                     <EditIcon/>
                 </IconButton>
-                <EditModal 
+                <Modal 
                     show={show} 
                     handleShowClose={handleShowClose} 
                     component={<CreateEditLectures {...props} handleShowClose={handleShowClose} />} />

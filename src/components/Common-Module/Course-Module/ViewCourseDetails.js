@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { IconButton } from '@mui/material'
 import PreviewIcon from '@mui/icons-material/Preview'
 import { Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, ListItemText } from '@mui/material'
+
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 
 const ViewCourseDetails = (props) => {

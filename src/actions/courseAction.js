@@ -150,7 +150,6 @@ const startGetStudentEnrolledCourses = () => {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 dispatch(allCourse(response.data))
             })
             .catch((error) => {

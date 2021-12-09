@@ -1,10 +1,9 @@
-import { Box } from '@mui/system'
 import React from 'react'
 import ReactPlayer from 'react-player'
+import { Box } from '@mui/system'
 
 const MediaPlayer = (props) => {
     const { url } = props
-    console.log(url)
 
     return (
         <>

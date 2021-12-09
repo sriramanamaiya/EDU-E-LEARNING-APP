@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import AddTaskIcon from '@mui/icons-material/AddTask'
 import { TableCell } from '@mui/material'
 import { IconButton } from '@mui/material'
-import EditModal from '../../Reusable-Comp/EditModal'
+
+import Modal from '../../Reusable-Comp/Modal'
 import EnrollCourses from './EnrollCourses'
 
 const EnrollUnrollContainer = (props) => {
@@ -24,7 +25,7 @@ const EnrollUnrollContainer = (props) => {
                     <AddTaskIcon/>
                 </IconButton>
             </TableCell>
-            <EditModal 
+            <Modal 
                 show={show} 
                 handleShowClose={handleShowClose} 
                 component={<EnrollCourses courseId={id} />} 

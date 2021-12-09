@@ -2,7 +2,7 @@ import { Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import EditModal from '../../Reusable-Comp/EditModal'
+import Modal from '../../Reusable-Comp/Modal'
 import CreateEditLectures from './CreateEditLectures'
 
 const LecturesNotFound = (props) => {
@@ -22,7 +22,7 @@ const LecturesNotFound = (props) => {
             <Typography variant="h5">
                 No Lectures Found. Add Your First Lecture. <Link to="#" onClick={handleClick} >Click here 👇</Link>
             </Typography>
-            <EditModal 
+            <Modal 
                 show={show} 
                 handleShowClose={handleShowClose} 
                 component={<CreateEditLectures 

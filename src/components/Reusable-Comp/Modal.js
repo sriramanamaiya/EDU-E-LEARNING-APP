@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dialog, DialogContent } from '@mui/material'
 
-const EditModal = (props) => {
+const Modal = (props) => {
     const { component, show, handleShowClose } = props
 
     return (
@@ -15,4 +15,4 @@ const EditModal = (props) => {
     )
 }
 
-export default EditModal
+export default Modal

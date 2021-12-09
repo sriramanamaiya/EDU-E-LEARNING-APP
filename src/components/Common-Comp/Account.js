@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import Heading from '../../Reusable-Comp/Heading'
-import ListItem from '../../Reusable-Comp/ListItem'
-import ButtonComp from '../../Reusable-Comp/ButtonComp'
-import EditModal from '../../Reusable-Comp/EditModal'
-import RegisterEdit from './RegisterEdit'
+import Heading from '../Reusable-Comp/Heading'
+import ListItem from '../Reusable-Comp/ListItem'
+import ButtonComp from '../Reusable-Comp/ButtonComp'
+import Modal from '../Reusable-Comp/Modal'
+import RegisterEdit from '../Admin/Admin-Auth/RegisterEdit'
 
 const Account = (props) => {
     const [ toggle, setToggle ] = useState(false)
@@ -35,7 +35,7 @@ const Account = (props) => {
                 <>  
                     { toggle ? (
                         <>
-                            <EditModal 
+                            <Modal 
                                 show={toggle} 
                                 handleShowClose={handleToggle}  
                                 component={<RegisterEdit 
