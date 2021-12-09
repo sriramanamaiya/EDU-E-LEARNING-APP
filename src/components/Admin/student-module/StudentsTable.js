@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableBody,TableCell, TableRow } from '@mui/material'
+import { TableBody, TableCell, TableRow } from '@mui/material'
 import { TableContainer, Table , TableHead } from '@mui/material'
 
 import EditAndDeleteStudents from './EditAndDeleteStudents'

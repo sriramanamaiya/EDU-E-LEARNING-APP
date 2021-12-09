@@ -15,7 +15,6 @@ const startLoginStudent = (data,redirect) => {
                     localStorage.setItem('token', result.token)
                     const res = jwt_decode(result.token)
                     localStorage.setItem('role', res.role)
-                    console.log(res)
                     dispatch(startGetStudentAccountInfo(res._id,result.token))
                     Swal.fire({
                         icon: 'success',

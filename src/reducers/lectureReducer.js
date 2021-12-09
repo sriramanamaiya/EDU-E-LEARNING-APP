@@ -13,6 +13,9 @@ const lectureReducer = ( state=lectureInitialState, action ) => {
             }
             return { ...state, errors : { ...result} }
         }
+        case 'LECTURE_LOADING' : {
+            return { ...state, isLoading : !state.isLoading }
+        } 
         case 'CREATE_LECTURE' : {
             return { ...state, data : [ ...state.data, { ...action.payload } ] }
         }

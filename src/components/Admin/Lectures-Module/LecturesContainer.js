@@ -2,10 +2,12 @@ import React, { useEffect } from 'react'
 import { Box } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { allLectures, startGetAllLectures } from '../../../actions/lectureAction'
+import { startGetAllLectures } from '../../../actions/lectureAction'
+
 import LecturesNotFound from './LecturesNotFound'
 import LecturesTable from './LecturesTable'
 import LecturesHeader from './LecturesHeader'
+import Loader from '../../Reusable-Comp/Loader'
 
 const LecturesContainer = (props) => {
     const { id: courseId } = props.match.params
@@ -17,10 +19,11 @@ const LecturesContainer = (props) => {
     },[])
     
     const data = useSelector((state) => {
-        return [ state.courses.data, state.lectures.data ]
+        return [ state.courses.data, state.lectures ]
     })
 
-    const [ courseData, lecturesData ] = data
+    const [ courseData, lectures ] = data
+    const { isLoading,  data : lecturesData } = lectures
 
     const findCourse = courseData.find((ele) => {
         return ele._id === courseId
@@ -28,14 +31,18 @@ const LecturesContainer = (props) => {
 
     return (
         <>
-            <Box sx={{ mt : 2 }}>
-                <LecturesHeader findCourse={findCourse} courseId={courseId} lecturesData={lecturesData} />
-                { lecturesData.length === 0  ? (
-                    <LecturesNotFound courseId={courseId}/>
-                ) : ( 
-                    <LecturesTable lecturesData={lecturesData} />
-                )}
-            </Box>
+            { isLoading ? (
+                <Loader />
+            ) : (
+                <Box sx={{ mt : 2 }}>
+                    <LecturesHeader findCourse={findCourse} courseId={courseId} lecturesData={lecturesData} />
+                    { lecturesData.length === 0  ? (
+                        <LecturesNotFound courseId={courseId}/>
+                    ) : ( 
+                        <LecturesTable lecturesData={lecturesData} />
+                    )}
+                </Box>
+            ) }
         </>
     )
 }

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { CircularProgress } from '@mui/material'
-import { Box } from '@mui/system'
 import { withRouter } from 'react-router'
 import jwtDecode from 'jwt-decode'
 
 import { adminLogOut, loggedIn, startGetAdminStudentsCourses } from '../../actions/adminAction'
 import { startGetAllCoursesStudent, studentAccountInfo, studentIsLoggedIn, studentLogOut } from '../../actions/studentAction'
+import { startGetStudentEnrolledCourses } from '../../actions/courseAction'
 
 import LoggedInNavBar from './LoggedInNavBar'
-import { startGetStudentEnrolledCourses } from '../../actions/courseAction'
+import Loader from '../Reusable-Comp/Loader'
 
 const NavBar = (props) => {
     const { history } = props
@@ -68,9 +67,7 @@ const NavBar = (props) => {
     return (
         <>  
             { isLoading || studentIsLoading ? (
-                <Box sx={{display: 'flex', justifyContent : 'center' , mt : 30}}>
-                    <CircularProgress />
-                </Box>
+                <Loader />
             ) : (
                 <LoggedInNavBar 
                     userRole={userRole} 

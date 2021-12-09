@@ -21,7 +21,7 @@ const MyCourses = (props) => {
     return (
         <>
             <Heading type="h3" title={`My Courses - ${courseData.length}`} />
-            <Grid container direction="row" justifyContent="space-around" alignItems="center" marginTop={2}>
+            <Grid container gap={2} marginTop={2}>
                 { courseData.map((course) => {
                     return (
                         <EachCourseCard key={course._id} {...course} />

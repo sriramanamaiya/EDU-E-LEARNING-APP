@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Typography, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-import EditModal from '../../Reusable-Comp/EditModal'
+import Modal from '../../Reusable-Comp/Modal'
 import CreateEditLectures from './CreateEditLectures'
 
 const LecturesHeader = (props) => {
@@ -26,7 +26,7 @@ const LecturesHeader = (props) => {
                         { lecturesData.length > 0 && (
                             <>
                                 <Link to="#" onClick={handleClick} >Click to Create new Lecture</Link>
-                                <EditModal 
+                                <Modal 
                                     show={show} 
                                     handleShowClose={handleShowClose} 
                                     component={<CreateEditLectures 

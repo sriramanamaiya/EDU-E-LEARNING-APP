@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import SortSearch from '../../Admin/Student-Module/SortSearch'
-import TableHeaders from '../../Admin/Student-Module/TableHeaders'
-import { searchFilter, sortAlphaInAToZ, sortAlphaInZToA } from '../../helperFunctions/helperFunctions'
-import CourseRegisterEdit from './CourseRegisterEdit'
 
+import { searchFilter, sortAlphaInAToZ, sortAlphaInZToA } from '../../helperFunctions/helperFunctions'
+
+import SortSearch from '../../Common-Comp/SortSearch'
+import TableHeaders from '../../Common-Comp/TableHeaders'
+import CourseRegisterEdit from './CourseRegisterEdit'
 import CourseTable from './CourseTable'
 
 const CourseContainer = (props) => {
@@ -45,8 +46,6 @@ const CourseContainer = (props) => {
             setCourseData(sortAlphaInAToZ(unSortedCourseData))
         }else if( value === "ZToA" ){
             setCourseData(sortAlphaInZToA(unSortedCourseData))
-        }else if( value === "category" ){
-            // setCourseData(sortUnAllowed(courseData))
         }
     }
 
@@ -77,7 +76,7 @@ const CourseContainer = (props) => {
                 component={CourseRegisterEdit}
                 userRole={userRole}
             />
-            { studCourData.length > 0 || adminCourData.length > 0  && (
+            { ( studCourData.length > 0 || adminCourData.length > 0 )  && (
                 <>
                     <SortSearch 
                         selectItems={selectItems} 

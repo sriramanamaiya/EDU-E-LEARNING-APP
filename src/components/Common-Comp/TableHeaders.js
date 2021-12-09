@@ -3,9 +3,9 @@ import { Typography, Box, Card, CardContent } from '@mui/material'
 import { IconButton } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 
-import Heading from '../../Reusable-Comp/Heading'
-import EditModal from '../../Reusable-Comp/EditModal'
-import ButtonComp from '../../Reusable-Comp/ButtonComp'
+import Heading from '../Reusable-Comp/Heading'
+import Modal from '../Reusable-Comp/Modal'
+import ButtonComp from '../Reusable-Comp/ButtonComp'
 
 const TableHeaders = (props) => {
     const { data, noDataTitle, buttonTitle, registerTitle, headingTitle, component : Component, userRole } = props
@@ -48,7 +48,7 @@ const TableHeaders = (props) => {
                     </Box>
                 </>
             ) }
-            <EditModal 
+            <Modal 
                 show={show} 
                 handleShowClose={handleShowClose} 
                 component={<Component handleShowClose={handleShowClose} />} 

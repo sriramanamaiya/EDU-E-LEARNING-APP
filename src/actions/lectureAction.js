@@ -40,12 +40,14 @@ const createLecture = (data) => {
 
 const startGetAllLectures = (id) => {
     return (dispatch) => {
+        dispatch(lectureLoading())
         axios.get(`${baseUrl}/courses/${id}/lectures` , {
             headers : {
                 'Authorization' : localStorage.getItem('token')
             }
         })
             .then((response) => {
+                dispatch(lectureLoading())
                 dispatch(allLectures(response.data))
             })
             .catch((error) => {
@@ -110,6 +112,12 @@ const deleteLecture = (data) => {
     return {
         type : 'DELETE_LECTURE',
         payload : data
+    }
+}
+
+const lectureLoading = () => {
+    return {
+        type : 'LECTURE_LOADING'
     }
 }
 
