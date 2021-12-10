@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 
 import { searchFilter, sortAllowed, sortAlphaInAToZ, sortAlphaInZToA, sortUnAllowed } from '../../helperFunctions/helperFunctions'
 
+import TableHeaders from '../../Common-Comp/TableHeaders'
 import SortSearch from '../../Common-Comp/SortSearch'
 import StudentsRegisterAndEdit from './StudentsRegisterAndEdit'
 import StudentsTable from './StudentsTable'
-import TableHeaders from '../../Common-Comp/TableHeaders'
 
 const StudentsContainer = (props) => {
     const [ studentsData, setStudentsData ] = useState([])
@@ -52,7 +52,7 @@ const StudentsContainer = (props) => {
                 buttonTitle="Add Student"
                 registerTitle="Register a New Student"
                 headingTitle={`Registered Students 🧑‍🎓 - (${studentsData.length})`}
-                data={studentsData} 
+                data={studData} 
                 component={StudentsRegisterAndEdit}
             />
             { studentsData.length > 0 && (
