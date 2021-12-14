@@ -35,7 +35,7 @@ const NavBar = (props) => {
                 dispatch(studentAccountInfo(jwtDecode(token)))
                 dispatch(studentIsLoggedIn())
                 dispatch(startGetAllCoursesStudent(token))
-                dispatch(startGetStudentEnrolledCourses())
+                dispatch(startGetStudentEnrolledCourses(token))
             }
         }
     },[])

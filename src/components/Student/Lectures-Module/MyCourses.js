@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Grid } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { startGetStudentEnrolledCourses } from '../../../actions/courseAction'
+import { useSelector } from 'react-redux'
 
 import Heading from '../../Reusable-Comp/Heading'
 import EachCourseCard from './EachCourseCard'
 
 const MyCourses = (props) => {
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(startGetStudentEnrolledCourses())
-    },[])
-
     const courseData = useSelector((state) => {
         return state.courses.data
     })

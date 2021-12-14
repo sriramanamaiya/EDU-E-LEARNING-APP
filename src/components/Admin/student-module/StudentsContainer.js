@@ -55,7 +55,7 @@ const StudentsContainer = (props) => {
                 data={studData} 
                 component={StudentsRegisterAndEdit}
             />
-            { studentsData.length > 0 && (
+            { studData.length > 0 && (
                 <>
                     <SortSearch 
                         selectItems={selectItems}

@@ -7,7 +7,7 @@ A Edu E-Learning app, where academy tutor can add courses, register students to 
 - 💻 JavaScript | ES6
 - 🌐 React JS
 - 🔧 Git 
-- 📦 [Redux](https://github.com/reduxjs/redux), [Redux-Thunk](https://github.com/reduxjs/redux-thunk), [React-Redux](https://github.com/reduxjs/react-redux), [Material-UI](https://github.com/mui-org/material-ui) ,[react-router-dom](https://www.npmjs.com/package/react-router-dom), [axios](https://www.npmjs.com/package/axios), [Formik](https://github.com/formium/formik), [yup](https://github.com/jquense/yup)
+- 📦 [Redux](https://github.com/reduxjs/redux), [Redux-Thunk](https://github.com/reduxjs/redux-thunk), [React-Redux](https://github.com/reduxjs/react-redux), [Material-UI](https://github.com/mui-org/material-ui) ,[react-router-dom](https://www.npmjs.com/package/react-router-dom), [axios](https://www.npmjs.com/package/axios), [Formik](https://github.com/formium/formik), [yup](https://github.com/jquense/yup), [jwt-decode](https://github.com/auth0/jwt-decode), [react-player](https://github.com/CookPete/react-player), [sweetalert2](https://sweetalert2.github.io/), [date-fns](https://github.com/date-fns/date-fns)
 
 ---
 ### Features

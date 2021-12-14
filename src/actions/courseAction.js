@@ -142,11 +142,11 @@ const enrollUnrollStudents = (data) => {
 }
 
 /* Student Course */
-const startGetStudentEnrolledCourses = () => {
+const startGetStudentEnrolledCourses = (token) => {
     return (dispatch) => {
         axios.get(`${baseUrl}/courses/enrolled`, {
             headers : {
-                'Authorization' : localStorage.getItem('token')
+                'Authorization' : token
             }
         })
             .then((response) => {
