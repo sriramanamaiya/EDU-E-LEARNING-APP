@@ -4,7 +4,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, List
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 
 const ShowDetailsModal = (props) => {
-    const { name, email, role, isAllowed, courses, updatedAt } = props
+    const { name, email, isAllowed, courses, updatedAt } = props
     const [ show, setShow ] = useState(false)
 
     const handleShowClose = () => {
