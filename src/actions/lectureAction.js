@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
-const startCreateLecture = (id,data) => {
+const startCreateLecture = (id,data,handleShowClose) => {
     return (dispatch) => {
         axios.post(`${baseUrl}/courses/${id}/lectures`, data, {
             headers : {
@@ -12,10 +12,12 @@ const startCreateLecture = (id,data) => {
         })
             .then((response) => {
                 const result = response.data
+                console.log(result)
                 if( result.hasOwnProperty('errors')){
                     dispatch(lecturesErrors(result.errors))
                 }else{
                     dispatch(createLecture(result))
+                    handleShowClose()
                 }
             })
             .catch((error) => {

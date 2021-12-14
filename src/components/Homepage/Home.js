@@ -9,12 +9,14 @@ import Image from '../Reusable-Comp/Image'
 
 const Home = (props) => {
     const isLoading = useSelector((state) => {
-        return state.admin.isLoading
+        return [ state.admin.isLoading, state.student.isLoading ]
     })
+
+    const [ adminIsLoading, studentIsLoading ] = isLoading
 
     return (
         <>
-            { !isLoading && (
+            { ( !adminIsLoading && !studentIsLoading ) && (
                 <Box sx={{display:'flex', alignItems : 'center', justifyContent : 'space-between'}}>
                     <Image source={elearning} alt="elarning" width="100%" />
                     <div>

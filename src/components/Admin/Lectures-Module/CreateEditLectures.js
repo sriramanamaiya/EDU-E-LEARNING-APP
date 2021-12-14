@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Grid, MenuItem, TextField, Typography } from '@mui/material'
+import { Box, Grid, Input, MenuItem, TextField, Typography } from '@mui/material'
 
 import { startCreateLecture, lecturesErrors, startEditLecture } from '../../../actions/lectureAction'
 
@@ -16,11 +16,9 @@ const CreateEditLectures = (props) => {
 
     const dispatch = useDispatch()
 
-    const data = useSelector((state) => {
-        return [ state.courses.data, state.lectures.errors ] 
+    const lectureErrors = useSelector((state) => {
+        return state.lectures.errors
     })
-
-    const [ courseData, lectureErrors ] = data
 
     const fileType = ['video','audio','text', 'pdf','img']
 
@@ -58,7 +56,7 @@ const CreateEditLectures = (props) => {
             description : '',
             assetType : '',
             assetURL : '',
-            course : '',
+            course : _id ? _id : courseId,
             isDelete : false
         },
         validationSchema,
@@ -71,7 +69,6 @@ const CreateEditLectures = (props) => {
             }
         }
     })
-    
 
     return (
         <Grid container sx={{flexGrow : 1}} justifyContent="center" >
@@ -143,26 +140,7 @@ const CreateEditLectures = (props) => {
                     required={true}
                 />
 
-                <TextField 
-                    sx={{width : '100%'}} 
-                    margin="normal"  
-                    required 
-                    name="course" 
-                    size="small" 
-                    label="Select Course"
-                    error={errors.course && touched.course ? true : false }  
-                    helperText={ touched.course && errors.course ? errors.course : ''} 
-                    select 
-                    value={values.course}
-                    onBlur={handleBlur}  
-                    onChange={handleChange}
-                >
-                    { courseData.map((course) => {
-                        return (
-                            <MenuItem key={course._id} value={course._id}>{course.name}</MenuItem>
-                        )
-                    })}
-                </TextField>
+                <Input value={values.course} type="hidden" />
     
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
                     { _id ? (

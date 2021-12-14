@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom'
 
 import { allLectures, startGetAllLectures } from '../../../actions/lectureAction'
 
-import MediaPlayer from '../../Common-Comp/MediaPlayer'
 import EachLecture from './EachLecture'
 import Heading from '../../Reusable-Comp/Heading'
-import MediaDescription from '../../Admin/Lectures-Module/MediaDescription'
 import Loader from '../../Reusable-Comp/Loader'
+import Player from '../../Common-Comp/Player'
+import MoreDetails from '../../Common-Comp/MoreDetails'
 
 const LecturesMain = (props) => {
     const { id : courseId } = props.match.params
@@ -82,11 +82,12 @@ const LecturesMain = (props) => {
                                 </Grid>
                                 <Grid item md={10}>
                                     { Object.keys(lecture).length > 0 && (
-                                        <MediaPlayer url={lecture.assetURL} />
+                                        <Player fileType={lecture.assetType} url={lecture.assetURL} />
                                         ) }
-                                    <MediaDescription description={lecture.description} />
+                                    <MoreDetails {...lecture} />
                                 </Grid>
                             </Grid>
+                            <Link className="goback" to='/student/mycourses' >Go Back 🔙</Link>
                         </>
                     ) : (
                         <Typography variant="h6" sx={{ mt : 2 }} >No Lectures Added By Admin. <Link to="/student/mycourses" >Go Back🔙</Link></Typography>

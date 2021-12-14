@@ -2,6 +2,8 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import Swal from 'sweetalert2'
 
+import { startGetStudentEnrolledCourses } from './courseAction'
+
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
 const startLoginStudent = (data,redirect) => {
@@ -15,7 +17,6 @@ const startLoginStudent = (data,redirect) => {
                     localStorage.setItem('token', result.token)
                     const res = jwt_decode(result.token)
                     localStorage.setItem('role', res.role)
-                    dispatch(startGetStudentAccountInfo(res._id,result.token))
                     Swal.fire({
                         icon: 'success',
                         title: 'SucessFully Logged In',
@@ -23,7 +24,9 @@ const startLoginStudent = (data,redirect) => {
                         timer: 2000
                     })
                     dispatch(studentIsLoggedIn())
+                    dispatch(startGetStudentAccountInfo(res._id,result.token))
                     dispatch(startGetAllCoursesStudent(result.token))
+                    dispatch(startGetStudentEnrolledCourses(result.token))
                     redirect()
                 }
             })
