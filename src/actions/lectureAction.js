@@ -117,10 +117,27 @@ const deleteLecture = (data) => {
     }
 }
 
+const startLectureComplete = (courseId, studentId) => {
+    return (dispatch) => {
+        axios.patch(`${baseUrl}/lectures/${courseId}/complete?studentId=${studentId}`, {} ,{
+            headers : {
+                'Authorization' : localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                dispatch(editLecture(response.data))
+            })
+            .catch((error) => {
+                Swal.fire(error.message)
+            })
+    }
+}
+
 const lectureLoading = () => {
     return {
         type : 'LECTURE_LOADING'
     }
 }
 
-export { startCreateLecture, startGetAllLectures, lecturesErrors, startEditLecture, startDeleteLecture, allLectures }
+export { startCreateLecture, startGetAllLectures, lecturesErrors, startEditLecture, startDeleteLecture, allLectures, 
+    startLectureComplete }
