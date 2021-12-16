@@ -30,9 +30,10 @@ const LecturesHeader = (props) => {
                                     show={show} 
                                     handleShowClose={handleShowClose} 
                                     component={<CreateEditLectures 
-                                    courseId={courseId} 
-                                    handleShowClose={handleShowClose} 
-                                />} />
+                                        courseId={courseId} 
+                                        handleShowClose={handleShowClose} 
+                                    />} 
+                                />
                             </>
                         ) }
                     </Box>
