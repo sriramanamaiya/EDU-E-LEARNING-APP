@@ -3,7 +3,7 @@ import { Container } from '@mui/material'
 
 import './App.css'
 
-import RouteComp from './components/navBar/RouteComp'
+import RouteComp from './components/NavBar/RouteComp'
 
 const App = (props) => {
 
