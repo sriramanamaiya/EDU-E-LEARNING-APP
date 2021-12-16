@@ -18,7 +18,7 @@ const DatePickerComp = (props) => {
                     handleDatePicker(date)
                 }}
                 renderInput={(params) => <TextField  {...params} error={false} margin="normal" />}
-                />
+            />
         </LocalizationProvider>
     )
 }
