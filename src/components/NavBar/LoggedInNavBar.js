@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import Heading from '../Reusable-Comp/Heading'
 import HomeNavBar from './HomeNavBar'
+import TitleLogo from './TitleLogo'
 
 const LoggedInNavBar = (props) => {
     const { userRole, isLoggedIn, studentLoggedIn, handleClick } = props
@@ -12,9 +13,8 @@ const LoggedInNavBar = (props) => {
             { isLoggedIn || studentLoggedIn ? (
                 <>  
                     <div className="nav-bar">
-                        <Heading type="h1" title="Edu E-learning App 📚" />
+                        <TitleLogo />
                         <nav className="navigation">
-                            <Link to="/">Home</Link>
                             <Link to={ userRole === 'admin' ? (
                                 "/admin/dashboard"
                             ) : (

@@ -39,3 +39,8 @@ Home, Register, Login (Admin/Student) Pages:
 
 ## Manual Setup
 - Download the project folder, then run `npm start` to view the Project.
+
+### Website Demo
+[Edu E-Learning App](https://edu-elearning.netlify.app/) 👈 For Website Demo
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/00c53325-1d81-4701-a4fe-b16b08ded3ac/deploy-status)](https://app.netlify.com/sites/edu-elearning/deploys)
