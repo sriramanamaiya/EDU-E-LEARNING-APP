@@ -31,7 +31,7 @@ const LoggedInNavBar = (props) => {
                             ) : (
                                 "/student/account" 
                             )}>Account</Link>
-                            <Link to="#" onClick={handleClick} >LogOut</Link>
+                            <Link to="#" onClick={handleClick} >Log-out</Link>
                         </nav>
                     </div>
                     

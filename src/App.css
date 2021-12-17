@@ -15,15 +15,15 @@ body {
 }
 
 .navigation a:link, .navigation a:visited {
-    margin-right: 30px;
+    margin-right: 50px;
     color: black;
-    font-size: 18px;
+    font-size: 20px;
     text-decoration: none;
 }
 
 .navigation a:hover, .navigation a:active {
     color: #034c57;
-    font-size: 19px;
+    font-size: 21px;
     text-decoration: underline;
 }
 

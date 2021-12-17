@@ -22,7 +22,7 @@ const Home = (props) => {
                     <div>
                         <Heading type="h1" title="Edu E-Learning app" className="about-heading" />
                         <Heading type="h3" title="Learning Made Simple" />
-                        <Typography variant="body1">A E-Learning app, where academy tutor can add courses, register students to courses and students can view the course if tutor granted permission.</Typography>
+                        <Typography variant="body1">An E-Learning app, where academy tutors can add courses, register students to courses, and students can view the course lectures if the tutor granted permission.</Typography>
                     </div>
                 </Box>
             ) }

@@ -1,13 +1,13 @@
-# EDU E-LEARNING APP (REACT + REDUX) (Ongoing project)    
+# EDU E-LEARNING APP (REACT + REDUX)   
 
-A Edu E-Learning app, where academy tutor can add courses, register students to courses and students can view the course if tutor granted permission.
+An E-learning app where the admin can register with academy details and login into his account. Admin can add courses, register students, allow the students to log in to the website, also update, delete the students. Students can log in to their accounts for accessing the course lectures and also enroll/unenroll courses added by admin.
 
 ### 🛠️ Tech Stack
 
 - 💻 JavaScript | ES6
 - 🌐 React JS
 - 🔧 Git 
-- 📦 [Redux](https://github.com/reduxjs/redux), [Redux-Thunk](https://github.com/reduxjs/redux-thunk), [React-Redux](https://github.com/reduxjs/react-redux), [Material-UI](https://github.com/mui-org/material-ui) ,[react-router-dom](https://www.npmjs.com/package/react-router-dom), [axios](https://www.npmjs.com/package/axios), [Formik](https://github.com/formium/formik), [yup](https://github.com/jquense/yup), [jwt-decode](https://github.com/auth0/jwt-decode), [react-player](https://github.com/CookPete/react-player), [sweetalert2](https://sweetalert2.github.io/), [date-fns](https://github.com/date-fns/date-fns)
+- 📦 [Redux](https://github.com/reduxjs/redux), [Redux-Thunk](https://github.com/reduxjs/redux-thunk), [React-Redux](https://github.com/reduxjs/react-redux), [Material-UI](https://github.com/mui-org/material-ui) ,[React-router-dom](https://www.npmjs.com/package/react-router-dom), [Axios](https://www.npmjs.com/package/axios), [Formik](https://github.com/formium/formik), [Yup](https://github.com/jquense/yup), [Jwt-decode](https://github.com/auth0/jwt-decode), [React-player](https://github.com/CookPete/react-player), [Sweetalert2](https://sweetalert2.github.io/), [Date-fns](https://github.com/date-fns/date-fns), [React-google-charts](https://react-google-charts.com/), [React-pdf-viewer](https://react-pdf-viewer.dev/)
 
 ---
 ### Features
@@ -31,7 +31,7 @@ A Edu E-Learning app, where academy tutor can add courses, register students to 
   - Students can view enrolled courses and their lectures on my course page.
     
 ---
-- As it is an ongoing project many features yet to be added.
+- Many features yet to be added.
 
 ### Demo
 Home, Register, Login (Admin/Student) Pages:
@@ -43,4 +43,4 @@ Home, Register, Login (Admin/Student) Pages:
 ### Website Demo
 [Edu E-Learning App](https://edu-elearning.netlify.app/) 👈 For Website Demo
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/00c53325-1d81-4701-a4fe-b16b08ded3ac/deploy-status)](https://app.netlify.com/sites/edu-elearning/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/00c53325-1d81-4701-a4fe-b16b08ded3ac/deploy-status)](https://edu-elearning.netlify.app)
