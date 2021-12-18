@@ -22,31 +22,13 @@ body {
 }
 
 .navigation a:hover, .navigation a:active {
-    color: #034c57;
-    font-size: 21px;
-    text-decoration: underline;
+    color: #1C5AA1;
 }
 
-.home-comp {
-    background-color: #fdeded;
-}
-
-.main-logo a:link , .main-logo a:visited, .main-logo a:hover, .main-logo a:active {
+/* Title Logo*/
+.main-logo:link , .main-logo:visited, .main-logo:hover, .main-logo:active {
     text-decoration: none;
     color: #000000;
-}
-
-/* Login */
-.account-heading {
-    margin: 0 auto;
-    font-size: 32px;
-}
-
-/* Account Details */
-.account-details {
-    margin-top: 10px;
-    list-style: none;
-    font-size: 20px;
 }
 
 /* Home Comp */ 
@@ -60,20 +42,29 @@ body {
     margin: 0 auto;
 }
 
-/* Register Links */
-.register-links a:link, .register-links a:visited {
-    color: black;
-    font-size: 18px;
-    text-decoration: none;
+.link-color:link, .link-color:visited {
+    font-weight: bold;
+    color: #5624d0;
 }
 
-.register-links a:hover, .register-links a:active {
-    color: #034c57;
-    font-size: 19px;
-    text-decoration: underline;
+.link-color:hover, .link-color:active {
+    color: #02045e;
 }
 
-/* Link */
+/* Account Comp */
+.account-heading {
+    margin: 0 auto;
+    font-size: 32px;
+}
+
+/* Account Details */
+.account-details {
+    margin-top: 10px;
+    list-style: none;
+    font-size: 20px;
+}
+
+/* Media Container Comp Links */
 .goback {
     font-size: 28px;
     text-decoration: none;
@@ -82,6 +73,14 @@ body {
     color: inherit;
 }
 
-.link-color {
-    font-weight: bold;
+/* Register Links */
+.register-links:link, .register-links:visited {
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.register-links:hover, .register-links:active {
+    color: #034c57;
+    font-size: 18.5px;
 }

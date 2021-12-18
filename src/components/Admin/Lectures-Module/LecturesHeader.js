@@ -25,7 +25,7 @@ const LecturesHeader = (props) => {
                         <Typography variant="h4" >{findCourse.name}</Typography>
                         { lecturesData.length > 0 && (
                             <>
-                                <Link to="#" onClick={handleClick} >Click to Create new Lecture</Link>
+                                <Link to="#" onClick={handleClick} className='register-links' >Click to Create new Lecture</Link>
                                 <Modal 
                                     show={show} 
                                     handleShowClose={handleShowClose} 

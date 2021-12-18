@@ -7,6 +7,7 @@ import { searchFilter } from '../../helperFunctions/helperFunctions'
 
 import ButtonComp from '../../Reusable-Comp/ButtonComp'
 import SortSearch from '../../Common-Comp/SortSearch'
+import SearchNotFound from '../../Reusable-Comp/SearchNotFound'
 
 const EnrollCourses = (props) => {
     const { courseId } = props
@@ -70,41 +71,45 @@ const EnrollCourses = (props) => {
         <>
             <Typography variant="h6">Add Students to Your Course: </Typography>
             <SortSearch selectItems={selectItems} handleSearch={handleSearch} handleSort={handleSort} />
-            <List>
-                { studentsData.map((students) => {
-                    return (
-                        <ListItem key={students._id}>
-                            <ListItemText primary={students.name} />
-                            { students.courses.length === 0 ? (
-                                <ButtonComp 
-                                    variant="outlined" 
-                                    handleClick={() => handleEnroll(students._id)} 
-                                    color="primary" 
-                                    title="Enroll" 
-                                />
-                            ) : (
-                                <>
-                                    { students.courses.some((ele) => ele.course === courseId ) ? (
-                                        <ButtonComp 
-                                            variant="outlined" 
-                                            handleClick={() => handleUnenroll(students._id)} 
-                                            color="primary" 
-                                            title="Unenroll" 
-                                        />
-                                    ) : (
-                                        <ButtonComp 
-                                            variant="outlined" 
-                                            handleClick={() => handleEnroll(students._id)} 
-                                            color="primary" 
-                                            title="Enroll" 
-                                        />
-                                    ) }
-                                </>
-                            )}
-                        </ListItem>
-                    )
-                }) }
-            </List>
+            { studentsData.length > 0 ? (
+                <List>
+                    { studentsData.map((students) => {
+                        return (
+                            <ListItem key={students._id}>
+                                <ListItemText primary={students.name} />
+                                { students.courses.length === 0 ? (
+                                    <ButtonComp 
+                                        variant="outlined" 
+                                        handleClick={() => handleEnroll(students._id)} 
+                                        color="primary" 
+                                        title="Enroll" 
+                                    />
+                                ) : (
+                                    <>
+                                        { students.courses.some((ele) => ele.course === courseId ) ? (
+                                            <ButtonComp 
+                                                variant="outlined" 
+                                                handleClick={() => handleUnenroll(students._id)} 
+                                                color="primary" 
+                                                title="Unenroll" 
+                                            />
+                                        ) : (
+                                            <ButtonComp 
+                                                variant="outlined" 
+                                                handleClick={() => handleEnroll(students._id)} 
+                                                color="primary" 
+                                                title="Enroll" 
+                                            />
+                                        ) }
+                                    </>
+                                )}
+                            </ListItem>
+                        )
+                    }) }
+                </List>
+            ) : (
+                <SearchNotFound />
+            )}
         </>
     )
 }

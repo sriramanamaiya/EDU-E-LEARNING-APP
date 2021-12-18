@@ -7,62 +7,70 @@ import EditDeleteCourse from './EditDeleteCourse'
 import EnrollUnrollContainer from './EnrollUnrollContainer'
 import StudentEnrollUnroll from './StudentEnrollUnroll'
 import ViewCourseDetails from './ViewCourseDetails'
+import SearchNotFound from '../../Reusable-Comp/SearchNotFound'
 
 const CourseTable = (props) => {
     const { courseData, userRole } = props
 
     return (
-        <TableContainer>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="center">Course Name</TableCell>
-                        <TableCell align="center">Category</TableCell>
-                        <TableCell align="center">Author</TableCell>
-                        <TableCell align="center">Duration</TableCell>
-                        { userRole === 'admin' && (
-                            <>
-                            <TableCell align="center">Edit</TableCell>
-                            <TableCell align="center">Delete</TableCell>
-                            <TableCell>Add/Update/View Lectures</TableCell>
-                            </>  
-                        ) }
-                        <TableCell align="center">{ userRole === 'admin' ? (
-                            'Enroll/Unenroll Students'
-                        ) : (
-                            'Enroll/Unenroll Course'
-                        )}</TableCell>
-                        <TableCell align="center">More Details</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                        { courseData.map((course) => {
-                            return (
-                                <TableRow key={course._id}>
-                                    <TableCell align="center">{course.name}</TableCell>
-                                    <TableCell align="center">{course.category}</TableCell>
-                                    <TableCell align="center">{course.author}</TableCell>
-                                    <TableCell align="center">{course.duration}hr</TableCell>
-                                    { userRole === 'admin' && <EditDeleteCourse {...course} /> }
-                                    { userRole === 'admin' ? (
-                                        <>
-                                            <TableCell align="center">
-                                                <Link to={`/admin/courses/${course._id}`} >
-                                                    <AddBoxIcon color="primary" />
-                                                </Link>
-                                            </TableCell>
-                                            <EnrollUnrollContainer id={course._id} />
-                                        </>
-                                    ) : (
-                                        <StudentEnrollUnroll id={course._id} students={course.students} />
-                                    )}
-                                    <TableCell align="center"><ViewCourseDetails course={course} /></TableCell>
-                                </TableRow>
-                            )
-                        }) }
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <>
+            { courseData.length > 0 ? (
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">Course Name</TableCell>
+                                <TableCell align="center">Category</TableCell>
+                                <TableCell align="center">Author</TableCell>
+                                <TableCell align="center">Duration</TableCell>
+                                { userRole === 'admin' && (
+                                    <>
+                                    <TableCell align="center">Edit</TableCell>
+                                    <TableCell align="center">Delete</TableCell>
+                                    <TableCell>Add/Update/View Lectures</TableCell>
+                                    </>  
+                                ) }
+                                <TableCell align="center">{ userRole === 'admin' ? (
+                                    'Enroll/Unenroll Students'
+                                ) : (
+                                    'Enroll/Unenroll Course'
+                                )}</TableCell>
+                                <TableCell align="center">More Details</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                                { courseData.map((course) => {
+                                    return (
+                                        <TableRow key={course._id}>
+                                            <TableCell align="center">{course.name}</TableCell>
+                                            <TableCell align="center">{course.category}</TableCell>
+                                            <TableCell align="center">{course.author}</TableCell>
+                                            <TableCell align="center">{course.duration}hr</TableCell>
+                                            { userRole === 'admin' && <EditDeleteCourse {...course} /> }
+                                            { userRole === 'admin' ? (
+                                                <>
+                                                    <TableCell align="center">
+                                                        <Link to={`/admin/courses/${course._id}`} >
+                                                            <AddBoxIcon color="primary" />
+                                                        </Link>
+                                                    </TableCell>
+                                                    <EnrollUnrollContainer id={course._id} />
+                                                </>
+                                            ) : (
+                                                <StudentEnrollUnroll id={course._id} students={course.students} />
+                                            )}
+                                            <TableCell align="center"><ViewCourseDetails course={course} /></TableCell>
+                                        </TableRow>
+                                    )
+                                }) }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )  : (
+                <SearchNotFound />
+            )}
+        </>
+        
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,6 +6,7 @@ import { Box } from '@mui/system'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Typography } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 
 import { startLogin, adminAuthErrors } from '../../actions/adminAction'
 import { startLoginStudent, studentErrors } from '../../actions/studentAction'
@@ -17,6 +18,7 @@ import AlertComp from '../Reusable-Comp/AlertComp'
 
 const Login = (props) => {
     const { history, role } = props
+    const [ loggedIn, setLoggedIn ] = useState(false)
     const dispatch = useDispatch()
 
     const error = useSelector((state) => {
@@ -38,8 +40,10 @@ const Login = (props) => {
     useEffect(() => {
         if( role ){
             setErrors(adminErrors)
+            setLoggedIn(false)
         }else{
             setErrors(studentError)
+            setLoggedIn(false)
         }
     },[adminErrors,studentError])
 
@@ -61,8 +65,10 @@ const Login = (props) => {
         validateOnChange : false,
         onSubmit : (values) => {
             if( role ){
+                setLoggedIn(true)
                 dispatch(startLogin(values,redirect))
             }else{
+                setLoggedIn(true)
                 dispatch(startLoginStudent(values, redirect))
             }
         }
@@ -99,7 +105,11 @@ const Login = (props) => {
                 />
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt : 1 }}>
-                    <ButtonComp variant="contained" handleClick={handleSubmit} title="LogIn" />
+                    { loggedIn ? (
+                        <LoadingButton loading variant="contained" />
+                    ) : (
+                        <ButtonComp variant="contained" handleClick={handleSubmit} title="LogIn" />
+                    ) }
                     <ButtonComp variant="contained" handleClick={redirect} title="Cancel" color="secondary" />
                 </Box>
             </form>

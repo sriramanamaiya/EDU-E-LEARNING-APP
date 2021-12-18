@@ -73,7 +73,6 @@ const startGetStudentAccountCoursesEnrolledCourses = (id,token) => {
                 dispatch(studentAccountInfo(accountInfo.data))
                 dispatch(allCourse(allCourses.data))
                 dispatch(allCourseStudent(enrolledCourses.data))
-                console.log(enrolledCourses.data)
             })
             .catch((error) => {
                 Swal.fire(error.message)
@@ -107,7 +106,6 @@ const startEnrollCourseStudent = (courseId) => {
                 if( typeof result === 'string' ){
                     Swal.fire(result)
                 }else{
-                    console.log(result)
                     dispatch(enrollUnrollStudents(result))
                     dispatch(addEnrollCourse(result))
                 }

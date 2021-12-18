@@ -6,9 +6,7 @@ import Heading from '../Reusable-Comp/Heading'
 const TitleLogo = (props) => {
 
     return (
-        <div className='main-logo'>
-            <Heading type="h1" title={<Link to="/" >Edu E-learning App 📚</Link>}/>
-        </div>
+        <Heading type="h1" title={<Link to="/" className='main-logo'>Edu E-learning App 📚</Link>}/>
     )
 }
 

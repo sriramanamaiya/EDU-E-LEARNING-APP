@@ -20,7 +20,7 @@ const LecturesNotFound = (props) => {
     return (
         <>
             <Typography variant="h5">
-                No Lectures Found. Add Your First Lecture. <Link to="#" onClick={handleClick} >Click here 👇</Link>
+                No Lectures Found. Add Your First Lecture. <Link to="#" onClick={handleClick} className='register-links'>Click here 👇</Link>
             </Typography>
             <Modal 
                 show={show} 
