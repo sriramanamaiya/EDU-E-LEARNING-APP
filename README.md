@@ -15,7 +15,7 @@ An E-learning app where the admin can register with academy details and login in
 - Admin.
   - Admin Authentication:
     - Admin will Register into the application and create an academy.
-    - Admin can login to the account and do changes to account details if required.
+    - Admin can login to the account and do changes to academy account details if required.
   - Students Module: 
     - Admin can register a student into his academy and can view, delete, update student information.
     - Admin can grant permission to a student to login into an account.
@@ -33,8 +33,8 @@ An E-learning app where the admin can register with academy details and login in
 ---
 - Many features yet to be added.
 
-### Demo
-Home, Register, Login (Admin/Student) Pages:
+## Demo
+### Home, Register, Login (Admin/Student) Pages:
 ![Homepage](https://user-images.githubusercontent.com/93823982/145931882-13cb3add-9da6-4d72-98e8-c9f8581df43b.gif)
 
 ## Manual Setup
@@ -43,4 +43,4 @@ Home, Register, Login (Admin/Student) Pages:
 ### Website Demo
 [Edu E-Learning App](https://edu-elearning.netlify.app/) 👈 For Website Demo
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/00c53325-1d81-4701-a4fe-b16b08ded3ac/deploy-status)](https://edu-elearning.netlify.app)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/00c53325-1d81-4701-a4fe-b16b08ded3ac/deploy-status)](https://edu-elearning.netlify.app/)

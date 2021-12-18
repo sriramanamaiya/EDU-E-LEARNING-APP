@@ -2,7 +2,7 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import Swal from 'sweetalert2'
 
-import { startGetStudentEnrolledCourses } from './courseAction'
+import { allCourse, enrollUnrollStudents } from './courseAction'
 
 const baseUrl = 'https://dct-e-learning.herokuapp.com/api'
 
@@ -24,9 +24,7 @@ const startLoginStudent = (data,redirect) => {
                         timer: 2000
                     })
                     dispatch(studentIsLoggedIn())
-                    dispatch(startGetStudentAccountInfo(res._id,result.token))
-                    dispatch(startGetAllCoursesStudent(result.token))
-                    dispatch(startGetStudentEnrolledCourses(result.token))
+                    dispatch(startGetStudentAccountCoursesEnrolledCourses(res._id,result.token))
                     redirect()
                 }
             })
@@ -49,15 +47,33 @@ const studentIsLoggedIn = () => {
     }
 }
 
-const startGetStudentAccountInfo = (id,token) => {
+const startGetStudentAccountCoursesEnrolledCourses = (id,token) => {
+    const url1 = axios.get(`${baseUrl}/students/${id}`, {
+        headers : {
+            'Authorization' : token
+        }
+    }),
+    url2 = axios.get(`${baseUrl}/courses`, {
+        headers : {
+            'Authorization' : token
+        }
+    }),
+    url3 = axios.get(`${baseUrl}/courses/enrolled`, {
+        headers : {
+            'Authorization' : token
+        }
+    })
+
     return (dispatch) => {
-        axios.get(`${baseUrl}/students/${id}`, {
-            headers : {
-                'Authorization' : token
-            }
-        })
+        dispatch(studentLoading())
+        Promise.all([ url1,url2,url3 ])
             .then((response) => {
-                dispatch(studentAccountInfo(response.data))
+                const [ accountInfo, allCourses, enrolledCourses ] = response
+                dispatch(studentLoading())
+                dispatch(studentAccountInfo(accountInfo.data))
+                dispatch(allCourse(allCourses.data))
+                dispatch(allCourseStudent(enrolledCourses.data))
+                console.log(enrolledCourses.data)
             })
             .catch((error) => {
                 Swal.fire(error.message)
@@ -69,25 +85,6 @@ const studentAccountInfo = (data) => {
     return {
         type : 'STUDENT_ACCOUNT_INFO',
         payload : data
-    }
-}
-
-const startGetAllCoursesStudent = (token) => {
-    return (dispatch) => {
-        dispatch(studentLoading())
-        axios.get(`${baseUrl}/courses`, {
-            headers : {
-                'Authorization' : token
-            }
-        })
-            .then((response) => {
-                const result = response.data
-                dispatch(studentLoading())
-                dispatch(allCourseStudent(result))
-            })
-            .catch((error) => {
-                Swal.fire(error.message)
-            })
     }
 }
 
@@ -110,12 +107,21 @@ const startEnrollCourseStudent = (courseId) => {
                 if( typeof result === 'string' ){
                     Swal.fire(result)
                 }else{
-                    dispatch(enrollUnrollStudentCourse(result))
+                    console.log(result)
+                    dispatch(enrollUnrollStudents(result))
+                    dispatch(addEnrollCourse(result))
                 }
             })
             .catch((error) => {
                 Swal.fire(error.message)
             })
+    }
+}
+
+const addEnrollCourse = (data) => {
+    return {
+        type : 'ADD_ENROLL_COURSE',
+        payload : data
     }
 }
 
@@ -131,7 +137,8 @@ const startUnrollCourseStudent = (courseId) => {
                 if( typeof result === 'string' ){
                     Swal.fire(result)
                 }else{
-                    dispatch(enrollUnrollStudentCourse(result))
+                    dispatch(enrollUnrollStudents(result))
+                    dispatch(removeUnenrollCourse(result))
                 }
             })
             .catch((error) => {
@@ -140,9 +147,9 @@ const startUnrollCourseStudent = (courseId) => {
         }
 }
 
-const enrollUnrollStudentCourse = (data) => {
+const removeUnenrollCourse = (data) => {
     return {
-        type : 'ENROLL_UNROLL_STUDENT_COURSE',
+        type : 'REMOVE_UNENROLL_COURSE',
         payload : data
     }
 }
@@ -159,5 +166,5 @@ const studentLogOut = () => {
     }
 }
 
-export { startLoginStudent, studentErrors, studentIsLoggedIn, startGetAllCoursesStudent, startEnrollCourseStudent,
-    startUnrollCourseStudent, studentAccountInfo, studentLogOut }
+export { startLoginStudent, studentErrors, studentIsLoggedIn, startEnrollCourseStudent,
+    startUnrollCourseStudent, studentAccountInfo, studentLogOut, startGetStudentAccountCoursesEnrolledCourses }

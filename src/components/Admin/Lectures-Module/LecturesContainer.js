@@ -32,7 +32,7 @@ const LecturesContainer = (props) => {
     return (
         <>
             { isLoading ? (
-                <Loader />
+                <Loader mt={30} />
             ) : (
                 <Box sx={{ mt : 2 }}>
                     <LecturesHeader findCourse={findCourse} courseId={courseId} lecturesData={lecturesData} />

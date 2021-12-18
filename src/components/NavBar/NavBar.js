@@ -4,8 +4,7 @@ import { withRouter } from 'react-router'
 import jwtDecode from 'jwt-decode'
 
 import { adminLogOut, loggedIn, startGetAdminStudentsCourses } from '../../actions/adminAction'
-import { startGetAllCoursesStudent, studentAccountInfo, studentIsLoggedIn, studentLogOut } from '../../actions/studentAction'
-import { startGetStudentEnrolledCourses } from '../../actions/courseAction'
+import { startGetStudentAccountCoursesEnrolledCourses, studentIsLoggedIn, studentLogOut } from '../../actions/studentAction'
 
 import LoggedInNavBar from './LoggedInNavBar'
 import Loader from '../Reusable-Comp/Loader'
@@ -32,10 +31,8 @@ const NavBar = (props) => {
                 dispatch(loggedIn())
                 dispatch(startGetAdminStudentsCourses(token))
             }else{
-                dispatch(studentAccountInfo(jwtDecode(token)))
                 dispatch(studentIsLoggedIn())
-                dispatch(startGetAllCoursesStudent(token))
-                dispatch(startGetStudentEnrolledCourses(token))
+                dispatch(startGetStudentAccountCoursesEnrolledCourses(jwtDecode(token)._id,token))
             }
         }
     },[])
@@ -67,7 +64,7 @@ const NavBar = (props) => {
     return (
         <>  
             { isLoading || studentIsLoading ? (
-                <Loader />
+                <Loader mt={30} />
             ) : (
                 <LoggedInNavBar 
                     userRole={userRole} 

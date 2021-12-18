@@ -11,13 +11,12 @@ import StudentLecturesPlayer from './StudentLecturesPlayer'
 
 const LecturesMain = (props) => {
     const { id : courseId } = props.match.params
-    const [ course, setCourse ] = useState({})
     const [ lecture, setLecture ] = useState({})
 
     const dispatch = useDispatch()
 
     const data = useSelector((state) => {
-        return [ state.lectures, state.courses.data ]
+        return [ state.lectures, state.student.data ]
     })
 
     const [ lectData, courseData ] = data
@@ -26,7 +25,6 @@ const LecturesMain = (props) => {
     useEffect(() => {
         if( courseId ){
             dispatch(startGetAllLectures(courseId))
-            setCourse(findCourse(courseId))
         }
 
         return () => {
@@ -40,19 +38,16 @@ const LecturesMain = (props) => {
         }
     },[lecturesData])
 
-    const findCourse = (id) => {
-        const result = courseData.find((course) => {
-            return course._id === id
-        })
-        return result
-    }
-
     const handleClick = (id) => {
         const result = lecturesData.find((lecture) => {
             return lecture._id === id
         })
         setLecture(result)
     } 
+
+    const course = courseData.find((course) => {
+        return course._id === courseId
+    })
 
     return (
         <>

@@ -11,6 +11,7 @@ const DatePickerComp = (props) => {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
+                disabled
                 label="Pick Release Date"
                 value={value}
                 minDate={new Date()}

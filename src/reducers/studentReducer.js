@@ -20,15 +20,14 @@ const studentReducer = ( state = studentInitialState, action ) => {
         case 'STUDENT_ACCOUNT_INFO' : {
             return { ...state, accountData : { ...action.payload } }
         }
-        case 'ENROLL_UNROLL_STUDENT_COURSE' : {
-            const result = state.data.map((course) => {
-                if( course._id === action.payload._id ){
-                    return { ...course, ...action.payload }
-                }else{
-                    return { ...course }
-                }
+        case 'ADD_ENROLL_COURSE' : {
+            return { ...state, data : [ ...state.data, action.payload ] }
+        }
+        case 'REMOVE_UNENROLL_COURSE' : {
+            const result = state.data.filter((course) => {
+                return course._id !== action.payload._id
             })
-            return { ...state, data : [ ...result ]}
+            return { ...state, data : [ ...result ] }
         }
         case 'ALL_COURSE_STUDENT' : {
             return { ...state, data : [ ...action.payload ] }

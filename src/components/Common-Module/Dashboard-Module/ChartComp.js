@@ -1,12 +1,9 @@
 import React from 'react'
 import { Box } from '@mui/system'
-import { useSelector } from 'react-redux'
-import Chart from "react-google-charts"
+import Chart from 'react-google-charts'
 
 const ChartComp = (props) => {
-    const courses = useSelector((state) => {
-        return state.courses.data
-    })
+    const { courses } = props
 
     const result = []
     courses.forEach((ele) => {

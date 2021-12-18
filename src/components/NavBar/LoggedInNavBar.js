@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Heading from '../Reusable-Comp/Heading'
 import HomeNavBar from './HomeNavBar'
 import TitleLogo from './TitleLogo'
 

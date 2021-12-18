@@ -141,22 +141,5 @@ const enrollUnrollStudents = (data) => {
     }
 }
 
-/* Student Course */
-const startGetStudentEnrolledCourses = (token) => {
-    return (dispatch) => {
-        axios.get(`${baseUrl}/courses/enrolled`, {
-            headers : {
-                'Authorization' : token
-            }
-        })
-            .then((response) => {
-                dispatch(allCourse(response.data))
-            })
-            .catch((error) => {
-                Swal.fire(error.message)
-            })
-    }
-}
-
 export { startCreateCourse, courseErrors, startDeleteCourse, startEditCourse, startEnrollCourse, 
-    startUnenrollCourse, allCourse, startGetStudentEnrolledCourses }
+    startUnenrollCourse, allCourse, enrollUnrollStudents }

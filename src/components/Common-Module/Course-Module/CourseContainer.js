@@ -12,11 +12,9 @@ const CourseContainer = (props) => {
     const [ userRole, setUserRole ] = useState('')
     const [ courseData, setCourseData ] = useState([])
 
-    const data = useSelector((state) => {
-        return [state.courses.data, state.student.data]
+    const adminStudentCoursesData = useSelector((state) => {
+        return state.courses.data
     })
-
-    const [ adminCourData, studCourData ] = data
 
     useEffect(() => {
         const role = localStorage.getItem('role')
@@ -24,39 +22,21 @@ const CourseContainer = (props) => {
     },[])
 
     useEffect(() => {
-        const userRole = localStorage.getItem('role')
-        if( userRole === 'admin' ){
-            setCourseData(adminCourData)
-        }else{
-            setCourseData(studCourData)
-        }
-    },[adminCourData,studCourData])
-
+        setCourseData(adminStudentCoursesData)
+    },[adminStudentCoursesData])
 
     const handleSort = (value) => {
-        let unSortedCourseData
-        if( userRole === 'admin' ){
-            unSortedCourseData = adminCourData
-        }else{
-            unSortedCourseData = studCourData
-        }
         if( value.length === 0 ){
-            setCourseData(unSortedCourseData)
+            setCourseData(adminStudentCoursesData)
         }else if( value === "AToZ" ){
-            setCourseData(sortAlphaInAToZ(unSortedCourseData))
+            setCourseData(sortAlphaInAToZ(adminStudentCoursesData))
         }else if( value === "ZToA" ){
-            setCourseData(sortAlphaInZToA(unSortedCourseData))
+            setCourseData(sortAlphaInZToA(adminStudentCoursesData))
         }
     }
 
     const handleSearch = (value) => {
-        let unSortedCourseData
-        if( userRole === 'admin' ){
-            unSortedCourseData = adminCourData
-        }else{
-            unSortedCourseData = studCourData
-        }
-        setCourseData(searchFilter(unSortedCourseData,value))
+        setCourseData(searchFilter(adminStudentCoursesData,value))
     }
 
     const selectItems = [ 
@@ -72,11 +52,11 @@ const CourseContainer = (props) => {
                 buttonTitle="Add Course"
                 registerTitle="Add a New Course"
                 headingTitle={`Courses 📑 - (${courseData.length})`}
-                data={ userRole === 'admin' ? adminCourData : studCourData} 
+                data={adminStudentCoursesData} 
                 component={CourseRegisterEdit}
                 userRole={userRole}
             />
-            { ( studCourData.length > 0 || adminCourData.length > 0 )  && (
+            { adminStudentCoursesData.length > 0   && (
                 <>
                     <SortSearch 
                         selectItems={selectItems} 

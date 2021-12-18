@@ -7,7 +7,7 @@ import EachCourseCard from './EachCourseCard'
 
 const MyCourses = (props) => {
     const courseData = useSelector((state) => {
-        return state.courses.data
+        return state.student.data
     })
 
     return (
