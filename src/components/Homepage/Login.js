@@ -38,11 +38,7 @@ const Login = (props) => {
     },[])
 
     useEffect(() => {
-        if( role ){
-            setErrors(adminErrors)
-            setLoggedIn(false)
-        }else{
-            setErrors(studentError)
+        if( Object.keys(adminErrors).length > 0 || Object.keys(studentError).length > 0 ){
             setLoggedIn(false)
         }
     },[adminErrors,studentError])
@@ -62,13 +58,14 @@ const Login = (props) => {
             password : ''
         },
         validationSchema,
-        validateOnChange : false,
         onSubmit : (values) => {
             if( role ){
                 setLoggedIn(true)
+                dispatch(adminAuthErrors({}))
                 dispatch(startLogin(values,redirect))
             }else{
                 setLoggedIn(true)
+                dispatch(studentErrors({}))
                 dispatch(startLoginStudent(values, redirect))
             }
         }
@@ -76,7 +73,9 @@ const Login = (props) => {
 
     return (
         <>
-            { errors.hasOwnProperty('errors') && <AlertComp type="error" title={errors.errors} /> }
+            {( adminErrors.hasOwnProperty('errors') || studentError.hasOwnProperty('errors') ) && (
+                <AlertComp type="error" title={ adminErrors.errors ? adminErrors.errors : studentError.errors }/> 
+            )}
             <form onSubmit={handleSubmit}>
                 <Heading type="h3" title="Login 💻"  className="login-heading" />
                 <InputField 
