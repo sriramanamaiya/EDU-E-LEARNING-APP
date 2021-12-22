@@ -44,6 +44,7 @@ const CreateEditLectures = (props) => {
     },[lectureErrors])
 
     const validationSchema = yup.object({
+        title : yup.string().required('Required'),
         description : yup.string().required('Required'),
         assetType : yup.string().required('Required'),
         assetURL : yup.string().required('Required'),

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography } from '@mui/material'
+import { Paper, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
 import Modal from '../../Reusable-Comp/Modal'
@@ -19,9 +19,11 @@ const LecturesNotFound = (props) => {
 
     return (
         <>
-            <Typography variant="h5">
-                No Lectures Found. Add Your First Lecture. <Link to="#" onClick={handleClick} className='register-links'>Click here 👇</Link>
-            </Typography>
+            <Paper square={true} elevation={3}>
+                <Typography variant="h5">
+                    No Lectures Found. Add Your First Lecture. <Link to="#" onClick={handleClick} className='lecture-notfound'>Click here 👇</Link>
+                </Typography>
+            </Paper>
             <Modal 
                 show={show} 
                 handleShowClose={handleShowClose} 

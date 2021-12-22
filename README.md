@@ -30,17 +30,33 @@ An E-learning app where the admin can register with academy details and login in
   - Students can also Enroll/Unenroll to course and view more details about it.
   - Students can view enrolled courses and their lectures on my course page.
     
----
-- Many features yet to be added.
+## Website Demo:
+### To have a demo of this web application, Please visit this Link 👉[Edu E-Learning App](https://edu-elearning.netlify.app/)
 
-## Demo
-### Home, Register, Login (Admin/Student) Pages:
-![Homepage](https://user-images.githubusercontent.com/93823982/145931882-13cb3add-9da6-4d72-98e8-c9f8581df43b.gif)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/00c53325-1d81-4701-a4fe-b16b08ded3ac/deploy-status)](https://edu-elearning.netlify.app/)
+
+- For Demo Credentials:
+  - Admin
+    - Email ID: eduelearning@gmail.com
+    - Password: 12345678
+  - Student
+    - Email ID: ram1996@gmail.com
+    - Password: 12345678
+
+### Home Page:
+![Home-Page](https://user-images.githubusercontent.com/93823982/147109255-70a8cd53-a30d-4025-91d5-85837c476c98.png)
+
+### Register, Login (Admin/Student) Pages:
+![Register-login Page](https://user-images.githubusercontent.com/93823982/147109978-aee7ca60-fe69-452e-a556-89182bc88e96.gif)
+
+### Account Page:
+Admin:
+![Admin-Account](https://user-images.githubusercontent.com/93823982/147111820-e41bc446-f359-44c9-8f40-6ffefab08490.gif)
+
+Student:
+![Student-Account](https://user-images.githubusercontent.com/93823982/147111945-94f66894-9ff8-4323-8d95-ebe50cf25355.gif)
+
+## Please visit this Demo Web App for more -- [Click here](https://edu-elearning.netlify.app/)
 
 ## Manual Setup
 - Download the project folder, then run `npm start` to view the Project.
-
-### Website Demo
-[Edu E-Learning App](https://edu-elearning.netlify.app/) 👈 For Website Demo
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/00c53325-1d81-4701-a4fe-b16b08ded3ac/deploy-status)](https://edu-elearning.netlify.app/)

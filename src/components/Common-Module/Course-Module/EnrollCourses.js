@@ -63,8 +63,8 @@ const EnrollCourses = (props) => {
 
     const selectItems = [ 
         { name : 'Sort', value : '' }, 
-        { name : 'Sort By Unenroll', value : 'unenroll' },
-        { name : 'Sort By Enroll', value : 'enroll' } 
+        { name : 'Sort By Enroll', value : 'enroll' },
+        { name : 'Sort By Unenroll', value : 'unenroll' }
     ]
 
     return (

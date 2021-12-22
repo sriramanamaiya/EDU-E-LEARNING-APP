@@ -22,10 +22,10 @@ const TableHeaders = (props) => {
     return (
         <>
             { data.length === 0 ? (
-                <Card sx={{ mt : 6 }}>
+                <Card elevation={4} sx={{ mt : 6 }}>
                     <CardContent sx={{ display : "flex", justifyContent : "space-around" }}>
-                        <Typography variant="h5" >{noDataTitle}</Typography>
-                        { userRole !== 'student' && (
+                        <Typography variant="h4" >{noDataTitle}</Typography>
+                        { userRole && (
                             <ButtonComp 
                                 variant="contained" 
                                 title={buttonTitle} 
@@ -39,7 +39,7 @@ const TableHeaders = (props) => {
                 <>
                     <Box sx={{ display: 'flex', alignItems : 'center', justifyContent: 'space-between'}}>
                         <Heading type="h4" title={headingTitle} />
-                        { userRole !== 'student' && (
+                        { userRole && (
                             <IconButton color="inherit" onClick={handleShow}> 
                                 <Typography variant="body1" >{registerTitle}</Typography>
                                 <AddIcon />

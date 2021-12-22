@@ -48,11 +48,12 @@ const StudentsContainer = (props) => {
     return (
         <>
             <TableHeaders 
-                noDataTitle="No Students found add Student "
+                noDataTitle="No Students Added.Add a Student 🧑‍🎓"
                 buttonTitle="Add Student"
                 registerTitle="Register a New Student"
                 headingTitle={`Registered Students 🧑‍🎓 - (${studentsData.length})`}
                 data={studData} 
+                userRole="admin"
                 component={StudentsRegisterAndEdit}
             />
             { studData.length > 0 && (

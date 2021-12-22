@@ -40,7 +40,7 @@ const ShowDetailsModal = (props) => {
                                 </ListItem>
                                 <ListItem>
                                     <ListItemText primary="UpdatedAt:" />
-                                    <ListItemText primary={updatedAt} />
+                                    <ListItemText primary={new Date(updatedAt).toDateString()} />
                                 </ListItem>
                             </List>
                         <DialogActions>

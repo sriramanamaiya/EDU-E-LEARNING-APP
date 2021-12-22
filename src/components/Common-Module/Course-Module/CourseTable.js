@@ -23,14 +23,14 @@ const CourseTable = (props) => {
                                 <TableCell align="center">Category</TableCell>
                                 <TableCell align="center">Author</TableCell>
                                 <TableCell align="center">Duration</TableCell>
-                                { userRole === 'admin' && (
+                                { userRole && (
                                     <>
                                     <TableCell align="center">Edit</TableCell>
                                     <TableCell align="center">Delete</TableCell>
                                     <TableCell>Add/Update/View Lectures</TableCell>
                                     </>  
                                 ) }
-                                <TableCell align="center">{ userRole === 'admin' ? (
+                                <TableCell align="center">{ userRole ? (
                                     'Enroll/Unenroll Students'
                                 ) : (
                                     'Enroll/Unenroll Course'
@@ -46,8 +46,8 @@ const CourseTable = (props) => {
                                             <TableCell align="center">{course.category}</TableCell>
                                             <TableCell align="center">{course.author}</TableCell>
                                             <TableCell align="center">{course.duration}hr</TableCell>
-                                            { userRole === 'admin' && <EditDeleteCourse {...course} /> }
-                                            { userRole === 'admin' ? (
+                                            { userRole && <EditDeleteCourse {...course} /> }
+                                            { userRole ? (
                                                 <>
                                                     <TableCell align="center">
                                                         <Link to={`/admin/courses/${course._id}`} >

@@ -52,7 +52,7 @@ const LecturesMain = (props) => {
     return (
         <>
             { isLoading ? (
-                <Loader />
+                <Loader mt={30} />
             ) : (
                 <>
                     { lecturesData.length > 0 ? (

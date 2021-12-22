@@ -16,8 +16,8 @@ const startCreateLecture = (id,data,handleShowClose) => {
                 if( result.hasOwnProperty('errors')){
                     dispatch(lecturesErrors(result.errors))
                 }else{
-                    dispatch(createLecture(result))
                     handleShowClose()
+                    dispatch(createLecture(result))
                 }
             })
             .catch((error) => {

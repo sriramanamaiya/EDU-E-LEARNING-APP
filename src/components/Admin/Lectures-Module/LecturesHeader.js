@@ -22,10 +22,10 @@ const LecturesHeader = (props) => {
             { findCourse && (
                 <>
                     <Box sx={{ display : 'flex', justifyContent : 'space-between' , mb : 2}}>
-                        <Typography variant="h4" >{findCourse.name}</Typography>
+                        <Typography variant="h5" >{findCourse.name}</Typography>
                         { lecturesData.length > 0 && (
                             <>
-                                <Link to="#" onClick={handleClick} className='register-links' >Click to Create new Lecture</Link>
+                                <Link to="#" onClick={handleClick} className='register-links' >Click to Create New Lecture</Link>
                                 <Modal 
                                     show={show} 
                                     handleShowClose={handleShowClose} 

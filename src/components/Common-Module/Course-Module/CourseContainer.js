@@ -9,17 +9,13 @@ import CourseRegisterEdit from './CourseRegisterEdit'
 import CourseTable from './CourseTable'
 
 const CourseContainer = (props) => {
-    const [ userRole, setUserRole ] = useState('')
     const [ courseData, setCourseData ] = useState([])
 
-    const adminStudentCoursesData = useSelector((state) => {
-        return state.courses.data
+    const data = useSelector((state) => {
+        return [ state.courses.data, state.admin.data.role ]
     })
 
-    useEffect(() => {
-        const role = localStorage.getItem('role')
-        setUserRole(role)
-    },[])
+    const [ adminStudentCoursesData, userRole ] = data
 
     useEffect(() => {
         setCourseData(adminStudentCoursesData)
@@ -48,7 +44,7 @@ const CourseContainer = (props) => {
     return (
         <>
             <TableHeaders 
-                noDataTitle="No Course found "
+                noDataTitle="No Course Added 📔"
                 buttonTitle="Add Course"
                 registerTitle="Add a New Course"
                 headingTitle={`Courses 📑 - (${courseData.length})`}
